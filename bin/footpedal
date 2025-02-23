@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# hotstream
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+OBS_SOCKET="--websocket obsws://localhost:4455/$(cat ~/.ssh/obs)"
+
+main() {
+    case "$1" in
+        mic)
+            MIC_SOURCE="$(pulsemixer --list-sources | grep "Scarlett Solo USB Input 1" | cut -d' ' -f 3 | cut -d',' -f 1)"
+            pulsemixer --id "$MIC_SOURCE" --toggle-mute
+            play -q -c2 -n synth 3 pluck E3 vol -45dB &
+            ;;
+        replay)
+            echo $OBS_SOCKET
+            obs-cmd $OBS_SOCKET replay save
+            play -q -c2 -n synth 3 pluck G1 vol -45dB &
+            ;;
+        record)
+            obs-cmd $OBS_SOCKET recording toggle
+            play -q -c2 -n synth 3 pluck A1 vol -45dB &
+            ;;
+    esac
+}
+
+main "$@"

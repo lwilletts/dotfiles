@@ -1,0 +1,68 @@
+// -*- mode: jsonc -*-
+{
+    "reload_style_on_change": true,
+    "layer": "top",
+    "output": "DP-1",
+    "position": "bottom",
+    "width": 1800,
+    "height": 28,
+    "spacing": 4,
+    "margin-top": 10,
+    "clock": {
+        "timezone": "Europe/London",
+        "interval": 60,
+        "format": "{:%H%M<span color='#808080'> hrs </span>%m/%d<span color='#808080'> %Y </span>}",
+        "tooltip-format": "\n<span size='8pt' font='Scientifica'>{calendar}</span>",
+        "calendar": {
+                    "mode"          : "month",
+                    "mode-mon-col"  : 4,
+                    "weeks-pos"     : "",
+                    "on-scroll"     : -1,
+                    "format": {
+                              "months":     "<span color='#EFEFEF'>{}</span>",
+                              "days":       "<span color='#EFEFEF'>{}</span>",
+                              "weeks":      "<span color='#808080'>W{}</span>",
+                              "weekdays":   "<span color='#808080'>{}</span>",
+                              "today":      "<span color='#b23450'>{}</span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click": "mode",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+    },
+    "wlr/taskbar": {
+        "all-outputs": false,
+        "icon-size": 16,
+        "tooltip-format": "{title} | {app_id}",
+	"on-click": "activate",
+	"on-click-right": "close"
+    },
+    "niri/workspaces": {
+        "current-only": false,
+        "format": "{name}"
+    },
+    "niri/window": {
+        "icon": true,
+        "icon-size": 16,
+        "format": "{title}"
+    },
+    "tray": {
+	"show-passive-items": true,
+	"reverse-direction": true,
+        "icon-size": 16,
+	"spacing": 2
+    },
+    "modules-left": [
+        "clock",
+        "wlr/taskbar"
+        // "niri/window"
+    ],
+    "modules-center": [
+        "niri/workspaces"
+    ],
+    "modules-right": [
+        "tray"
+    ]
+}

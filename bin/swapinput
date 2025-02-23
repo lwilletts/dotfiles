@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# swapinput
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+main() {
+    input="$(ddcutil --model="C27JG5x" --sleep-multiplier 0.125 getvcp 0x60 | \
+        tail -n 1 | awk -F '[(=)]' '{print $5}')"
+
+    case "$input" in
+        0x0f|0x05) ddcutil --model="C27JG5x" --sleep-multiplier 0.125 setvcp 0x60 0x06 > /dev/null 2>&1 ;;
+        0x06)      ddcutil --model="C27JG5x" --sleep-multiplier 0.125 setvcp 0x60 0x0f > /dev/null 2>&1 ;;
+    esac
+}
+
+main "$@"

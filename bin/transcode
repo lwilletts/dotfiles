@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# transcode
+
+usage() {
+    base=$(basename $0)
+
+    cat >&2 << EOF
+Usage: $base [file]
+EOF
+
+    [ $# -eq 0 ] || exit $1
+}
+
+encode() {
+    ffmpeg -hide_banner -loglevel info -i "$vid.$ext" \
+           -max_muxing_queue_size 1024 \
+           -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p \
+           -c:a pcm_s16le -map 0 -f mov "$dir/$vid.mov"
+}
+
+prep() {
+    vid=$(printf '%s\n' "$*" | rev | cut -d\. -f 2- | rev)
+    ext=$(printf '%s\n' "$*" | rev | cut -d\. -f 1 | rev)
+
+    if [ ! -d "$dir" ]; then
+        mkdir "$dir"
+    fi
+
+    if [ ! -e "$dir/$vid.mov" ]; then
+        encode "$@"
+    fi
+}
+
+main() {
+    dir="$PWD/dnxhr"
+
+    case "$@" in
+        -h) usage 0 ;;
+    esac
+
+    prep "$@"
+}
+
+main "$@"

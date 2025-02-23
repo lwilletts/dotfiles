@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# set colours for framebuffer
+
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0101010"
+    echo -en "\e]P8101010"
+    echo -en "\e]P1CA3448"
+    echo -en "\e]P9CA3448"
+    echo -en "\e]P260C8B1"
+    echo -en "\e]PA60C8B1"
+    echo -en "\e]P3C8C660"
+    echo -en "\e]PBC8C660"
+    echo -en "\e]P48BC3E4"
+    echo -en "\e]PC8BC3E4"
+    echo -en "\e]P5B8A0C0"
+    echo -en "\e]PDB8A0C0"
+    echo -en "\e]P69FB9A8"
+    echo -en "\e]PE9FB9A8"
+    echo -en "\e]P7D9EAE2"
+    echo -en "\e]PFD9EAE2"
+fi

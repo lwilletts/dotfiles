@@ -1,0 +1,14 @@
+#compdef gl
+
+function _gl {
+    hash gl 2> /dev/null && {
+        local -a subcmds
+        subcmds=('outerworlds:Play The Outer Worlds'
+        'midair:Play Midair'
+        'tribes:Play Tribes 1'
+        'ftl:Play Faster Than Light'
+        'ittb:Play Into The Breach')
+        _describe 'gl' subcmds
+    }
+}
+

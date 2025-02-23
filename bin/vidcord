@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# transcode
+
+usage() {
+    base=$(basename $0)
+
+    cat >&2 << EOF
+Usage: $base [file]
+EOF
+
+    [ "$#" -eq 0 ] || exit "$1"
+}
+
+intCheck() {
+    printf '%d' "$1" > /dev/null 2>&1
+}
+
+encode() {
+    if [ "$ext" = "mp4" ]; then
+        increment="-1"
+    else
+        increment=""
+    fi
+
+    ffmpeg -hide_banner -loglevel info -i "$vid.$ext" \
+           -max_muxing_queue_size 1024 -r 60 \
+           -sws_flags lanczos -vf "scale=-2:$RES" \
+           -c:v libx264 -crf 30 -preset fast \
+           -c:a aac -b:a 160k -f mp4 "$PWD/$vid$increment.mp4"
+}
+
+prep() {
+    file="$*"
+
+    vid=${file%.*}
+    ext=${file##*.}
+
+    if [ -n "$RES" ]; then
+        intCheck "$RES"
+    else
+        RES=640
+    fi
+
+    encode "$@"
+}
+
+main() {
+    case "$@" in
+        -h) usage 0 ;;
+        *)  [ -e "$1" ] && prep "$1" ;;
+    esac
+}
+
+main "$@"

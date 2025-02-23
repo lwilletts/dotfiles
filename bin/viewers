@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# fyr 2017 (c) MIT
+
+STREAMER="wildefyr"
+
+STREAMERURL="$(curl -sL https://tmi.twitch.tv/group/user/$STREAMER/chatters)"
+
+test "$STREAMERURL" != "\"\"" && {
+    MODERATORS=$(printf '%s\n' "$STREAMERURL" | jq -r '.chatters.moderators | length')
+    test $MODERATORS -gt 0 && {
+        printf '%s' "Moderators: "
+        printf '%s\n' "$STREAMERURL" | jq -r '.chatters.moderators' | sed '1d; $d' | \
+        tr '\n' '\f' | sed 's/"//g' | tr '\f' '\n' | cut -d' ' -f 3- | tr '\n' ' '
+        printf '\n'
+    }
+
+    STAFF=$(printf '%s\n' "$STREAMERURL" | jq -r '.chatters.staff | length')
+    test $STAFF -gt 0 && {
+        printf '%s' "Staff: "
+        printf '%s\n' "$STREAMERURL" | jq -r '.chatters.staff' | sed '1d; $d' | \
+        tr '\n' '\f' | sed 's/"//g' | tr '\f' '\n' | cut -d' ' -f 3- | tr '\n' ' '
+        printf '\n'
+    }
+
+    ADMINS=$(printf '%s\n' "$STREAMERURL" | jq -r '.chatters.admins | length')
+    test $ADMINS -gt 0 && {
+        printf '%s' "Admins: "
+        printf '%s\n' "$STREAMERURL" | jq -r '.chatters.admins' | sed '1d; $d' | \
+        tr '\n' '\f' | sed 's/"//g' | tr '\f' '\n' | cut -d' ' -f 3- | tr '\n' ' '
+        printf '\n'
+    }
+
+    GLOBAL_MODS=$(printf '%s\n' "$STREAMERURL" | jq -r '.chatters.global_mods | length')
+    test $GLOBAL_MODS -gt 0 && {
+        printf '%s' "Global Mods: "
+        printf '%s\n' "$STREAMERURL" | jq -r '.chatters.global_mods' | sed '1d; $d' | \
+        tr '\n' '\f' | sed 's/"//g' | tr '\f' '\n' | cut -d' ' -f 3- | tr '\n' ' '
+        printf '\n'
+    }
+
+    VIEWERS=$(printf '%s\n' "$STREAMERURL" | jq -r '.chatters.viewers | length')
+    test $VIEWERS -gt 0 && {
+        printf '\n%s\n' "$VIEWERS viewers + $MODERATORS moderators."
+        printf '%s' "Viewers: "
+        printf '%s\n' "$STREAMERURL" | jq -r '.chatters.viewers' | sed '1d; $d' | \
+        tr '\n' '\f' | sed 's/"//g' | tr '\f' '\n' | cut -d' ' -f 3- | tr '\n' ' '
+        printf '\n'
+    } || {
+        printf '%s\n' "Viewers: 0"
+    }
+}

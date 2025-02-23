@@ -1,0 +1,333 @@
+// fyr niri cfg
+
+// startup
+spawn-at-startup "foot" "--server"
+spawn-at-startup "steam"
+spawn-at-startup "streamdeck" "-n"
+spawn-at-startup "xwayland-satellite" ":1"
+spawn-at-startup "discord" "--enable-features=UseOzonePlatform,WaylandWindowDecorations" "--ozone-platform=wayland"
+spawn-at-startup "element-desktop"
+
+// top level settings
+prefer-no-csd
+screenshot-path "~/%s.png"
+hotkey-overlay { skip-at-startup; }
+
+environment {
+    DISPLAY ":1"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+}
+
+cursor {
+    xcursor-theme "breeze"
+    xcursor-size 20
+
+    hide-when-typing
+    hide-after-inactive-ms 5000
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+
+        repeat-delay 180
+        repeat-rate 50
+    }
+
+    mouse {
+        accel-profile "flat"
+	scroll-factor 1.5
+    }
+
+    // behaviour
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+    disable-power-key-handling
+}
+
+output "DP-1" {
+    mode "2560x1440@239.970"
+    scale 1
+    transform "normal"
+    position x=0 y=0
+    background-color "#000000"
+    // variable-refresh-rate on-demand=true
+}
+
+output "HDMI-A-1" {
+    mode "2560x1440@143.998"
+    scale 1
+    transform "90"
+    position x=2560 y=-560
+    background-color "#000000"
+}
+
+layout {
+    gaps 10
+
+    struts {
+        left 4
+        right 4
+        top 0
+        bottom -4
+    }
+
+    // behaviour
+    default-column-width { proportion 0.33333; }
+    center-focused-column "on-overflow"
+    always-center-single-column
+
+    preset-column-widths {
+        proportion 0.25
+        proportion 0.33333
+        proportion 0.4
+        proportion 0.6
+    }
+
+    preset-window-heights {
+        proportion 0.5
+        proportion 0.6
+        proportion 0.6667
+        proportion 0.75
+    }
+
+    focus-ring {
+        width 2
+        active-color "#D9EAE2"
+        inactive-color "#121212"
+    }
+
+    // tabs
+    default-column-display "tabbed"
+
+    tab-indicator {
+        hide-when-single-tab
+        place-within-column
+        gap 10
+        width 16
+        gaps-between-tabs 20
+        length total-proportion=0.2
+        position "right"
+        corner-radius 6
+        active-color "#D9EAE2"
+        inactive-color "121212"
+    }
+
+    insert-hint {
+        off
+    }
+
+    shadow {
+	softness 10
+	spread 2
+        offset x=5 y=5
+        draw-behind-window true
+        color "#121212"
+    }
+
+    border {
+        width 0
+        active-color "#EFEFEF"
+        inactive-color "#808080"
+    }
+}
+
+animations {
+    slowdown 0.75
+
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    window-open {
+        duration-ms 100
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 100
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+    }
+
+    screenshot-ui-open {
+        duration-ms 100
+        curve "ease-out-quad"
+    }
+}
+
+workspace "dash" { open-on-output "DP-1"; }
+workspace "game" { open-on-output "DP-1"; }
+workspace "record" { open-on-output "DP-1"; }
+workspace "secondary" { open-on-output "HDMI-A-1"; }
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="foot"
+    default-column-width { proportion 0.25; }
+}
+
+window-rule {
+    match app-id="qutebrowser"
+    open-on-workspace "dash"
+    default-column-width { proportion 0.7; }
+}
+
+window-rule {
+    match app-id="com.obsproject"
+    open-maximized false
+    open-on-workspace "record"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id=r#"discord|Element|mumble"#
+    open-on-output "HDMI-A-1"
+//    default-column-display "tabbed"
+    open-maximized true
+    open-focused false
+    min-width 600
+}
+
+window-rule {
+    match app-id=r#"steam"#
+    open-on-workspace "game"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id=r#"steam_app_|gamescope|wine"#
+    open-on-workspace "game"
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="mpv"
+    open-floating true
+    // default-floating-position x=0 y=0 relative-to="top-left"
+}
+
+binds {
+    Alt+Return cooldown-ms=125 { spawn "footclient"; }
+    Alt+D repeat=false { spawn "fuzzel"; }
+    Alt+Q { close-window; }
+
+    // add screen transition once global colours are worked out
+
+    // mouse controls 
+    // Alt+MouseLeft { move-window; }
+    // Alt+MouseRight { resize-window; }
+    Alt+MouseMiddle { close-window; }
+
+    Alt+WheelScrollUp         cooldown-ms=100 { focus-window-up-or-column-left; }
+    Alt+WheelScrollDown       cooldown-ms=100 { focus-window-down-or-column-right; }
+    Alt+Shift+WheelScrollUp   cooldown-ms=100 { move-column-left-or-to-monitor-left; }
+    Alt+Shift+WheelScrollDown cooldown-ms=100 { move-column-right-or-to-monitor-right; }
+    Mod+WheelScrollUp         cooldown-ms=100 { focus-workspace-up; }
+    Mod+WheelScrollDown       cooldown-ms=100 { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp   cooldown-ms=100 { move-window-up-or-to-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=100 { move-window-down-or-to-workspace-down; }
+
+    // focus & movement controls
+    Alt+H { focus-column-or-monitor-left; }
+    Alt+J { focus-window-or-workspace-down; }
+    Alt+K { focus-window-or-workspace-up; }
+    Alt+L { focus-column-or-monitor-right; }
+    Alt+Shift+H { move-column-left-or-to-monitor-left; }
+    Alt+Shift+J { move-window-down-or-to-workspace-down; }
+    Alt+Shift+K { move-window-up-or-to-workspace-up; }
+    Alt+Shift+L { move-column-right-or-to-monitor-right; }
+
+    Alt+Tab { focus-monitor-next; }
+    Alt+Shift+Tab { move-window-to-monitor-next; }
+
+    // floating & tabbed management
+    Alt+W { toggle-column-tabbed-display; }
+    Alt+S { switch-focus-between-floating-and-tiling; }
+    Alt+Shift+S { toggle-window-floating; }
+
+    // workspace selection
+    Alt+1 { focus-workspace 1; }
+    Alt+2 { focus-workspace 2; }
+    Alt+3 { focus-workspace 3; }
+    Alt+4 { focus-workspace 4; }
+    Alt+5 { focus-workspace 5; }
+    Alt+6 { focus-workspace 6; }
+    Alt+7 { focus-workspace 7; }
+    Alt+8 { focus-workspace 8; }
+    Alt+Shift+1 { move-window-to-workspace 1; }
+    Alt+Shift+2 { move-window-to-workspace 2; }
+    Alt+Shift+3 { move-window-to-workspace 3; }
+    Alt+Shift+4 { move-window-to-workspace 4; }
+    Alt+Shift+5 { move-window-to-workspace 5; }
+    Alt+Shift+6 { move-window-to-workspace 6; }
+    Alt+Shift+7 { move-window-to-workspace 7; }
+    Alt+Shift+8 { move-window-to-workspace 8; }
+
+    // column management
+    Alt+C { center-column; }
+    Alt+U { focus-column-first; }
+    Alt+I { focus-column-last; }
+    Alt+Shift+U { move-column-to-first; }
+    Alt+Shift+I { move-column-to-last; }
+    Alt+BracketLeft  { consume-or-expel-window-left; }
+    Alt+BracketRight { consume-or-expel-window-right; }
+
+    // window sizing
+    Alt+R { switch-preset-column-width; }
+    Alt+Shift+R { switch-preset-window-height; }
+    Alt+A { reset-window-height; }
+    Alt+M { maximize-column; }
+    Alt+F { fullscreen-window; }
+
+    // manual resize
+    Alt+Minus { set-column-width "-5%"; }
+    Alt+Equal { set-column-width "+5%"; }
+    Alt+Shift+Minus { set-window-height "-5%"; }
+    Alt+Shift+Equal { set-window-height "+5%"; }
+
+    // audio
+    Alt+Space  { spawn "playerctl" "play-pause"; }
+    Alt+Comma  { spawn "playerctl" "prev"; }
+    Alt+Period { spawn "playerctl" "next"; }
+    XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "2"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
+    Alt+9 { spawn "playerctl" "volume" "0.02-"; }
+    Alt+0 { spawn "playerctl" "volume" "0.02+"; }
+
+    // Alt+ { spawn "playerctld" "shift"; }
+    // Alt+ { spawn "playerctld" "unshift"; }
+
+    // shot
+    Print { screenshot; }
+    Mod+Shift+s { screenshot; }
+    Shift+Print { screenshot-window; }
+
+    // system
+    Alt+Shift+E { quit skip-confirmation=true; }
+    Alt+Shift+B { power-off-monitors; }
+    Alt+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
+}

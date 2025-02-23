@@ -1,0 +1,47 @@
+#!/bin/zsh
+#
+# servers
+
+APPID="1469060"
+[ -f ~/.ssh/steamkey ] && KEY="$(cat ~/.ssh/steamkey)"
+
+URL="https://api.steampowered.com/IGameServersService/GetServerList/v1/?format=json&filter=%5Cappid%5C1203630&key=$KEY"
+
+OUTPUT=$(curl -sL "$URL" | jq '.')
+echo $OUTPUT
+exit
+LENGTH=$(printf '%s' "$OUTPUT" | jq '. | length')
+
+FINAL=""
+
+for i in $(seq 1 $LENGTH); do
+    i=$((i - 1))
+    SERVER=$(printf '%s' "$OUTPUT" | jq ".[$i]")
+
+    NAME=$(printf '%s' "$SERVER" | jq -r '.name' | cut -c -32)
+    PLAYERS=$(printf '%s' "$SERVER" | jq -r '.players')
+    IP=$(printf '%s' "$SERVER" | jq -r '.addr')
+
+    TOTALPLAYERS=$(printf '%s' "$SERVER" | jq -r '.max_players')
+    CURRENTPLAYERS=$((CURRENTPLAYERS + PLAYERS))
+
+    case "$1" in
+        -a|--all|all)
+            FINAL=$(printf "$FINAL \n$PLAYERS/$TOTALPLAYERS|$NAME|$IP \n")
+            ;;
+        *)
+            [ "$PLAYERS" -eq 0 ] || {
+                FINAL=$(printf "$FINAL \n$PLAYERS/$TOTALPLAYERS|$NAME|$IP \n")
+            }
+        ;;
+    esac
+done
+
+case "$1" in
+    -a|--all|all)
+        printf '%s' "$FINAL" | column -t -s "|"
+        ;;
+    *)
+        printf '%s' "$FINAL" | column -t -s "|" | sort -nr
+        ;;
+esac

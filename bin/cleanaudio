@@ -1,0 +1,197 @@
+#!/bin/sh
+#
+# wildefyr - 2016 (c) wtfpl
+# extracts audio from video and cleans up static
+# based on: http://www.zoharbabin.com/how-to-do-noise-reduction-using-ffmpeg-and-sox/
+
+ARGS="$@"
+
+PASSES="3"
+FACTOR="0.1"
+
+usage() {
+    cat << EOF
+Usage: $(basename $0) [-i filename] [-o filename] [-f factor] [-qh]
+    -i|--input:  Pass input file to clean up.
+    -o|--output: Produce cleaned file in this location. [default: "./cleaninputfile"]
+    -f|--factor: Sox noisered factor. [default: ${FACTOR}]
+    -p|--passes: Number of passes to do. [default" ${PASSES}]
+    -q|--quiet:  Suppress all text output.
+    -h|--help:   Show this help.
+EOF
+
+    test -z $1 && exit 0 || exit $1
+}
+
+intCheck() {
+    test $1 -ne 0 2> /dev/null
+    test $? -ne 2 || {
+         printf '%s\n' "'$1' is not an integer." >&2
+         exit 1
+    }
+}
+
+fltCheck() {
+    testDecimal=$(echo "$1\n" | bc)
+    test $testDecimal -eq 0 2> /dev/null && {
+        printf '%s\n' "'$1' is not a number." >&2
+        exit 1
+    }
+}
+
+validateDeps() {
+    type ffmpeg 2>&1 > /dev/null || {
+        printf '%s\n' "What the hell is wrong with you? You don't have ffmpeg!" >&2
+        exit 2
+    }
+    type sox 2>&1 > /dev/null || {
+        printf '%s\n' "sox was not found on your \$PATH" >&2
+        exit 2
+    }
+}
+
+testAudio() {
+    test -z "$(ffprobe -i ${INPUT} -show_streams -select_streams a -loglevel error)" && {
+        printf '%s\n' "File has no audio stream!"
+        exit 3
+    } || {
+        audioExt=$(ffprobe -i ${INPUT} -show_streams -select_streams a \
+            -loglevel quiet | grep "codec_name" | cut -d'=' -f 2)
+    }
+}
+
+testVideo() {
+    test -z "$(ffprobe -i ${INPUT} -show_streams -select_streams v -loglevel error)" || {
+        videoExt=$(printf '%s\n' "${INPUT}" | rev | cut -d'.' -f 1 | rev)
+    }
+}
+
+extractAudio() {
+    printf '%s\n' "Extracting audio..."
+    ffmpeg -i ${INPUT} -vn -acodec ${ENCODER} ${TMPAUD} -threads 4 \
+    -y -loglevel error
+}
+
+generateProfile() {
+    NOISEPROF="./.noise"
+
+    printf '%s\n' "Generating noise profile..."
+    ffmpeg -i ${TMPFIN} -vn -ss "00:00:00" -t "02" ${BADSOUND} \
+        -threads 4 -y -loglevel quiet
+    sox ${BADSOUND} -n noiseprof ${NOISEPROF} || {
+        cleanProcessing
+        exit 4
+    }
+}
+
+createClean() {
+    printf '%s\n' "Cleaning audio..."
+    sox ${TMPAUD} ${TMPCLEAN} noisered ${NOISEPROF} ${FACTOR}
+    printf '%s\n' "Audio cleaned!"
+}
+
+cleanProcessing() {
+    rm -f ${BADSOUND} ${NOISEPROF} ${TMPFIN}
+    test ! -z "$videoExt" && {
+        rm -f ${TMPAUD} ${TMPCLEAN}
+    }
+}
+
+main() {
+    validateDeps
+
+    for arg in "$@"; do
+        test "$inputFlag" = "true" && {
+            INPUT="$arg"
+            inputFlag=false
+        }
+        test "$outputFlag" = "true" && {
+            OUTPUT="$arg"
+            outputFlag=false
+        }
+        test "$factorFlag" = "true" && {
+            FACTOR="$arg"
+            fltCheck "$FACTOR"
+            factorFlag=false
+        }
+        test "$passesFlag" = "true" && {
+            PASSES="$arg"
+            intCheck "$PASSES"
+            factorFlag=false
+        }
+
+        case $arg in
+            -i|--input)  inputFlag=true  ;;
+            -o|--output) outputFlag=true ;;
+            -f|--factor) factorFlag=true ;;
+            -p|--passes) passesFlag=true ;;
+        esac
+    done
+
+    test -z "$INPUT" && {
+        printf '%s\n' "No input file specified!"
+        usage 1
+    }
+    test -z "$OUTPUT" && {
+        OUTPUT="./clean${INPUT}"
+        printf '%s\n' "No output file specified! Using: ${OUTPUT}."
+    }
+
+    testAudio
+    testVideo
+
+    test ! -z "$videoExt" && {
+        TMPFIN="./.tmpfin.${audioExt}"
+    } || {
+        TMPFIN="./.tmpfin.${videoExt}"
+    }
+
+    cp "$INPUT" "$TMPFIN"
+
+    test "$audioExt" = "aac" || test "$audioExt" = "opus" && {
+        TMPAUD="./.tmpaud.ogg"
+        BADSOUND="./.tmpsnd.ogg"
+        TMPCLEAN="./.tmpclean.ogg"
+        ENCODER="libvorbis"
+    } || {
+        TMPAUD="./.tmpaud.${audioExt}"
+        BADSOUND="./.tmpsnd.${audioExt}"
+        TMPCLEAN="./.tmpclean.${audioExt}"
+        ENCODER="copy"
+    }
+
+    case $PASSES in
+        1) printf '%s\n' "Executing ${PASSES} pass:"   ;;
+        *) printf '%s\n' "Executing ${PASSES} passes:" ;;
+    esac
+
+    for count in $(seq $PASSES); do
+        printf '%s\n' "Pass ${count}:"
+        extractAudio
+        generateProfile
+        createClean
+    done
+
+    test ! -z "$videoExt" && {
+        printf '%s\n' "Merging cleaned audio into video..."
+        ffmpeg -i ${TMPCLEAN} -i ${INPUT} -vcodec copy ${OUTPUT} \
+        -threads 4 -y -loglevel quiet
+    } || {
+        mv ${TMPCLEAN} ${OUTPUT}
+    }
+
+    cleanProcessing
+}
+
+for arg in $ARGS; do
+    case $arg in
+        -q|--quiet) QUIETFLAG=true ;;
+        -h|--help)  usage 0        ;;
+    esac
+done
+
+test "$QUIETFLAG" = "true" && {
+    main $ARGS 2>&1 > /dev/null
+} || {
+    main $ARGS
+}

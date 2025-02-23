@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# spectrograph
+
+FILE="$1"
+IMG="$2"
+
+type sox 2>&1 > /dev/null || {
+    printf '%s\n' "sox was not found on your \$PATH."
+    exit 1
+}
+
+test -e "${IMG}.png" && {
+    mpv --loop-file --really-quiet "${IMG}.png" &
+    exit 0
+}
+
+test -e "$FILE" && {
+    sox "$FILE" -n spectrogram -o "${IMG}.png"
+    mpv --loop-file --really-quiet "${IMG}.png" &
+} || {
+    printf '%s\n' "Not a valid file."
+    exit 2
+}

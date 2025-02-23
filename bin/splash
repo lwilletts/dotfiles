@@ -1,0 +1,224 @@
+#!/bin/sh
+#
+# fyr 2019 (c) CC | /bin/sh sysinfo
+# thanks sshbio, xero, z3bra for providing ideas
+
+FULL=${FULL-▬}
+EMPTY=${EMPTY-▬}
+
+c0='[30m'; c1='[31m'
+c2='[32m'; c3='[33m'
+c4='[34m'; c5='[35m'
+c6='[36m'; c7='[37m'
+R='[0m'
+
+getSystem() {
+    hash crux 2> /dev/null && {
+        SYS="$(crux)"
+        PACK="$(pkginfo -i | wc -l)"
+        ASCII="crux"
+        return
+    }
+
+    hash apk 2> /dev/null && {
+        SYS="Alpine Linux $(cat /etc/alpine-release)"
+        PACK=$(apk info | wc -l)
+        ASCII="alpine"
+        return
+    }
+
+    hash hostnamectl 2> /dev/null && {
+        OS=$(hostnamectl | grep "Operating System:")
+
+        printf '%s\n' "$OS" | grep -q "Debian\|Ubuntu" && {
+            SYS="DEBIAN version $(cat /etc/debian_version)"
+            PACK=$(dpkg-query -f '${binary:Package}\n' -W | wc -l)
+            ASCII="debian"
+            return
+        }
+
+        printf '%s\n' "$OS" | grep -q "Arch Linux" && {
+            SYS="$(printf '%s\n' "$OS" | cut -d ':' -f 2 | cut -c 2-)"
+            PACK=$(pacman -Q | wc -l)
+            ASCII="arch"
+            return
+        }
+    }
+
+    hash xbps-install 2> /dev/null && {
+        SYS="Void Linux"
+        PACK=$(xbps-query -l | wc -l)
+        ASCII="void"
+        return
+    }
+}
+
+getASCII() {
+    case "$ASCII" in
+        crux)
+            cat >&2 << EOF
+  ${c4}    ___
+  ${c4}   (${c7}.· ${c4}|
+  ${c4}   (${c3}<> ${c4}|
+  ${c4}  / ${c6}__  ${c4}\\
+  ${c4} ( ${c6}/  \\ ${c4}/|
+  ${c3}_${c4}/\\ ${c6}__)${c4}/${c3}_${c4})
+  ${c3}\/${c4}-____${c3}\/
+
+EOF
+            ;;
+        alpine)
+            cat >&2 << EOF
+  ${c4}   /\\ /\\
+    /${c7}/ ${c4}\\  \\
+   /${c7}/   ${c4}\\  \\
+  /${c7}//    ${c4}\\  \\
+  ${c7}//      ${c4}\\  \\
+           \\
+
+EOF
+            ;;
+        debian)
+            cat >&2 << EOF
+  ${c1}  _____
+   /  __ \\
+  |  /    |
+  |  \\___-
+  -_
+    --_
+
+EOF
+            ;;
+        arch)
+            cat >&2 << EOF
+  ${c7}      /\\
+       /  \\
+      /\\   \\
+  ${c4}   /      \\
+    /   ,,   \\
+   /   |  |  -\\
+  /_-''    ''-_\\
+
+EOF
+            ;;
+        void)
+            cat >&2 << EOF
+  ${c2}    _______
+   _ \\______ -
+  | \\  ___  \\ |
+  | | /   \ | |
+  | | \___/ | |
+  | \\______ \\_|
+   -_______\\
+
+EOF
+            ;;
+    esac
+
+}
+
+getVars() {
+    USER="$USER"
+    HOST="$(hostnamectl hostname)"
+    KERN="$(uname -r)"
+
+    hash busybox 2> /dev/null && {
+        TIME="$(uptime)"
+    } || {
+        TIME="$(uptime -p)"
+    }
+
+    # lspci | grep "Navi" 2>&1 > /dev/null && hash sensors 2> /dev/null && \
+    #     GPU="$(gpu)"
+}
+
+workOutLineSize() {
+    LINE1=$(printf '%s\n' "  $USER@$HOST | $SYS | $PACK Packages" | wc -m)
+    LINE2=$(printf '%s\n' "  $KERN | $TIME" | wc -m)
+    LINE3=$(printf '%s\n' "  sh: $SHELL" | wc -m)
+
+    # find longest
+    SIZE=0
+    for i in $LINE1 $LINE2; do
+        test $i -gt $SIZE && SIZE=$i
+    done
+
+
+    TERMSIZE=$(stty size < /dev/tty | cut -d\  -f 2)
+    test $SIZE -ge $TERMSIZE && SIZE=$((TERMSIZE - 2))
+
+    # get the extra characters each line needs
+    LINE1EXTRA=$(printf '%*s' "$((SIZE - LINE1))" | sed 's/ / /')
+    LINE2EXTRA=$(printf '%*s' "$((SIZE - LINE2))" | sed 's/ / /')
+    LINE3EXTRA=$(printf '%*s' "$((SIZE - LINE3))" | sed 's/ / /')
+}
+
+draw() {
+    perc=$1
+    size=$2
+    color=$3
+
+    inc=$((perc * size / 100))
+
+    for i in $(seq 0 $((size - 1))); do
+        test $i -le $inc && {
+            out="${out}${FULL}"
+        } || {
+            out="${color}${out}${R}${c7}${EMPTY}${R}"
+        }
+    done
+
+    test $perc -eq 100 && out="${color}${out}"
+    printf '%s' "$out"
+}
+
+cpu() {
+    cpu="$(grep 'cpu ' /proc/stat | \
+        awk '{cpu=($2+$4)*100/($2+$4+$5)} END {print cpu}')"
+    cpu=$(printf "%.0f" $cpu)
+
+    printf "${c7}CPU${R} %s" "$(draw $cpu $SIZE $c1)"
+}
+
+# gpubar() {
+#     TEMP="$(($(printf '%s\n' "$GPU" | cut -d\  -f 4 | cut -d\. -f1) - 35))"
+#     printf "${c7}GPU${R} %s" "$(draw $TEMP $SIZE $c1)"
+# }
+
+ram() {
+    ram="$(free | awk '/Mem:/ {print int($3/$2 * 100.0)}')"
+    printf "${c7}RAM${R} %s" "$(draw $ram $SIZE $c2)"
+}
+
+battery() {
+    BATTERY=$(find /sys/class/power_supply -maxdepth 1 -type l -name "BAT*")
+    charge=$(sed '1q' $BATTERY/capacity)
+    printf "${c7}BAT${R} %s" "$(draw $charge $SIZE $c7)"
+}
+
+getSystem
+getVars
+
+# set window title
+# echo "\033]2$HOST\007"
+
+workOutLineSize
+
+clear=$(tput sgr0)
+clear
+
+getASCII
+
+printf '%s\n' "$c6▐$c7 $USER@$HOST | $PACK Packages $LINE1EXTRA"
+printf '%s\n' "$c6▐$c7 $KERN | $TIME $LINE2EXTRA"
+
+printf '\n'
+
+SIZE=$((SIZE - 5))
+
+printf '%s\n' "$(cpu)"
+printf '%s\n' "$(ram)"
+[  ! -z "$GPU" ] && printf '%s\n' "$(gpubar)"
+[  -d "/sys/class/power_supply/BAT0" ] && printf '%s\n' "$(battery)"
+
+printf '\n'

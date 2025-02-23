@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# fffopen
+
+[  -z "$1" ] && exit
+[  -e "$1" ] || exit
+
+mime_type="$(file -biL "$1")"
+
+case "$mime_type" in
+    text/*|*/xml)
+        "${EDITOR:-vi}" "$1"
+        ;;
+    image/*)
+        mpv --loop-file --really-quiet "$1"
+        ;;
+    video/*|application/mxf*)
+        mpv --loop-file --really-quiet "$1"
+        ;;
+    audio/*)
+        mpv "$1"
+        ;;
+    application/pdf*)
+        zathura "$1"
+        ;;
+    application/zip*|application/gzip)
+        unzipper "$1"
+        ;;
+    *opendocument*|*openxmlformats*)
+        libreoffice "$1"
+        ;;
+    *)
+        printf '%s\n' "Unknown filetype"
+        ;;
+esac

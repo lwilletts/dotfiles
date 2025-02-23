@@ -1,0 +1,66 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Scientifica;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(10, 10, 10, 1);
+    border-top: 2px solid rgba(128, 128, 128, 1);
+    color: #EFEFEF;
+}
+
+tooltip {
+    background: #101010;
+    border: 1px solid rgba(239, 239, 239, 1);
+}
+
+tooltip label {
+    color: #EFEFEF;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    color: #EFEFEF;
+    border-top: 2px solid transparent;
+}
+
+#workspaces button.focused {
+    border-top: 2px solid white;
+    color: #EFEFEF;
+}
+
+#workspaces button.empty {
+    color: #808080;
+}
+
+#workspaces button:hover {
+    border-top: 2px solid transparent;
+    background: #EFEFEF;
+    color: #121212;
+}
+
+#mode, #taskbar, #clock, #tray, #battery {
+    padding: 0 2px;
+}
+
+#mode {
+    background: #64727D;
+    border-top: 3px solid #EFEFEF;
+}
+
+#tray menu {
+    color: #EFEFEF;
+    background: #101010;
+    border: 1px solid rgba(239, 239, 239, 1);
+}
+    
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}

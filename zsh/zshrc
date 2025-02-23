@@ -1,0 +1,4 @@
+for configuration (~/.zsh/*.zsh) . $configuration
+unset configuration
+
+chpwd

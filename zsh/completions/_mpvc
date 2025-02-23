@@ -1,0 +1,26 @@
+#compdef mpvc
+
+
+function _mpvc {
+    local line
+
+    hash mpvc 2> /dev/null && {
+        _arguments -C \
+            "-h[Get help]" "--help[Get help]" \
+            "-t[Seek through file]" "--seek[Seek through file]" \
+            "-a[Add file to socket]" "--add[Add file to socket]" \
+            "-A[Add file to be played next]" "--playnext[Add file to be played next]" \
+            "1:Media File:(play stop pause add playnext next prev playlist move rm remove del crop clear save shuffle mute unmute volume seek speed kill version help)" \
+            "*::arg:->args"
+
+            case $line[1] in
+                add|-a|--add|playnext|-A|--playnext)
+                    _mpvc_add
+                    ;;
+            esac
+    }
+}
+
+function _mpvc_add {
+    _path_files
+}

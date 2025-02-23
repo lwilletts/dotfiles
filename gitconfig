@@ -1,0 +1,15 @@
+[user]
+	email = laurencewilletts@protonmail.com
+	name = Laurence Willetts
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+[color]
+	ui = true
+[alias]
+	a = add
+	c = clone
+	pl = pull
+	pu = push
+	ci = commit

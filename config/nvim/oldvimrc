@@ -1,0 +1,448 @@
+" fyr
+
+    " vim-plug
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{
+" auto install plug if not found
+if empty(glob('$HOME/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+nmap <Leader>Vu :PlugUpdate<CR>
+nmap <Leader>Vi :PlugUpgrade<CR>
+nmap <Leader>Vc :PlugClean<CR>
+nmap <Leader>Vs :PlugStatus<CR>
+let g:plug_retries = 0
+let g:plug_window = "tabnew"
+
+call plug#begin('$HOME/.vim/plugged')
+
+    " color
+Plug 'ellisonleao/gruvbox.nvim'
+
+    " usability
+Plug 'tpope/vim-repeat'
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-commentary'
+Plug 'pgdouyon/vim-evanesco'
+Plug 'farmergreg/vim-lastplace'
+    let g:lastplace_open_folds = 1
+    let g:lastplace_ignore = "gitcommit,gitrebase"
+    let g:lastplace_ignore_buftype = "quickfix,nofile,help"
+
+Plug 'dense-analysis/ale'
+
+Plug 'tpope/vim-surround'
+    nmap sl yss
+    nmap sw ysiw
+    nmap sW ysiW
+    nmap sap ysap
+    nmap sip ysip
+
+    " file opener
+Plug 'srstevenson/vim-picker'
+    let g:picker_selector_executable = 'fzf'
+    let g:picker_selector_flags = ''
+    let g:picker_height = 10
+
+    nnoremap <Leader>f :PickerEdit<CR>
+    nnoremap <Leader>b :PickerBuffer<CR>
+    nnoremap <Leader>v :PickerSplit<CR>
+    nnoremap <Leader>s :PickerVsplit<CR>
+
+    " build checkers
+Plug 'benekastah/neomake'
+    let g:neomake_open_list = 1
+    let g:neomake_place_signs = 1
+    let g:neomake_error_sign = {
+        \ 'text': 'E>',
+        \ 'texthl': 'Error',
+    \ }
+    let g:neomake_warning_sign = {
+        \ 'text': 'W>',
+        \ 'texthl': 'TermCursorNC',
+    \ }
+
+    " linting
+Plug 'dense-analysis/ale'
+    let g:ale_sign_error = '>>'
+    let g:ale_sign_warning = '..'
+    let g:ale_set_highlights = 1
+    let g:ale_sign_column_always = 1
+
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+
+    " async
+Plug 'skywind3000/asyncrun.vim'
+
+    " bullets
+Plug 'dkarter/bullets.vim'
+    let g:bullets_enabled_file_types = [
+        \ 'markdown',
+        \ 'text',
+        \ 'gitcommit',
+        \ 'scratch'
+        \]
+
+    "  intelligent tab
+Plug 'ervandew/supertab'
+    let g:SuperTabDefaultCompletionType = "<c-n>"
+    let g:SuperTabContextDefaultCompletionType = "<c-p>"
+
+if has('nvim')
+    if has('python3')
+        function! DoRemote(arg)
+          UpdateRemotePlugins
+        endfunction
+
+        Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+
+        let g:deoplete#enable_at_startup = 1
+        let g:deoplete#enable_ignore_case = 0
+    endif
+endif
+
+    " custom syntax && preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    nnoremap <Leader>om :MarkdownPreview<CR>
+
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'imsnif/kdl.vim'
+
+call plug#end()
+"}}}
+
+    " Remapping Keys
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{
+nnoremap K <nop>
+nnoremap <C-u> <nop>
+
+map <Space> <Leader>
+nnoremap <Leader>c :noh<CR>
+nnoremap <Leader><Space> <C-f>
+
+" edit and source vimrc on save
+nmap <silent> <Leader>E :next $MYVIMRC<CR>
+augroup VimReload
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" reload file automatically
+set autoread
+
+" saving and closing
+nmap <Leader>w :wa!<CR>
+nmap <Leader>x :xa!<CR>
+nmap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nmap <C-q> :qa!<CR>
+nmap <C-s> :silent w! !sudo tee % > /dev/null<CR>
+
+" replace word under cursor globally
+noremap <Leader>* :%s/\<<c-r><c-w>\>//g<left><left>
+
+" manipulating text in normal mode
+noremap <Tab> i<Tab><ESC>l
+
+" formatting options
+nmap <Leader>gq vipgq
+nmap <Leader>gc vipgc
+
+" better pasting
+xnoremap p pgvy
+
+" swapping like for like keys
+nnoremap ` '
+nnoremap ' `
+nnoremap # *
+nnoremap * #
+
+" ctrl-backspace
+" inoremap C-h BdWx
+
+" remove trailing whitespace
+nmap <Leader>z mz:%s/\s\+$<CR>'z:w<CR>:noh<CR>
+
+" toggles
+nmap <Leader>V :set spell!<CR>
+nmap <Leader>n :set number!<CR>
+
+" visual mappings
+nnoremap v <C-v>
+nnoremap <C-v> v
+vnoremap j gj
+vnoremap k gk
+vnoremap 0 g^
+vnoremap $ g$
+vnoremap < <gv
+vnoremap > >gv
+
+" buffers
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprev<CR>
+
+" tabs
+nmap <Leader>tn :tabnew %<CR>
+nmap <Leader>to :tabonly<CR>
+nmap <Leader>tc :tabclose<CR>
+nmap <Leader>ts :tab sball<CR>:tabnext<CR>
+
+" reverse splits
+nnoremap <C-w>s <C-w>v
+nnoremap <C-w>v <C-w>s
+" more natural splitting
+set splitright
+set splitbelow
+
+" spellcheck
+nnoremap <Leader>= 1z=
+nnoremap zn ]s
+nnoremap zp [s
+
+" auto expansion
+inoremap (<CR> (<CR>)<ESC>O
+inoremap {<CR> {<CR>}<ESC>O
+inoremap [<CR> [<CR>]<ESC>O
+inoremap {; {<CR>};<ESC>O
+inoremap {, {<CR>},<ESC>O
+inoremap [; [<CR>];<ESC>O
+inoremap [, [<CR>],<ESC>O
+
+" make
+nnoremap <Leader>m :make<CR>
+
+" external program launching
+nnoremap <Leader>op :AsyncRun zathura %:r.pdf<CR>
+nnoremap <Leader>ob :AsyncRun qutebrowser %:r.html<CR>
+vnoremap <Leader>s :! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-"}'<CR>
+
+    " Mappings for Custom Functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" make current file executable
+nmap <silent> <Leader>C :Chmox<CR>
+
+" correct default help to custom help function
+cabbrev h H
+cabbrev help H
+
+nmap <Leader>I :call <SID>SynStack()<CR>
+"}}}
+
+    " Visual Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{
+set title
+set titlestring=nvim:\ %t titlelen=50
+
+set shortmess+=I
+set equalalways
+set noshowcmd
+set noshowmode
+set laststatus=0
+
+" fuck the readonly warning
+au BufEnter * set noro
+
+syntax on
+
+" cursor always placed in middle
+set scrolloff=1000
+" cursor allowed to exist where there is no character in visual block mode
+set virtualedit=block
+
+" blank character between splits
+set fillchars=vert:\ ,
+
+set hidden
+set showmatch
+set lazyredraw
+
+" permanent signcolumn
+set signcolumn=yes
+
+" use marker folding by default
+set foldmethod=marker
+"}}}
+
+    " General Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{
+
+" remove viminfo
+let skip_defaults_vim=1
+
+" set zsh as our default shell
+let shell="/bin/zsh"
+
+" change $PWD to current file location
+set autochdir
+
+" disable annoying mouse
+set mouse+=a
+
+" faster updates
+set updatetime=100
+
+" autosave file on focus loss
+set autowrite
+autocmd! FocusLost * silent! :wa
+
+" stop leader timeout
+set ttimeout
+set notimeout
+
+" stop wrapping
+set nowrap
+
+" colorscheme
+set background=dark
+colorscheme gruvbox
+
+" sane backspace
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" sane searching
+set incsearch ignorecase smartcase
+
+" better wildcard matching
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*.o,*~,*.pyc,*/.git/*
+set wildignore+=*.gif,*.png,*.jp*
+
+" completion menu
+set completeopt=menu,preview
+
+" clipboard
+set clipboard=unnamedplus
+
+" defaults
+set tw=120
+set fo+=t
+set ts=4 sw=4 sts=4
+set smarttab expandtab
+
+" turn filetype subsystem on
+filetype plugin indent on
+
+autocmd! FileType c          setlocal ts=8 sw=8 sts=8 noet
+autocmd! FileType sh         setlocal makeprg=sh\ %\
+autocmd! FileType md         setlocal spell fo+=a makeprg=pandoc\ '%'\ -o\ '%:r'.pdf
+autocmd! FileType tex        setlocal spell fo-=a makeprg=pdflatex\ '%'
+autocmd! FileType txt        setlocal spell fo+=a noet wrap linebreak
+autocmd! FileType html,ruby  setlocal ts=2 sw=2 sts=2
+autocmd! FileType css,python setlocal ts=4 sw=4 sts=4
+
+" buffer read
+autocmd! BufNewFile,BufRead *fstab           setlocal filetype=fstab tw=0
+autocmd! BufNewFile,BufRead *Pkgfile         setlocal filetype=sh noet
+autocmd! BufNewFile,BufRead *.gitconfig      setlocal filetype=gitconfig noet
+autocmd! BufNewFile,BufRead *.zsh,*.zprofile setlocal filetype=sh
+
+" buffer write
+autocmd! BufWritePost *.tex make %
+
+" buffer delete
+autocmd! BufDelete *.tex :AsyncRun latexmk -pdf -C -silent
+
+set history=1000
+
+set backup
+set directory=~/.vim/swap
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+set backupdir=~/.vim/backup
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+
+if has('persistent_undo')
+    set undofile
+    set undoreload=5000
+    set undolevels=5000
+    set undodir=~/.vim/undo
+
+    if !isdirectory(expand(&undodir))
+        call mkdir(expand(&undodir), "p")
+    endif
+endif
+
+if has('nvim')
+    " settings
+    set list
+    set breakindent
+
+    " keybindings
+    nmap <Leader>dd :term<CR>
+    nmap <Leader>dv :split<CR>:term<CR>
+    nmap <Leader>ds :vsplit<CR>:term<CR>
+
+    tnoremap <C-e> <C-\><C-n>
+
+    nnoremap <M-h> <c-\><c-n><c-w>h
+    nnoremap <M-j> <c-\><c-n><c-w>j
+    nnoremap <M-k> <c-\><c-n><c-w>k
+    nnoremap <M-l> <c-\><c-n><c-w>l
+    nnoremap <M-w> <c-\><c-n><c-w>h
+
+    " jump to insert mode automatically
+    autocmd BufEnter *
+    \ if &buftype == "terminal" |
+    \ startinsert |
+    \ endif
+
+    " close terminal buffer immediately
+    autocmd TermClose * silent! bd!
+endif
+"}}}
+
+    " functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{
+" open current file with <program>
+function! Openwith(program)
+    silent! execute "!" . a:program . " " . expand('%:p') . " &"
+endfunction
+
+command! -bang -nargs=* Openwith call Openwith(<q-args>)
+
+" fix wayland clipboard
+set clipboard+=unnamed
+
+" chmod +x current file
+function! Chmox()
+    execute "!chmod +x " . expand('%:p')
+endfunction
+
+command! Chmox call Chmox()
+
+" open help in own buffer without split
+function! FullScreenHelp(helpfile)
+    enew
+    set bt=help
+    execute "help " . a:helpfile
+    set buflisted
+endfunction
+
+command! -nargs=1 -complete=help H call FullScreenHelp(<f-args>)
+
+" information about current highlighting
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
+    "}}}

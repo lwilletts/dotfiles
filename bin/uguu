@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# uguu
+
+test -n "$1" && {
+    URL="$(curl --silent -i -F file="@$1" \
+    https://uguu.se/api.php?d=upload-tool | tail -n 1)"
+    printf '%s\n' "$URL"
+    printf '%s\n' "$URL" | xsel -ib
+}

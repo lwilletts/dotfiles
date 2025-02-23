@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# exesh
+
+[ -e "$1" ] && ${EDITOR:-vi} "$1" && exit
+
+[ -n "$1" ] && {
+    printf '%s' "#!/bin/sh
+#
+# $1
+
+usage() {
+    base=\$(basename \"\$0\")
+
+    cat >&2 << EOF
+Usage:
+    \$base
+EOF
+
+    [ \$# -eq 0 ] || exit \"\$1\"
+}
+
+main() {
+    return 0
+}
+
+main \"\$@\"
+" > "$1"
+
+    chmod +x "$1"
+    $EDITOR "$1"
+}

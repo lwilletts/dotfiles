@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# sysl
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+OPTIONS="-s -f -v -n"
+DOTFILEDIR="$(dirname "$(readlink -f "$0")" | rev | cut -d'/' -f 2- | rev)"
+
+headless() {
+    [ ! -d "$HOME/.config" ] && mkdir -p "$HOME/.config"
+
+    ln $OPTIONS "$DOTFILEDIR/bin" "$HOME/.bin"
+
+    ln $OPTIONS "$DOTFILEDIR/config/nvim" "$HOME/.config"
+
+    ln $OPTIONS "$DOTFILEDIR/gitconfig" "$HOME/.gitconfig"
+    ln $OPTIONS "$DOTFILEDIR/tmux.conf" "$HOME/.tmux.conf"
+
+    ln $OPTIONS "$DOTFILEDIR/zsh" "$HOME/.zsh"
+    ln $OPTIONS "$DOTFILEDIR/zsh/zshrc" "$HOME/.zshrc"
+    ln $OPTIONS "$DOTFILEDIR/zsh/zprofile" "$HOME/.zprofile"
+} 
+  
+wayland() {
+    [ ! -d "$HOME/.config" ] && mkdir -p "$HOME/.config"
+
+    ln $OPTIONS "$DOTFILEDIR/config/niri" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/mako" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/foot" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/fuzzel" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/waybar" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/zathura" "$HOME/.config"
+
+    ln $OPTIONS "$DOTFILEDIR/config/mpv" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/pipewire" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/MangoHud" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/vkBasalt" "$HOME/.config"
+
+    ln $OPTIONS "$DOTFILEDIR/config/qutebrowser/config.py" "$HOME/.config/qutebrowser/config.py"
+
+    ln $OPTIONS "$DOTFILEDIR/config/htop" "$HOME/.config"
+    ln $OPTIONS $DOTFILEDIR/config/systemd/*.service "$HOME/.config/systemd/user"
+}
+
+for arg in "$@"; do
+        case "$arg" in
+            h|headless) headless          ;;
+            w|wayland)  wayland           ;;
+	    all|deploy) headless; wayland ;;
+            -?)         usage 1  	  ;;
+        esac
+done
