@@ -4,7 +4,7 @@ latest configuration files
 
 ### preview
 
-![preview](https://github.com/lwilletts/dotfiles/preview.png)
+![image](https://github.com/lwilletts/dotfiles/preview.png)
 
 ### wayland programs
 
