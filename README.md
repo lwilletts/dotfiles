@@ -1,10 +1,10 @@
-# .
+# .d/*
 
-latest configuration files
+latest dots
 
 ### preview
 
-![image](https://github.com/lwilletts/dotfiles/preview.png)
+![image](https://github.com/lwilletts/dotfiles/blob/main/preview.png?raw=true)
 
 ### wayland programs
 
