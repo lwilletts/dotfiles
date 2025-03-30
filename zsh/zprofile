@@ -3,14 +3,9 @@
 . $HOME/.zsh/ttycolors
 . $HOME/.zsh/environment.zsh
 
-# if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-#     if [ "$(tty)" = /dev/tty1 ]; then
-#         niri
-#     fi
-# fi
-
-# if [ -z "$DISPLAY" ]; then
-#     if [ "$(tty)" = /dev/tty1 ]; then
-#         startx
-#     fi
-# fi
+if [ -z "$DISPLAY" ]; then
+	if [ "$(tty)" = /dev/tty1 ]; then
+		echo hi
+		# startx
+	fi
+fi

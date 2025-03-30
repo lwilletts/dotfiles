@@ -44,6 +44,8 @@ alias findexec="fd . --exact-depth 1 -t x"
 # dtach
 alias irc="dtach -A /tmp/irc weechat"
 
+alias modcat="systemd-analyze cat-config modprobe.d"
+
 # ascii
 alias unix="printf '%s\n' \"\$(curl -sL git.io/unix)\""
 alias taco="printf '%s\n' \"\$(curl -sL git.io/taco)\""

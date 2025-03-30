@@ -16,7 +16,7 @@ EOF
 main() {
     HOME=/home/fyr/.resolve || exit 1
 
-    /opt/resolve/bin/resolve
+    QT_QPA_PLATFORM=xcb /opt/resolve/bin/resolve
 }
 
 main "$@"

@@ -224,19 +224,19 @@ c.fonts.web.size.minimum = 8
 c.fonts.web.size.minimum_logical = 8
 
 # monospace fonts
-c.fonts.hints = '8pt scientifica'
-c.fonts.keyhint = '8pt scientifica'
-c.fonts.prompts = '8pt scientifica'
-c.fonts.downloads = '8pt scientifica'
-c.fonts.statusbar = '8pt scientifica'
-c.fonts.contextmenu = '8pt scientifica'
-c.fonts.messages.info = '8pt scientifica'
-c.fonts.debug_console = '8pt scientifica'
-c.fonts.messages.error = '8pt scientifica'
-c.fonts.completion.entry = '8pt scientifica'
-c.fonts.completion.category = '8pt scientifica'
-c.fonts.tabs.selected = '8pt scientifica'
-c.fonts.tabs.unselected = '8pt scientifica'
+c.fonts.hints = '8pt cozette'
+c.fonts.keyhint = '8pt cozette'
+c.fonts.prompts = '8pt cozette'
+c.fonts.downloads = '8pt cozette'
+c.fonts.statusbar = '8pt cozette'
+c.fonts.contextmenu = '8pt cozette'
+c.fonts.messages.info = '8pt cozette'
+c.fonts.debug_console = '8pt cozette'
+c.fonts.messages.error = '8pt cozette'
+c.fonts.completion.entry = '8pt cozette'
+c.fonts.completion.category = '8pt cozette'
+c.fonts.tabs.selected = '8pt cozette'
+c.fonts.tabs.unselected = '8pt cozette'
 
 # c.fonts.web.family.cursive
 # c.fonts.web.family.fantasy

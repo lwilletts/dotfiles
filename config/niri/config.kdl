@@ -2,7 +2,7 @@
 
 // startup
 spawn-at-startup "foot" "--server"
-spawn-at-startup "steam"
+spawn-at-startup "steam" "-silent"
 spawn-at-startup "streamdeck" "-n"
 spawn-at-startup "xwayland-satellite" ":1"
 spawn-at-startup "discord" "--enable-features=UseOzonePlatform,WaylandWindowDecorations" "--ozone-platform=wayland"
@@ -14,14 +14,14 @@ screenshot-path "~/%s.png"
 hotkey-overlay { skip-at-startup; }
 
 environment {
-    DISPLAY ":1"
+    DISPLAY ":0"
     QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 cursor {
-    xcursor-theme "breeze"
-    xcursor-size 20
+    xcursor-theme "miniature"
+    xcursor-size 16
 
     hide-when-typing
     hide-after-inactive-ms 5000
@@ -39,11 +39,11 @@ input {
 
     mouse {
         accel-profile "flat"
-	scroll-factor 1.5
+	scroll-factor 2
     }
 
     // behaviour
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="90%"
     workspace-auto-back-and-forth
     disable-power-key-handling
 }
@@ -54,14 +54,15 @@ output "DP-1" {
     transform "normal"
     position x=0 y=0
     background-color "#000000"
-    // variable-refresh-rate on-demand=true
+    variable-refresh-rate on-demand=true
 }
 
 output "HDMI-A-1" {
-    mode "2560x1440@143.998"
-    scale 1
+    mode "2560x1440@59.951"
+    // mode "2560x1440@143.998"
+    scale 1.5
     transform "90"
-    position x=2560 y=-560
+    position x=2560 y=0
     background-color "#000000"
 }
 
@@ -101,15 +102,15 @@ layout {
     }
 
     // tabs
-    default-column-display "tabbed"
+    // default-column-display "tabbed"
 
     tab-indicator {
         hide-when-single-tab
         place-within-column
-        gap 10
-        width 16
-        gaps-between-tabs 20
-        length total-proportion=0.2
+        gap 8
+        width 10
+        gaps-between-tabs 8
+        length total-proportion=0.5
         position "right"
         corner-radius 6
         active-color "#D9EAE2"
@@ -180,7 +181,7 @@ workspace "record" { open-on-output "DP-1"; }
 workspace "secondary" { open-on-output "HDMI-A-1"; }
 
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 6
     clip-to-geometry true
 }
 
@@ -192,7 +193,7 @@ window-rule {
 window-rule {
     match app-id="qutebrowser"
     open-on-workspace "dash"
-    default-column-width { proportion 0.7; }
+    default-column-width { proportion 0.6; }
 }
 
 window-rule {
@@ -224,7 +225,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="mpv"
+    match app-id=r#"mpv|FTL|resolve"#
     open-floating true
     // default-floating-position x=0 y=0 relative-to="top-left"
 }

@@ -35,7 +35,6 @@ export MAIL="$XDG_CONFIG_HOME/mail"
 export PYTHONPATH="$XDG_CONFIG_HOME"
 export GNUPGHOME="$XDG_CONFIG_HOME"
 
-
 export VISUAL="nvim"
 export EDITOR="nvim"
 alias vi="$VISUAL"
@@ -47,5 +46,9 @@ export MANWIDTH=999
 export FZF_DEFAULT_OPTS='--color=bw'
 
 # games
+export PROTON_ENABLE_NVAPI=1
+# export __GL_MaxFramesAllowed="1"
+# export __GL_THREADED_OPTIMIZATIONS="1"
+
 export GAME="$HOME/.steam/steam/steamapps/common"
 export COMPAT="$HOME/.steam/steam/steamapps/compatdata"
