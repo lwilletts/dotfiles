@@ -14,7 +14,7 @@ screenshot-path "~/%s.png"
 hotkey-overlay { skip-at-startup; }
 
 environment {
-    DISPLAY ":0"
+    DISPLAY ":1"
     QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "qt6ct"
 }
@@ -58,7 +58,7 @@ output "DP-1" {
 }
 
 output "HDMI-A-1" {
-    mode "2560x1440@59.951"
+    mode "2560x1440@119.998"
     // mode "2560x1440@143.998"
     scale 1.5
     transform "90"
@@ -107,13 +107,13 @@ layout {
     tab-indicator {
         hide-when-single-tab
         place-within-column
-        gap 8
-        width 10
+        gap 5
+        width 8
         gaps-between-tabs 8
-        length total-proportion=0.5
+        length total-proportion=0.66
         position "right"
-        corner-radius 6
-        active-color "#D9EAE2"
+        corner-radius 4
+        active-color "#FFFFFF"
         inactive-color "121212"
     }
 
@@ -213,19 +213,19 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"steam"#
+    match app-id=r#"steam|Lutris"#
     open-on-workspace "game"
     default-column-width { proportion 0.5; }
 }
 
 window-rule {
-    match app-id=r#"steam_app_|gamescope|wine"#
+    match app-id=r#"steam_app_|gamescope"#
     open-on-workspace "game"
     open-fullscreen true
 }
 
 window-rule {
-    match app-id=r#"mpv|FTL|resolve"#
+    match app-id=r#"mpv|FTL|resolve|wine"#
     open-floating true
     // default-floating-position x=0 y=0 relative-to="top-left"
 }
@@ -313,6 +313,7 @@ binds {
     Alt+Space  { spawn "playerctl" "play-pause"; }
     Alt+Comma  { spawn "playerctl" "prev"; }
     Alt+Period { spawn "playerctl" "next"; }
+    Alt+Slash  { spawn "playerctl" "stop"; }
     XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "2"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
@@ -331,4 +332,5 @@ binds {
     Alt+Shift+E { quit skip-confirmation=true; }
     Alt+Shift+B { power-off-monitors; }
     Alt+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
+    Alt+Ctrl+R allow-when-locked=true { spawn "reboot"; }
 }

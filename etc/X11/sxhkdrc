@@ -1,0 +1,19 @@
+{mod1, mod2} + Return
+    urxvt
+mod1 + d
+    drun -b
+{mod1 + @button1, mod1 + @button3}
+    wattr o $(pfw) || chwso -r $(pfw); {xmmv,xmrs}
+
+mod1 + shift + r
+    pkill -USR1 -x sxhkd
+mod1 + ctrl + BackSpace
+    pkill xinit
+
+# shot
+Print
+    shot 
+shift + Print
+    shot "$(pfw)"
+
+# vim: set ft=sxhkdrc :

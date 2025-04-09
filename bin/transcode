@@ -13,9 +13,9 @@ EOF
 }
 
 encode() {
-    ffmpeg -hide_banner -loglevel info -i "$vid.$ext" \
+    ffmpeg -hide_banner -loglevel verbose -i "$vid.$ext" \
            -max_muxing_queue_size 1024 \
-           -c:v prores_ks -profile:v 3 \
+           -c:v dnxhd -profile:v dnxhr_hq -r 120000/1001 \
            -c:a pcm_s16le -map 0 -f mov "$dir/$vid.mov"
 }
 

@@ -18,12 +18,14 @@ alias szsh="source ~/.zshrc"
 
 # apps
 alias n="niri-session"
+alias x="xinit -- :0 vt2 2> /dev/null &!"
 alias vol="pulsemixer"
 alias htop="htop -t -s PERCENT_CPU"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias todo="$EDITOR $HOME/usr/notes/todo.md"
 alias ffmpeg="ffmpeg -hide_banner"
+alias ffprobe="ffprobe -hide_banner"
 alias glances="glances --hide-kernel-threads"
 
 # net

@@ -4,8 +4,7 @@
 . $HOME/.zsh/environment.zsh
 
 if [ -z "$DISPLAY" ]; then
-	if [ "$(tty)" = /dev/tty1 ]; then
-		echo hi
-		# startx
+	if [ "$(tty)" = /dev/tty2 ]; then
+		echo
 	fi
 fi

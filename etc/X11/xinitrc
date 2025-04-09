@@ -1,0 +1,16 @@
+#!/bin/sh
+
+XDIR="$HOME/.d/etc/X11"
+
+$XDIR/screenlayout.sh
+
+wmp -a 1280 720
+xset s off -dpms
+xsetroot -cursor_name left_ptr
+[ -f ~/.Xresources ] && xrdb -load ~/.Xresources
+
+hsetroot -tile "/home/fyr/usr/img/tile/blackorchid.png"
+
+sxhkd -c $XDIR/sxhkdrc &
+
+exec xwait
