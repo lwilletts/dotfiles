@@ -36,6 +36,7 @@ simpleX11() {
 
     ln $OPTIONS "$DOTFILEDIR/etc/X11/xinitrc" "$HOME/.xinitrc"
     ln $OPTIONS "$DOTFILEDIR/etc/X11/Xresources" "$HOME/.Xresources"
+    ln $OPTIONS "$DOTFILEDIR/config/sxhkd" "$HOME/.config"
     
     # sudo cp -f "$DOTFILEDIR/etc/X11/xorg.conf.d" "/etc/X11/"
     # sudo cp -f "$DOTFILEDIR/etc/X11/Xwrapper.config" "/etc/X11/"

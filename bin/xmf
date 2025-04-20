@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# xmf - X mouse focus
+
+wew | while read -r ev wid; do
+    case "$ev" in
+        ENTER)
+	    wattr o "$wid" || wtf "$wid"
+	    ;;
+    esac
+done

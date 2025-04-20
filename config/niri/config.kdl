@@ -1,12 +1,10 @@
 // fyr niri cfg
 
 // startup
-spawn-at-startup "foot" "--server"
 spawn-at-startup "steam" "-silent"
 spawn-at-startup "streamdeck" "-n"
 spawn-at-startup "xwayland-satellite" ":1"
 spawn-at-startup "discord" "--enable-features=UseOzonePlatform,WaylandWindowDecorations" "--ozone-platform=wayland"
-spawn-at-startup "element-desktop"
 
 // top level settings
 prefer-no-csd
@@ -39,7 +37,7 @@ input {
 
     mouse {
         accel-profile "flat"
-	scroll-factor 2
+        scroll-factor 2
     }
 
     // behaviour
@@ -78,7 +76,7 @@ layout {
 
     // behaviour
     default-column-width { proportion 0.33333; }
-    center-focused-column "on-overflow"
+    center-focused-column "never"
     always-center-single-column
 
     preset-column-widths {
@@ -181,7 +179,7 @@ workspace "record" { open-on-output "DP-1"; }
 workspace "secondary" { open-on-output "HDMI-A-1"; }
 
 window-rule {
-    geometry-corner-radius 6
+    geometry-corner-radius 4
     clip-to-geometry true
 }
 
@@ -329,8 +327,8 @@ binds {
     Shift+Print { screenshot-window; }
 
     // system
-    Alt+Shift+E { quit skip-confirmation=true; }
     Alt+Shift+B { power-off-monitors; }
+    Alt+Ctrl+Backspace { quit skip-confirmation=true; }
     Alt+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
     Alt+Ctrl+R allow-when-locked=true { spawn "reboot"; }
 }

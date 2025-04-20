@@ -24,6 +24,7 @@ alias htop="htop -t -s PERCENT_CPU"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias todo="$EDITOR $HOME/usr/notes/todo.md"
+alias clock="xclock -d -face "Cozette-8" -padding 8 -update 5 2>/dev/null &!"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffprobe="ffprobe -hide_banner"
 alias glances="glances --hide-kernel-threads"
@@ -34,7 +35,7 @@ alias wget="wget --no-hsts"
 
 # oneliners
 alias coin="curl -s rate.sx"
-alias wth="curl -s wttr.in | tail -n 32 | head -n 30"
+alias btc="curl -s rate.sx/btc"
 
 # file handling
 alias i="img2sixel"
@@ -45,13 +46,13 @@ alias findexec="fd . --exact-depth 1 -t x"
 
 # dtach
 alias irc="dtach -A /tmp/irc weechat"
+alias ts="systemd-run --user --scope tmux new-session"
 
 alias modcat="systemd-analyze cat-config modprobe.d"
 
 # ascii
 alias unix="printf '%s\n' \"\$(curl -sL git.io/unix)\""
 alias taco="printf '%s\n' \"\$(curl -sL git.io/taco)\""
-alias bonsai="< ~/.dots/ascii/bonsai"
 
 # misc
 alias snake="terminibbles -d 3 -q"

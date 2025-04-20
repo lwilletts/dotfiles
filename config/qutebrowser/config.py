@@ -722,7 +722,7 @@ c.prompt.radius = 10
 
     # scroll + search
 c.scrolling.bar = 'when-searching'
-c.scrolling.smooth = True
+c.scrolling.smooth = False
 c.search.ignore_case = 'smart'
 c.search.incremental = True
 

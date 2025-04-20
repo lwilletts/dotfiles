@@ -1,16 +1,52 @@
 #!/bin/sh
 
-XDIR="$HOME/.d/etc/X11"
-
-$XDIR/screenlayout.sh
+xrandr --output DP-0 --primary --mode 2560x1440 -r 239.97 \
+       --output HDMI-0 --off \
+       --output DP-1 --off \
+       --output HDMI-1 --off \
+       --output DP-2 --off \
+       --output DP-3 --off &> /dev/null
 
 wmp -a 1280 720
+xset r rate 180 50 
 xset s off -dpms
 xsetroot -cursor_name left_ptr
-[ -f ~/.Xresources ] && xrdb -load ~/.Xresources
+[ -f ~/.Xresources ] && xrdb -load -I$HOME ~/.Xresources
 
-hsetroot -tile "/home/fyr/usr/img/tile/blackorchid.png"
+# userland
+hsetroot -tile "/home/fyr/usr/img/tile/green-fibers.png" -gamma 0.9
+sxhkd &
 
-sxhkd -c $XDIR/sxhkdrc &
-
-exec xwait
+# event handler
+wew | while read -r ev wid; do
+    case $ev in
+        CREATE)
+            case $(atomx WM_CLASS $wid) in
+                steam_app) 
+                    chwb -s 0 $wid
+                    ;;
+                xclock)
+                    ignw -s $wid
+                    chwb -s 1 -c 0xEEEEEE $wid
+                    wmv 20 20 $wid
+                    ;;
+                *)         
+                    wattr o $wid || { 
+                        chwb -s 0 $(pfw)
+                        wtf $wid
+                        wmv -a $(wmp) $wid 
+                        chwb -s 1 -c 0xEEEEEE $wid 
+                    }
+                    ;;
+            esac
+            ;;
+        ENTER)
+            wattr o $wid || { 
+                chwb -s 0 $(pfw)
+                wtf $wid 
+                chwso -r $wid
+                chwb -s 1 -c 0xEEEEEE $wid
+            }
+            ;;
+    esac
+done

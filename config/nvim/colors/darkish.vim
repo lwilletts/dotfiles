@@ -7,7 +7,6 @@ if exists("syntax_on")
 endif
 
 hi clear
-set background=0
 
     " vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# wid
+
+usage() {
+    cat >&2 << EOF
+Usage: $(basename "$0") "lsw flag" "search string"
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+[ $# -eq 0 ] && usage 1
+
+case "$1" in
+    -a|all) LSWCMD="lsw -a"; shift ;;
+    -o|ovr) LSWCMD="lsw -o"; shift ;;
+    -u|hid) LSWCMD="lsw -u"; shift ;;
+    *)      LSWCMD="lsw"   ;;
+    -h)     usage 0        ;;
+esac
+
+for wid in $($LSWCMD); do
+    printf '%s\n' "$wid $(atomx WM_NAME "$wid")"
+    printf '%s\n' "$wid $(atomx WM_CLASS "$wid")"
+done | grep -Fi "$@" | grep -v "wid" | cut -d\  -f 1
