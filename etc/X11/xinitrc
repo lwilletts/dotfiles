@@ -22,7 +22,7 @@ wew | while read -r ev wid; do
     case $ev in
         CREATE)
             case $(atomx WM_CLASS $wid) in
-                steam_app) 
+                steam_app_*) 
                     chwb -s 0 $wid
                     ;;
                 xclock)

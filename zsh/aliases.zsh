@@ -29,6 +29,8 @@ alias ffmpeg="ffmpeg -hide_banner"
 alias ffprobe="ffprobe -hide_banner"
 alias glances="glances --hide-kernel-threads"
 
+alias pick="niri msg pick-color"
+
 # net
 alias net="curl -4 icanhazip.com"
 alias wget="wget --no-hsts"

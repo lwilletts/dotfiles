@@ -42,7 +42,6 @@ alias vim="$VISUAL"
 export PAGER="less"
 export MANPAGER='nvim --cmd ":lua vim.g.noplugins=1" +Man!'
 export MANWIDTH=999
-export FZF_DEFAULT_OPTS='--color=bw'
 
 # games
 export PROTON_ENABLE_NVAPI=1
@@ -51,3 +50,8 @@ export PROTON_ENABLE_NVAPI=1
 
 export GAME="$HOME/.steam/steam/steamapps/common"
 export COMPAT="$HOME/.steam/steam/steamapps/compatdata"
+
+
+# fzf
+source <(fzf --zsh)
+export FZF_DEFAULT_OPTS='--color=bw'

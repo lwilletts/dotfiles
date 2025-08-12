@@ -13,9 +13,3 @@ if hash make 2> /dev/null; then
         fi
     }
 fi
-
-# fzf
-if hash fzf 2> /dev/null; then
-     . "$HOME/.fzf/shell/completion.zsh"
-     . "$HOME/.fzf/shell/key-bindings.zsh"
-fi
