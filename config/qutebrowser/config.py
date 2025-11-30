@@ -17,8 +17,8 @@ c.content.blocking.whitelist = ['googleadservices.com', 'adservice.google.com']
 config.bind('Ctrl-o', 'config-cycle content.blocking.enabled')
 
 # start
-c.url.start_pages = ['file:///home/fyr/usr/start/start.html']
-c.url.default_page = 'file:///home/fyr/usr/start/start.html'
+c.url.start_pages = ['blaze.lan:3000']
+c.url.default_page = 'blaze.lan:3000'
 
 # sane defaults
 c.backend = 'webengine'
@@ -33,7 +33,7 @@ c.input.forward_unbound_keys = 'auto'
 c.content.geolocation = False
 c.session.default_name = None
 
-# c.fileselect.handler = 'externa'
+# c.fileselect.handler = 'external'
 # c.fileselect.multiple_files.command = 'fff'
 # c.fileselect.single_file.command = 'fff'
 
@@ -50,7 +50,6 @@ config.bind('return', 'selection-follow')
 config.bind('cx', 'download-cancel')
 config.bind('<Ctrl-s>', 'config-source ~/.config/qutebrowser/config.py')
 config.bind('<Ctrl-E>', 'config-edit', mode='normal')
-
 
 # mouse
 c.input.mouse.rocker_gestures = False
@@ -144,7 +143,7 @@ c.tabs.min_width = 110
 c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
 c.tabs.title.alignment = 'left'
 
-
+# title
 c.window.title_format = '{current_title}'
 c.tabs.title.format = '{current_title}'
 c.tabs.title.format_pinned = '{current_title}'
@@ -201,8 +200,6 @@ c.content.headers.do_not_track = True
 # of a directory, all files in the directory are read as dblock lists.
 # The file `~/.config/qutebrowser/blocked-hosts` is always read if it
 # c.content.host_blocking.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
-
-
 
 #   - all: Accept all cookies.
 #   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
@@ -401,7 +398,7 @@ c.colors.tabs.pinned.selected.odd.fg = '#121212'
 c.colors.tabs.pinned.selected.even.bg = '#D9EAE2'
 c.colors.tabs.pinned.selected.even.fg = '#121212'
 
-# right-click menu
+    # right-click menu
 c.colors.contextmenu.menu.bg = '#121212'
 c.colors.contextmenu.menu.fg = '#D9EAE2'
 c.colors.contextmenu.selected.bg = '#D9EAE2'
@@ -411,14 +408,6 @@ c.colors.contextmenu.selected.fg = '#121212'
 # c.completion.web_history.exclude = []
 
 c.completion.web_history.max_items = -1
-
-# Maximum number of pages to hold in the global memory page cache. The
-# page cache allows for a nicer user experience when navigating forth or
-# back to pages in the forward/back history, by pausing and resuming up
-# to _n_ pages. For more information about the feature, please refer to:
-# http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
-# Type: Int
-# c.content.cache.maximum_pages = 0
 
 # Size (in bytes) of the HTTP network cache. Null to use the default
 # value. With QtWebEngine, the maximum supported value is 2147483647 (~2
@@ -584,7 +573,7 @@ c.content.pdfjs = False
 
 # Enable WebGL.
 # Type: Bool
-# c.content.webgl = True
+c.content.webgl = True
 
 # limit fullscreen to the browser window (does not expand to fill the screen)
 # c.content.windowed_fullscreen = False
@@ -673,7 +662,7 @@ c.prompt.radius = 10
 # https://peter.sh/experiments/chromium-command-line-switches/ for a
 # list) will work.
 # Type: List of String
-# c.qt.args = ["blink-settings=darkMode=4"]
+c.qt.args = ["ignore-gpu-blocklist", "enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "num-raster-threads=4"]
 
 # Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
 # environment variable and is useful to force using the XCB plugin when
@@ -690,7 +679,7 @@ c.prompt.radius = 10
 #   - qt-quick: Tell Qt Quick to use a software renderer instead of OpenGL. (`QT_QUICK_BACKEND=software`)
 #   - chromium: Tell Chromium to disable GPU support and use Skia software rendering instead. (`--disable-gpu`)
 #   - none: Don't force software rendering.
-# c.qt.force_software_rendering = 'none'
+c.qt.force_software_rendering = 'none'
 
 # Turn on Qt HighDPI scaling. This is equivalent to setting
 # QT_AUTO_SCREEN_SCALE_FACTOR=1 in the environment. It's off by default
@@ -734,7 +723,6 @@ c.search.incremental = True
 #   - never: Never search automatically.
 # c.url.auto_search = 'naive'
 
-
 # URL segments where `:navigate increment/decrement` will search for a
 # number.
 # Type: FlagList
@@ -761,8 +749,6 @@ c.search.incremental = True
 # `:open google qutebrowser`.
 # Type: Dict
 # c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
-
-
 
 # Bindings for normal mode
 # config.bind("'", 'enter-mode jump_mark')

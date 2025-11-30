@@ -18,7 +18,7 @@ autoload -U zmv
 # vi prompt
 precmd() {
     PROMPT="%{$fg[white]%}|%{$reset_color%} "
-    RPROMPT="%{$fg[white]%}%{$reset_color%}"
+    RPROMPT="%{$fg[white]%}%m%{$reset_color%}"
 
     # set window title
     print -Pn "\e]0;%~\a"

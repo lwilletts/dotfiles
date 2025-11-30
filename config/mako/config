@@ -1,13 +1,13 @@
 sort=-time
-layer=top
-anchor=bottom-center
+layer=overlay
+anchor=bottom-right
 
 output=DP-1
 
-width=500
+width=400
 height=300
 padding=20
-margin=50
+margin=60
 
 font=Scientifica 8
 border-size=2

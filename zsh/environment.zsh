@@ -12,6 +12,7 @@ $HOME/src/fwm
 /bin
 /sbin
 /usr/sbin
+$HOME/.local/share/flatpak/exports/bin
 $HOME/.local/bin"
 
 printf '%s\n' "$EXECPATHS" | while read -r EXECPATH; do

@@ -18,7 +18,8 @@ alias szsh="source ~/.zshrc"
 
 # apps
 alias n="niri-session"
-alias x="xinit -- :0 vt2 2> /dev/null &!"
+alias x="startx"
+# alias x="xinit -- :0 vt2 2> /dev/null &!"
 alias vol="pulsemixer"
 alias htop="htop -t -s PERCENT_CPU"
 alias grep="grep --color=auto"
@@ -38,6 +39,10 @@ alias wget="wget --no-hsts"
 # oneliners
 alias coin="curl -s rate.sx"
 alias btc="curl -s rate.sx/btc"
+alias plot="systemd-analyze plot > boot.svg && mpv boot.svg"
+alias latency="sudo tc qdisc add dev enp10s0u1c2 root netem delay 72ms"
+alias reseteth="sudo tc qdisc del dev enp10s0u1c2 root"
+alias stress="stress-ng --cpu 16 --timeout 60s --metrics-brief"
 
 # file handling
 alias i="img2sixel"

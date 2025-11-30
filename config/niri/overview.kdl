@@ -1,0 +1,41 @@
+overview {
+    zoom 0.75
+
+    workspace-shadow {
+        off
+    }
+}
+
+// make wallpaper layer be treated as backdrop
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+gestures {
+    hot-corners {
+        bottom-left
+    }
+}
+
+recent-windows {
+    debounce-ms 1000
+    open-delay-ms 0
+
+    highlight {
+        padding 10
+        corner-radius 4
+    }
+
+    previews {
+        max-height 1080
+        max-scale 0.75
+    }
+
+    binds {
+        Mod+Tab         { next-window     scope="output"; }
+        Mod+Shift+Tab   { previous-window scope="output"; }
+        Super+Tab       { next-window     scope="output" filter="app-id"; }
+        Super+Shift+Tab { previous-window scope="output" filter="app-id"; }
+    }
+}

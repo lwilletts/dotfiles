@@ -1,0 +1,72 @@
+// assignment
+workspace "dash" { open-on-output "DP-2"; }
+workspace "game" { open-on-output "DP-2"; }
+workspace "src" { open-on-output "DP-2"; }
+
+// general
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="foot"
+    default-column-width { proportion 0.25; }
+}
+
+// dash
+window-rule {
+    match app-id=r#"qutebrowser|google-chrome"#
+    default-column-width { proportion 0.6; }
+    open-on-workspace "dash"
+    open-focused true
+}
+
+// game
+window-rule {
+    match app-id=r#"steam|Lutris"#
+    open-on-workspace "game"
+    default-column-width { proportion 0.3; }
+}
+
+window-rule {
+    match app-id=r#"steam_app_|gamescope"#
+    open-on-workspace "game"
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach"#
+    open-on-workspace "game"
+    min-width 1600
+}
+
+window-rule {
+    match app-id=r#"discord|Element|WebCord"#
+    open-on-workspace "game"
+    open-focused false
+}
+
+window-rule {
+    match app-id="com.obsproject"
+    default-column-width { proportion 0.6; }
+    open-on-workspace "game"
+    open-focused false
+    min-width 850
+    min-height 200
+}
+
+// src
+window-rule {
+    match app-id="WinBox"
+    default-column-width { proportion 0.7; }
+    open-on-workspace "src"
+    open-focused true
+}
+
+// floating windows
+window-rule {
+    match app-id=r#"mpv|FTL|resolve|wine"#
+    open-floating true
+}
+

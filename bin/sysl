@@ -65,10 +65,10 @@ wayland() {
 
 for arg in "$@"; do
         case "$arg" in
-            h|headless) headless                     ;;
-	    x|x11)	simpleX11                    ;;
-            w|wayland)  wayland                      ;;
-	    all|deploy) headless; simpleX11; wayland ;;
-            -?)         usage 1  	             ;;
+            h|headless) headless  ;;
+	        x|x11)	    simpleX11 ;;
+            w|wayland)  wayland   ;;
+	        all|deploy) headless; simpleX11; wayland ;;
+            -?)         usage 1   ;;
         esac
 done

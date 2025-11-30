@@ -1,20 +1,24 @@
 #!/bin/sh
 
-xrandr --output DP-0 --primary --mode 2560x1440 -r 239.97 \
+DISPLAY=:1
+
+xrandr --output DP-2 --primary --mode 2560x1440 -r 239.97 \
        --output HDMI-0 --off \
        --output DP-1 --off \
        --output HDMI-1 --off \
-       --output DP-2 --off \
+       --output DP-1 --off \
        --output DP-3 --off &> /dev/null
 
 wmp -a 1280 720
-xset r rate 180 50 
 xset s off -dpms
+xset r rate 250 50 
 xsetroot -cursor_name left_ptr
+
 [ -f ~/.Xresources ] && xrdb -load -I$HOME ~/.Xresources
 
-# userland
-hsetroot -tile "/home/fyr/usr/img/tile/green-fibers.png" -gamma 0.9
+hsetroot -tile "/home/fyr/usr/img/tile/blackorchid.png" -gamma 1.2
+xclock -d -face "Cozette-8" -padding 8 -update 5 2> /dev/null &
+streamdeck -n &
 sxhkd &
 
 # event handler
@@ -28,11 +32,12 @@ wew | while read -r ev wid; do
                 xclock)
                     ignw -s $wid
                     chwb -s 1 -c 0xEEEEEE $wid
-                    wmv 20 20 $wid
+                    wmv 20 1380 $wid
                     ;;
                 *)         
                     wattr o $wid || { 
                         chwb -s 0 $(pfw)
+                        chwso -r $(pfw)
                         wtf $wid
                         wmv -a $(wmp) $wid 
                         chwb -s 1 -c 0xEEEEEE $wid 
@@ -44,9 +49,10 @@ wew | while read -r ev wid; do
             wattr o $wid || { 
                 chwb -s 0 $(pfw)
                 wtf $wid 
-                chwso -r $wid
                 chwb -s 1 -c 0xEEEEEE $wid
             }
+            ;;
+        DESTROY)
             ;;
     esac
 done

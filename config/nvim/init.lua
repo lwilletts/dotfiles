@@ -22,7 +22,7 @@ local function bootstrap_paq(packages)
 
     -- Read and install packages
     paq(packages)
-    paq.install()
+    -- paq.install()
 end
 
 -- Call helper function
@@ -36,11 +36,11 @@ require "paq" {
     "tpope/vim-surround",
     "neovim/nvim-lspconfig",
     "echasnovski/mini.nvim",
-    "folke/tokyonight.nvim",
     "baskerville/vim-sxhkdrc",
-    "imsnif/kdl.vim",
     "github/copilot.vim",
     "farmergreg/vim-lastplace",
+    "mfussenegger/nvim-ansible",
+    "imsnif/kdl.vim",
 }
 
 -- plugin startup
@@ -64,7 +64,7 @@ vim.cmd.colorscheme('habamax')
 
 -- text view
 vim.opt.syntax = 'on'
-vim.opt.number = false
+vim.opt.number = true
 vim.opt.wrap = false
 
 -- text behaviour
@@ -107,7 +107,9 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<leader>E', '<cmd>edit $MYVIMRC<CR>')
 vim.keymap.set('n', '<leader>c', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>V', '<cmd>set spell!<CR>')
-vim.keymap.set('n', '<leader>n', '<cmd>set number!<CR>')
+vim.keymap.set('n', '<leader>N', '<cmd>set number!<CR>')
+vim.keymap.set('n', '<leader>p', '<cmd>bprevious<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>bnext<CR>')
 
 vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
 vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})

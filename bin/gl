@@ -22,8 +22,8 @@ main() {
         hades)    steam steam://rungameid/1145360  & ;;
         horizon)  steam steam://rungameid/1151640  & ;;
         ittb)     steam steam://rungameid/590380   & ;;
-        # midair)   steam steam://rungameid/1231210  & ;;
-        ma|midair)   steam steam://rungameid/1469060  & ;;
+        ma|midair)   steam steam://rungameid/1231210  & ;;
+        # ma|midair)   steam steam://rungameid/1469060  & ;;
         tribes)   steam steam://rungameid/2687970  & ;;
         rottr)    steam steam://rungameid/391220   & ;;
         sottr)    steam steam://rungameid/750920   & ;;
