@@ -39,7 +39,6 @@ simpleX11() {
     ln $OPTIONS "$DOTFILEDIR/config/sxhkd" "$HOME/.config"
     
     # sudo cp -f "$DOTFILEDIR/etc/X11/xorg.conf.d" "/etc/X11/"
-    # sudo cp -f "$DOTFILEDIR/etc/X11/Xwrapper.config" "/etc/X11/"
 }
   
 wayland() {
@@ -56,6 +55,7 @@ wayland() {
     ln $OPTIONS "$DOTFILEDIR/config/pipewire" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/MangoHud" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/vkBasalt" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/jellyfin-tui" "$HOME/.config"
 
     ln $OPTIONS "$DOTFILEDIR/config/qutebrowser/config.py" "$HOME/.config/qutebrowser/config.py"
 
