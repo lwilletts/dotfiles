@@ -25,10 +25,12 @@ headless() {
 
     ln $OPTIONS "$DOTFILEDIR/gitconfig" "$HOME/.gitconfig"
     ln $OPTIONS "$DOTFILEDIR/tmux.conf" "$HOME/.tmux.conf"
+    ln $OPTIONS "$DOTFILEDIR/ansible.cfg" "$HOME/.ansible.cfg"
 
     ln $OPTIONS "$DOTFILEDIR/zsh" "$HOME/.zsh"
     ln $OPTIONS "$DOTFILEDIR/zsh/zshrc" "$HOME/.zshrc"
     ln $OPTIONS "$DOTFILEDIR/zsh/zprofile" "$HOME/.zprofile"
+
 } 
 
 simpleX11() {
