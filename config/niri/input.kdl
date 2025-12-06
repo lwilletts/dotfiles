@@ -137,4 +137,5 @@ binds {
     Mod+Ctrl+Backspace { quit skip-confirmation=true; }
     Mod+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
     Mod+Ctrl+R allow-when-locked=true { spawn "reboot"; }
+    Mod+Backspace repeat=false { spawn "sudo" "chvt" "2"; }
 }

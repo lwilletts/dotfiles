@@ -54,6 +54,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .rss                  38;5;3
 .xml                  38;5;3
 .yml                  38;5;3
+.yaml                  38;5;3
 # }}}
 
 # binary {{{2

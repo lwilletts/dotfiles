@@ -82,6 +82,8 @@ mod1 + button5
 # sys
 mod1 + shift + r
     pkill -USR1 -x sxhkd
+mod1 + BackSpace
+    sudo chvt 1
 mod1 + ctrl + BackSpace
     pkill xinit
 

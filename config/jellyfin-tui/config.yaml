@@ -1,0 +1,20 @@
+servers:
+  - name: blaze.lan
+    url: 'http://blaze.lan:8096'
+    username: 'fyr'
+    password_file: /home/fyr/.jellyfin-tui-pw
+    default: true
+
+art: true
+persist: true
+auto_color: true
+always_show_lyrics: false
+
+discord: APPLICATION_ID
+discord_art: true
+
+window_title: true
+
+mpv:
+  af: lavfi=[loudnorm=I=-16:TP=-3:LRA=4]
+  no-config: true

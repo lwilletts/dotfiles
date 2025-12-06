@@ -1,51 +1,31 @@
 -- init.lua
 
--- shortcut
+-- shortcut autocmd
 local autocmd = vim.api.nvim_create_autocmd
 
-local function clone_paq()
-    local path = vim.fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
-    local is_installed = vim.fn.empty(vim.fn.glob(path)) == 0
-    if not is_installed then
-        vim.fn.system { "git", "clone", "--depth=1", "https://github.com/savq/paq-nvim.git", path }
-        return true
-    end
+-- paq bootstrap
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({
+    'git', 'clone', '--depth', '1',
+    'https://github.com/savq/paq-nvim.git',
+    install_path
+  })
 end
-
-local function bootstrap_paq(packages)
-    local first_install = clone_paq()
-    vim.cmd.packadd("paq-nvim")
-    local paq = require("paq")
-    if first_install then
-        vim.notify("Installing plugins... If prompted, hit Enter to continue.")
-    end
-
-    -- Read and install packages
-    paq(packages)
-    -- paq.install()
-end
-
--- Call helper function
-bootstrap_paq {
-    "savq/paq-nvim",
-}
 
 -- plugin
 require "paq" {
     "savq/paq-nvim",
     "tpope/vim-surround",
     "neovim/nvim-lspconfig",
-    "echasnovski/mini.nvim",
     "baskerville/vim-sxhkdrc",
     "github/copilot.vim",
     "farmergreg/vim-lastplace",
     "mfussenegger/nvim-ansible",
     "imsnif/kdl.vim",
 }
-
--- plugin startup
-require('mini.pick').setup({})
-require('mini.files').setup({})
 
 -- title
 vim.opt.title = true
@@ -110,7 +90,8 @@ vim.keymap.set('n', '<leader>V', '<cmd>set spell!<CR>')
 vim.keymap.set('n', '<leader>N', '<cmd>set number!<CR>')
 vim.keymap.set('n', '<leader>p', '<cmd>bprevious<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>bnext<CR>')
+vim.keymap.set('n', '<leader>d', '<cmd>bdelete<CR>')
 
-vim.keymap.set('n', '<leader><space>', '<cmd>Pick buffers<cr>', {desc = 'Search open files'})
-vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', {desc = 'Search all files'})
-vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<cr>', {desc = 'Search help tags'})
+-- visual
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
