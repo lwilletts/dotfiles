@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# ansible-role
+# create a new ansible role directory structure
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+main() {
+    ROLE_NAME="$1"
+
+    mkdir -p \
+        "$PWD/$ROLE_NAME/meta" \
+        "$PWD/$ROLE_NAME/tasks" \
+        "$PWD/$ROLE_NAME/vars/main" \
+        "$PWD/$ROLE_NAME/handlers" \
+        "$PWD/$ROLE_NAME/files" \
+        "$PWD/$ROLE_NAME/templates"
+
+    printf '%s\n%s\n' "---" "dependencies: []" > "$PWD/$ROLE_NAME/meta/main.yaml"
+
+    for file in "$PWD/$ROLE_NAME/tasks/main.yaml" \
+        "$PWD/$ROLE_NAME/vars/main/main.yaml" \
+        "$PWD/$ROLE_NAME/handlers/main.yaml"; do
+        printf '%s\n' "---" > "$file"
+    done
+
+    cd "$PWD/$ROLE_NAME"
+}
+
+if [ $# -eq 0 ]; then
+    usage 1
+else
+    main "$@"
+fi

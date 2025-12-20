@@ -7,7 +7,10 @@ usage() {
 
     cat >&2 << EOF
 Usage:
-    $base
+    $base [h|headless]      # Deploy headless configuration
+    $base [x|x11]           # Deploy simple X11 configuration
+    $base [w|wayland]       # Deploy Wayland configuration
+    $base [all|deploy]      # Deploy all configurations
 EOF
 
     [ $# -eq 0 ] || exit "$1"
@@ -66,15 +69,15 @@ wayland() {
 }
 
 for arg in "$@"; do
-        case "$arg" in
-            -?)         usage 1   ;;
-            h|headless) headless  ;;
-	        x|x11)	    simpleX11 ;;
-            w|wayland)  wayland   ;;
-	        all|deploy) 
-                headless
-                simpleX11
-                wayland 
-                ;;
-        esac
+    case "$arg" in
+        -?)         usage 1   ;;
+        h|headless) headless  ;;
+        x|x11)	    simpleX11 ;;
+        w|wayland)  wayland   ;;
+        all|deploy) 
+        headless
+        simpleX11
+        wayland 
+        ;;
+    esac
 done
