@@ -48,6 +48,12 @@ simpleX11() {
   
 wayland() {
     [ ! -d "$HOME/.config" ] && mkdir -p "$HOME/.config"
+    [ ! -d "$HOME/.config/qutebrowser" ] && mkdir -p "$HOME/.config/qutebrowser"
+    [ ! -d "$HOME/.config/systemd/user" ] && mkdir -p "$HOME/.config/systemd/user"
+
+    if [ -d "$HOME/.config/niri" ]; then
+        rm -rf "$HOME/.config/niri"
+    fi
 
     ln $OPTIONS "$DOTFILEDIR/config/niri" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/mako" "$HOME/.config"
