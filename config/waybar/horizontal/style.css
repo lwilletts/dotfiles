@@ -1,0 +1,80 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: cozette;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(10, 10, 10, 1);
+    border-bottom: 2px solid rgba(80, 80, 80, 1);
+    color: #EFEFEF;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+tooltip {
+    background: #1C1C1C;
+    border: 2px solid rgba(239, 239, 239, 1);
+}
+
+tooltip label {
+    color: #EFEFEF;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    color: #EFEFEF;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.focused {
+    border-bottom: 2px solid white;
+    color: #EFEFEF;
+}
+
+#workspaces button.empty {
+    color: #808080;
+}
+
+#workspaces button:hover {
+    color: #1C1C1C;
+    background: #EFEFEF;
+    border-bottom: 2px solid transparent;
+}
+
+#mode, #taskbar, #clock, #tray, #battery {
+    padding: 0 2px;
+}
+
+#mode {
+    background: #1C1C1C;
+    border-bottom: 2px solid #EFEFEF;
+}
+
+#tray menu {
+    color: #EFEFEF;
+    background: #1C1C1C;
+    border: 1px solid rgba(239, 239, 239, 1);
+}
+
+#systemd-failed-units.ok {
+    background: #1C1C1C;
+    border-bottom: 2px solid #EFEFEF;
+}
+
+#systemd-failed-units.degraded {
+    color: #EFEFEF;
+    border-bottom: 2px solid #B23450;
+    padding: 0 4px;
+}
+    
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}

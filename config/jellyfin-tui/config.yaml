@@ -8,13 +8,17 @@ servers:
 art: true
 persist: true
 auto_color: true
-always_show_lyrics: false
+lyrics: never
 
-discord: APPLICATION_ID
-discord_art: true
+rounded_corners: true
 
 window_title: true
 
 mpv:
+  replaygain: album
   af: lavfi=[loudnorm=I=-16:TP=-3:LRA=4]
   no-config: true
+
+# themes:
+#   - name: "Transparent Dark"
+#     background: "none"

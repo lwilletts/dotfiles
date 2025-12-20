@@ -14,7 +14,7 @@ layer-rule {
 
 gestures {
     hot-corners {
-        bottom-left
+        top-right
     }
 }
 

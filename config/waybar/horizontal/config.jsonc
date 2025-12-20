@@ -2,19 +2,16 @@
 {
     "reload_style_on_change": true,
     "layer": "top",
-    "position": "left",
-    "width": 30,
-    "spacing": 0,
-    "margin-top": 0,
-    "margin-right": 0,
-    "margin-bottom": 0,
-    "margin-left": 0,
-
+    "position": "top",
+    "width": 1800,
+    "height": 28,
+    "spacing": 4,
+    "margin-bottom": 4,
     "clock": {
         "timezone": "Europe/London",
         "interval": 60,
-        "format": "{:%H%M<span color='#808080'>\nhrs</span>}",
-        "tooltip-format": "\n<span size='8pt' font='lemon'>{calendar}</span>",
+        "format": "{:%H%M<span color='#808080'> hrs </span>%m/%d<span color='#808080'> %Y </span>}",
+        "tooltip-format": "\n<span size='8pt' font='Cozette'>{calendar}</span>",
         "calendar": {
                     "mode"          : "month",
                     "mode-mon-col"  : 4,
@@ -34,27 +31,18 @@
                     "on-scroll-down": "shift_down"
                     }
     },
-
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "on-click-right": "close"
-    },
-    
     "niri/window": {
-        "icon": false,
+        "icon": true,
         "icon-size": 14,
-        "format": "",
+        "format": "{title}",
         "separate-outputs": false
     },
-
     "niri/workspaces": {
         "current-only": false,
         "disable-click": false,
         "all-outputs": false,
-        "format": "{index}"
+        "format": "{name}"
     },
-
     "systemd-failed-units": {
         "hide-on-ok": true, 
         "format": "system: {nr_failed_system} user: {nr_failed_user}",
@@ -62,23 +50,19 @@
         "system": true,
         "user": true
     },
-
     "tray": {
-        "show-passive-items": true,
-        "reverse-direction": true,
-        "icon-size": 14,
-        "spacing": 2
+	"show-passive-items": true,
+	"reverse-direction": true,
+        "icon-size": 16,
+	"spacing": 2
     },
-
     "modules-left": [
         "clock",
+        "niri/window"
+    ],
+    "modules-center": [
         "niri/workspaces"
     ],
-
-    "modules-center": [
-        "wlr/taskbar"
-    ],
-
     "modules-right": [
         "systemd-failed-units",
         "tray"

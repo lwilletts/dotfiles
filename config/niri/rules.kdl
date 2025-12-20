@@ -18,7 +18,6 @@ window-rule {
 window-rule {
     match app-id=r#"qutebrowser|google-chrome"#
     default-column-width { proportion 0.6; }
-    open-on-workspace "dash"
     open-focused true
 }
 
@@ -38,13 +37,14 @@ window-rule {
 window-rule {
     match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach"#
     open-on-workspace "game"
-    min-width 1600
+    min-width 1800
 }
 
 window-rule {
     match app-id=r#"discord|Element|WebCord"#
     open-on-workspace "game"
     open-focused false
+    max-width 800
 }
 
 window-rule {
@@ -53,7 +53,7 @@ window-rule {
     open-on-workspace "game"
     open-focused false
     min-width 850
-    min-height 200
+    min-height 400
 }
 
 // src

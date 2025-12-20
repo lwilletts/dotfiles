@@ -31,7 +31,8 @@ c.confirm_quit = ['downloads']
 c.input.escape_quits_reporter = True
 c.input.forward_unbound_keys = 'auto'
 c.content.geolocation = False
-c.session.default_name = None
+c.session.default_name = 'default'
+c.session.lazy_restore = False
 
 # c.fileselect.handler = 'external'
 # c.fileselect.multiple_files.command = 'fff'
@@ -917,8 +918,8 @@ c.search.incremental = True
 # config.bind('ym', 'yank markdown')
 # config.bind('yp', 'yank pretty-url')
 # config.bind('yt', 'yank title')
-config.bind('yY', 'yank -s')
-config.bind('yy', 'yank')
+config.bind('yY', 'yank')
+config.bind('yy', 'yank -s')
 # config.bind('{{', 'navigate prev -t')
 # config.bind('}}', 'navigate next -t')
 

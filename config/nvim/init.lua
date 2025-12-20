@@ -20,10 +20,9 @@ require "paq" {
     "savq/paq-nvim",
     "tpope/vim-surround",
     "neovim/nvim-lspconfig",
-    "baskerville/vim-sxhkdrc",
     "github/copilot.vim",
     "farmergreg/vim-lastplace",
-    "mfussenegger/nvim-ansible",
+    "baskerville/vim-sxhkdrc",
     "imsnif/kdl.vim",
 }
 
@@ -41,6 +40,9 @@ vim.opt.laststatus = 0
 vim.opt.background = 'dark'
 vim.opt.termguicolors = false
 vim.cmd.colorscheme('habamax')
+
+-- cursor
+vim.opt.guicursor = 'n:blinkon0'
 
 -- text view
 vim.opt.syntax = 'on'

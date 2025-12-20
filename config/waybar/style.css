@@ -1,66 +1,97 @@
+@define-color white rgba(239, 239, 239, 1);
+@define-color black rgba(10, 10, 10, 1);
+@define-color dark  rgba(28, 28, 28, 1);
+@define-color grey  rgba(80, 80, 80, 1);
+@define-color mid   rgba(100, 100, 100, 1);
+@define-color red   rgba(178, 52, 80, 1);
+
 * {
     border: none;
     border-radius: 0;
-    font-family: cozette;
+    font-family: lemon;
     font-size: 11px;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(10, 10, 10, 1);
-    border-top: 2px solid rgba(128, 128, 128, 1);
-    color: #EFEFEF;
+    background: @dark ;
+    border-right: 2px solid @mid;
+    color: @white;
+    border-radius: 0px 0px 0px 0px;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+#clock { 
+    padding: 8px 0px 0px 0px;
+}
+
+#tray { 
+    padding: 0px 0px 8px 0px;
 }
 
 tooltip {
-    background: #1C1C1C;
-    border: 1px solid rgba(239, 239, 239, 1);
+    background: @dark;
+    border: 2px solid @white;
 }
 
 tooltip label {
-    color: #EFEFEF;
+    color: @white;
 }
 
 #workspaces button {
-    padding: 0 6px;
-    color: #EFEFEF;
-    border-top: 2px solid transparent;
+    color: @white;
+    border-right: 2px solid transparent;
+    padding: 10px 8px 10px 8px;
 }
 
-#workspaces button.focused {
-    border-top: 2px solid white;
-    color: #EFEFEF;
+button.focused {
+    border-right: 2px solid @white;
+    border-color: @white;
+    color: @white;
+    transition-duration: 0.2s ease-in-out;
 }
 
-#workspaces button.empty {
-    color: #808080;
+button.empty {
+    color: @grey;
 }
 
-#workspaces button:hover {
-    border-top: 2px solid transparent;
-    background: #EFEFEF;
-    color: #1C1C1C;
-}
-
-#mode, #taskbar, #clock, #tray, #battery {
-    padding: 0 2px;
+button:hover {
+    color: @dark;
+    background: @white;
 }
 
 #mode {
-    background: #64727D;
-    border-top: 3px solid #EFEFEF;
+    background: @black;
 }
 
 #tray menu {
-    color: #EFEFEF;
-    background: #1C1C1C;
-    border: 1px solid rgba(239, 239, 239, 1);
+    color: @white;
+    background: @dark;
+    border: 2px solid @white;
+}
+
+#systemd-failed-units {
+    background: @dark;
+    border-right: 2px solid @white;
+}
+
+#systemd-failed-units.ok {
+    background: @dark;
+    border-right: 2px solid @white;
+}
+
+#systemd-failed-units.degraded {
+    color: @white;
+    border-right: 2px solid @red;
+    padding: 0px 0px 0px 0px;
 }
     
-
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: black;
+        background-color: @white;
+        color: @black;
     }
 }

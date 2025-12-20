@@ -10,6 +10,7 @@ include "animations.kdl"
 // startup
 spawn-at-startup "steam" "-silent"
 spawn-at-startup "xwayland-satellite" ":0"
+spawn-at-startup "wl-paste --primary --watch wl-copy"
 
 prefer-no-csd
 screenshot-path "~/%s.png"

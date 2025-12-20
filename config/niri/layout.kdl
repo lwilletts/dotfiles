@@ -3,15 +3,15 @@ layout {
 
     struts {
         left 4
-        right 4
-        top 0
-        bottom -4
+        right 0
+        top -2
+        bottom 2
     }
 
     // behaviour
     default-column-width { proportion 0.33333; }
     center-focused-column "never"
-    always-center-single-column
+    // always-center-single-column
 
     preset-column-widths {
         proportion 0.25
@@ -32,12 +32,12 @@ layout {
     tab-indicator {
         hide-when-single-tab
         place-within-column
-        gap 6
-        width 8
+        gap 8
+        width 10
         gaps-between-tabs 20
         length total-proportion=0.75
         position "left"
-        corner-radius 2
+        corner-radius 4
     }
 
     insert-hint {
@@ -45,13 +45,14 @@ layout {
     }
 
     shadow {
-        softness 10
+        on
+        softness 8
         spread 2
-        offset x=5 y=5
+        offset x=2 y=2
         draw-behind-window true
     }
 
     border {
-        width 0
+        width 2
     }
 }
