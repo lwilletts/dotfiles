@@ -1,10 +1,7 @@
 # /dev/nvme0n1p1
-UUID=7552-8AB5      /boot       vfat    rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+UUID=7552-8AB5                              /boot       vfat    rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
 # /dev/nvme0n1p2
-/dev/nvme0n1p2      /           btrfs   rw,relatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/	                                0 0
+UUID=3c92c168-c1f4-4bd7-959a-61cea573d7b6   /           btrfs   rw,relatime,ssd,discard=async,space_cache=v2,subvolid=5,subvol=/	                                    0 0
 
-# /dev/zram0          none        swap    defaults,pri=100                                                                                        0 0
-
+# /dev/zram0        none        swap    defaults,pri=100                                                                                        0 0
 /swap/swapfile 	    none        swap    defaults                                                                                                0 0
-
-//blaze/pool        /mnt/pool   cifs    _netdev,nofail,credentials=/etc/samba/credentials/share,uid=1000,gid=1000,x-systemd.automount           0 0
