@@ -1,7 +1,3 @@
-umask 022
-unset TERMCAP
-unset MANPATH
-
 PATH=""
 
 EXECPATHS="
@@ -43,15 +39,8 @@ alias vim="$VISUAL"
 export PAGER="less"
 export MANPAGER='nvim --cmd ":lua vim.g.noplugins=1" +Man!'
 export MANWIDTH=999
-
-# games
-export PROTON_ENABLE_NVAPI=1
-# export __GL_MaxFramesAllowed="1"
-# export __GL_THREADED_OPTIMIZATIONS="1"
-
 export GAME="$HOME/.steam/steam/steamapps/common"
 export COMPAT="$HOME/.steam/steam/steamapps/compatdata"
-
 
 # fzf
 source <(fzf --zsh)

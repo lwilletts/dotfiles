@@ -2,10 +2,3 @@
 
 . $HOME/.zsh/ttycolors
 . $HOME/.zsh/environment.zsh
-
-if [ -z "$DISPLAY" ]; then
-	if [ "$(tty)" = /dev/tty2 ]; then
-        sleep 1
-		# startx
-	fi
-fi

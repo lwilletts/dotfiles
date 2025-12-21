@@ -34,10 +34,6 @@ zle-keymap-select() {
     zle reset-prompt
 }
 
-# superglobs
-setopt extendedglob
-unsetopt caseglob
-
 # ls colours
 hash busybox 2> /dev/null || {
     if hash dircolors 2> /dev/null; then
@@ -49,6 +45,3 @@ hash busybox 2> /dev/null || {
 } || {
     alias ls="ls -F --group-directories-first"
 }
-
-# load reporting
-export REPORTTIME=120

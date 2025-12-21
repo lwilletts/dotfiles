@@ -36,7 +36,7 @@ alias net="curl -4 icanhazip.com"
 alias wget="wget --no-hsts"
 
 # ansible
-alias pl="ansible-playbook -K"
+alias pl="ansible-playbook"
 alias role="ansible-role"
 alias vault="ansible-vault"
 alias ve="ansible-vault edit"

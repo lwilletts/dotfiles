@@ -11,4 +11,3 @@ function _gl {
         _describe 'gl' subcmds
     }
 }
-

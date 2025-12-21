@@ -11,6 +11,7 @@ widget-vicmd() {
     CURSOR=$cur
 }
 
+
 # history expansion
 for W in \
     up-line-or-history  \
@@ -53,7 +54,6 @@ zstyle ':completion:*' menu select
 # Ctrl-Backspace
 bindkey '^H' backward-kill-word
 
-# C-k ../
 cdParentKey() {
     pushd ..
     zle reset-prompt
@@ -69,12 +69,3 @@ clearLS() {
 
 zle -N clearLS
 bindboth "^l" clearLS
-
-goBack() {
-    clear
-    cd - || return
-    zle redisplay
-}
-
-zle -N goBack
-bindboth "^b" goBack
