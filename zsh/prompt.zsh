@@ -17,7 +17,7 @@ autoload -U zmv
 
 # vi prompt
 precmd() {
-    PROMPT="%{$fg[white]%}|%{$reset_color%} "
+    PROMPT="%{$fg[white]%}𜰟%{$reset_color%} "
     RPROMPT="%{$fg[white]%}%{$reset_color%}"
 
     # set window title
@@ -25,10 +25,10 @@ precmd() {
 }
 
 zle-keymap-select() {
-    PROMPT="%{$fg[white]%}|%{$reset_color%} "
+    PROMPT="%{$fg[white]%}𜰟%{$reset_color%} "
 
     if [ "$KEYMAP" = "vicmd" ]; then
-        PROMPT="%{$fg[red]%}|%{$reset_color%} "
+        PROMPT="%{$fg[red]%}𜰟%{$reset_color%} "
     fi
 
     zle reset-prompt

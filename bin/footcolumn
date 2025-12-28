@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# niri-test
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+main() {
+    footclient &
+    sleep 0.01
+    niri msg action consume-or-expel-window-left
+}
+
+main "$@"

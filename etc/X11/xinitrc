@@ -11,13 +11,12 @@ xrandr --output DP-2 --primary --mode 2560x1440 -r 239.97 \
 
 wmp -a 1280 720
 xset s off -dpms
-xset r rate 250 50 
+xset r rate 250 50
 xsetroot -cursor_name left_ptr
 
 [ -f ~/.Xresources ] && xrdb -load -I$HOME ~/.Xresources
 
-hsetroot -tile "/home/fyr/usr/img/tile/blackorchid.png" -gamma 1.2
-xclock -d -face "Cozette-8" -padding 8 -update 5 2> /dev/null &
+hsetroot -tile "/home/fyr/usr/img/tile/45degreee_fabric.png" -gamma 0.05
 sxhkd &
 
 # event handler
@@ -25,30 +24,30 @@ wew | while read -r ev wid; do
     case $ev in
         CREATE)
             case $(atomx WM_CLASS $wid) in
-                steam_app_*) 
+                steam_app_*)
                     chwb -s 0 $wid
                     ;;
                 xclock)
                     ignw -s $wid
-                    chwb -s 1 -c 0xEEEEEE $wid
+                    chwb -s 2 -c 0xEEEEEE $wid
                     wmv 20 1380 $wid
                     ;;
-                *)         
-                    wattr o $wid || { 
+                *)
+                    wattr o $wid || {
                         chwb -s 0 $(pfw)
                         chwso -r $(pfw)
                         wtf $wid
-                        wmv -a $(wmp) $wid 
-                        chwb -s 1 -c 0xEEEEEE $wid 
+                        wmv -a $(wmp) $wid
+                        chwb -s 2 -c 0xEEEEEE $wid
                     }
                     ;;
             esac
             ;;
         ENTER)
-            wattr o $wid || { 
+            wattr o $wid || {
                 chwb -s 0 $(pfw)
-                wtf $wid 
-                chwb -s 1 -c 0xEEEEEE $wid
+                wtf $wid
+                chwb -s 2 -c 0xEEEEEE $wid
             }
             ;;
         DESTROY)
