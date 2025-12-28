@@ -1,14 +1,14 @@
 // assignment
-workspace "dash" { open-on-output "DP-2"; }
-workspace "game" { open-on-output "DP-2"; }
-workspace "src" { open-on-output "DP-2"; }
+workspace "☰" { open-on-output "DP-2"; }
+workspace "☱" { open-on-output "DP-2"; }
+workspace "☲" { open-on-output "DP-2"; }
+workspace "☳" { open-on-output "DP-2"; }
+workspace "☴" { open-on-output "DP-2"; }
+workspace "☵" { open-on-output "DP-2"; }
+workspace "☶" { open-on-output "DP-2"; }
+workspace "☷" { open-on-output "DP-2"; }
 
 // general
-window-rule {
-    geometry-corner-radius 4
-    clip-to-geometry true
-}
-
 window-rule {
     match app-id="foot"
     default-column-width { proportion 0.25; }
@@ -17,56 +17,69 @@ window-rule {
 // dash
 window-rule {
     match app-id=r#"qutebrowser|google-chrome"#
-    default-column-width { proportion 0.6; }
-    open-focused true
+    default-column-width { proportion 0.5; }
+    open-focused false
 }
 
 // game
 window-rule {
     match app-id=r#"steam|Lutris"#
-    open-on-workspace "game"
+    open-on-workspace "☱"
     default-column-width { proportion 0.3; }
 }
 
 window-rule {
     match app-id=r#"steam_app_|gamescope"#
-    open-on-workspace "game"
+    open-on-workspace "☱"
     open-fullscreen true
 }
 
 window-rule {
     match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach"#
-    open-on-workspace "game"
+    open-on-workspace "☱"
     min-width 1800
 }
 
 window-rule {
     match app-id=r#"discord|Element|WebCord"#
-    open-on-workspace "game"
+    open-on-workspace "☱"
     open-focused false
-    max-width 800
+}
+
+// rdp
+window-rule {
+    match app-id="org.remmina.Remmina" title="ember.lan"
+    open-on-workspace "☲"
+    open-maximized-to-edges true
 }
 
 window-rule {
-    match app-id="com.obsproject"
-    default-column-width { proportion 0.6; }
-    open-on-workspace "game"
-    open-focused false
+    match app-id="org.remmina.Remmina"
+    open-on-workspace "☲"
+    open-focused true
+    open-floating true
+}
+
+// content
+window-rule {
+    match app-id="com.obsproject" title=r#"^OBS$"#
+    open-on-workspace "☳"
+    open-maximized-to-edges true
     min-width 850
     min-height 400
 }
 
-// src
 window-rule {
-    match app-id="WinBox"
-    default-column-width { proportion 0.7; }
-    open-on-workspace "src"
+    match app-id="com.obsproject"
+    open-on-workspace "☳"
     open-focused true
+    open-floating true
 }
+
+//
 
 // floating windows
 window-rule {
     match app-id=r#"mpv|FTL|resolve|wine"#
     open-floating true
 }
-

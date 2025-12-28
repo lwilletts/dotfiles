@@ -10,12 +10,12 @@ mod1 + q
 mod1 + Tab
     chwb -s 0 $(pfw); \ 
     wid=$(lsw | head -n 1); \
-    wtf $wid; chwso -r $(pfw); chwb -s 1 -c 0xEEEEEE $wid
+    wtf $wid; chwso -r $(pfw); chwb -s 2 -c 0xEEEEEE $wid
 mod1 + {h,j,k,l}
     { dir=x; sort=-nr;, dir=y; sort=-n;, dir=y; sort=-nr;, dir=x; sort=-n; } \
     if pfw &> /dev/null; then wid=$(lsw | xargs wattr "$dir"i | sort "$sort" | sed "0,/$(pfw)/d" | sed "1s/^[0-9]* //p;d"); fi; \
     if [ ! -z $wid ]; then \
-        chwb -s 0 $(pfw); wtf $wid; chwso -r $wid; chwb -s 1 -c 0xEEEEEE $wid; \
+        chwb -s 0 $(pfw); wtf $wid; chwso -r $wid; chwb -s 2 -c 0xEEEEEE $wid; \
     fi 
 
 # window manipulation
@@ -35,7 +35,7 @@ mod1 + f
     if [ ! -z "$(atomx WM_POSITION $(pfw))" ]; then \
         wtp $(atomx WM_POSITION $(pfw)); \
         atomx -d WM_POSITION $(pfw); \
-        chwb -s 1 -c 0xEEEEEE $(pfw); \
+        chwb -s 2 -c 0xEEEEEE $(pfw); \
         wmp -a $(($(wattr x $(pfw)) + $(wattr w $(pfw)) / 2)) $(($(wattr y $(pfw)) + $(wattr h $(pfw)) / 2)); \
     else \
         atomx WM_POSITION="$(wattr xywhi $(pfw))" $(pfw) > /dev/null; \

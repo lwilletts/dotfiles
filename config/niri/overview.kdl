@@ -3,7 +3,14 @@ overview {
 
     workspace-shadow {
         off
+        softness 12
+        spread 8
+        offset x=0 y=0
     }
+}
+
+layout {
+    background-color "transparent"
 }
 
 // make wallpaper layer be treated as backdrop
@@ -14,7 +21,7 @@ layer-rule {
 
 gestures {
     hot-corners {
-        top-right
+        bottom-left
     }
 }
 
@@ -32,10 +39,8 @@ recent-windows {
         max-scale 0.75
     }
 
-    binds {
-        Mod+Tab         { next-window     scope="output"; }
-        Mod+Shift+Tab   { previous-window scope="output"; }
-        Super+Tab       { next-window     scope="output" filter="app-id"; }
-        Super+Shift+Tab { previous-window scope="output" filter="app-id"; }
-    }
+    // binds {
+    //     Super+Tab         { next-window     scope="output"; }
+    //     Super+Shift+Tab   { previous-window scope="output"; }
+    // }
 }

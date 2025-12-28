@@ -20,11 +20,14 @@ require "paq" {
     "savq/paq-nvim",
     "tpope/vim-surround",
     "neovim/nvim-lspconfig",
-    "github/copilot.vim",
     "farmergreg/vim-lastplace",
     "baskerville/vim-sxhkdrc",
     "imsnif/kdl.vim",
+    -- "github/copilot.vim",
 }
+
+-- editorconfig
+vim.g.editorconfig = true
 
 -- title
 vim.opt.title = true
@@ -36,10 +39,22 @@ vim.opt.showcmd = false
 vim.opt.showmode = true
 vim.opt.laststatus = 0
 
--- colours
+-- terminal colors
 vim.opt.background = 'dark'
-vim.opt.termguicolors = false
-vim.cmd.colorscheme('habamax')
+vim.opt.termguicolors = true
+
+-- vim.g.terminal_color1 = '#1C1C1C'
+-- vim.g.terminal_color2 = '#CA3448'
+-- vim.g.terminal_color3 = '#60C8B1'
+-- vim.g.terminal_color3 = '#C8C660'
+-- vim.g.terminal_color4 = '#8BC3E4'
+-- vim.g.terminal_color5 = '#B8A0C0'
+-- vim.g.terminal_color6 = '#9FB9A8'
+-- vim.g.terminal_color7 = '#D9EAE2'
+
+vim.api.nvim_set_hl(0, 'Normal', { fg = "#D9EAE2", bg="#1C1C1C" })
+vim.api.nvim_set_hl(0, 'Visual', { fg = "#1C1C1C", bg="#D9EAE2" })
+vim.api.nvim_set_hl(0, 'Comment', { fg = "#9FB9A8", bg= "#1C1C1C" })
 
 -- cursor
 vim.opt.guicursor = 'n:blinkon0'
@@ -80,7 +95,7 @@ vim.opt.undolevels = 5000
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- autocmd
+-- autocmds
 autocmd('BufWritePost', {pattern = 'init.lua', command = 'source $MYVIMRC'})
 
 -- key remaps
@@ -92,7 +107,7 @@ vim.keymap.set('n', '<leader>V', '<cmd>set spell!<CR>')
 vim.keymap.set('n', '<leader>N', '<cmd>set number!<CR>')
 vim.keymap.set('n', '<leader>p', '<cmd>bprevious<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>bnext<CR>')
-vim.keymap.set('n', '<leader>d', '<cmd>bdelete<CR>')
+vim.keymap.set('n', '<leader>q', '<cmd>bdelete<CR>')
 
 -- visual
 vim.keymap.set('v', '>', '>gv')

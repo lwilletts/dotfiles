@@ -30,10 +30,13 @@ cursor {
 }
 
 binds {
+    // sys
     Mod+Return cooldown-ms=125 { spawn "footclient"; }
+    Mod+Shift+Return cooldown-ms=125 { spawn "footcolumn"; }
     Mod+D repeat=false { spawn "fuzzel"; }
     Mod+Q { close-window; }
 
+    // overview
     Mod+O { toggle-overview; }
     Mod+MouseMiddle { toggle-overview; }
 
@@ -71,12 +74,14 @@ binds {
     Mod+I { focus-column-last; }
     Mod+Shift+U { move-column-to-first; }
     Mod+Shift+I { move-column-to-last; }
-    Mod+N { swap-window-right; }
-    Mod+P { swap-window-left; }
+    Mod+Ctrl+H { swap-window-left; }
+    Mod+Ctrl+L { swap-window-right; }
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
     // workspace selection
+    Mod+N { focus-workspace-down; }
+    Mod+P { focus-workspace-up; }
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -93,17 +98,18 @@ binds {
     Mod+Shift+6 { move-column-to-workspace 6; }
     Mod+Shift+7 { move-column-to-workspace 7; }
     Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+1 { move-window-to-workspace 1; }
-    Mod+Ctrl+2 { move-window-to-workspace 2; }
-    Mod+Ctrl+3 { move-window-to-workspace 3; }
-    Mod+Ctrl+4 { move-window-to-workspace 4; }
-    Mod+Ctrl+5 { move-window-to-workspace 5; }
-    Mod+Ctrl+6 { move-window-to-workspace 6; }
-    Mod+Ctrl+7 { move-window-to-workspace 7; }
-    Mod+Ctrl+8 { move-window-to-workspace 8; }
+    Mod+Ctrl+1 { move-workspace-to-index 1; }
+    Mod+Ctrl+2 { move-workspace-to-index 2; }
+    Mod+Ctrl+3 { move-workspace-to-index 3; }
+    Mod+Ctrl+4 { move-workspace-to-index 4; }
+    Mod+Ctrl+5 { move-workspace-to-index 5; }
+    Mod+Ctrl+6 { move-workspace-to-index 6; }
+    Mod+Ctrl+7 { move-workspace-to-index 7; }
+    Mod+Ctrl+8 { move-workspace-to-index 8; }
 
+    // quick window switch
     Mod+Tab { focus-window-previous; }
-    Mod+Shift+Tab { focus-workspace-previous; }
+    Super+Tab { focus-workspace-previous; }
 
     // window sizing
     Mod+R { switch-preset-window-height; }
@@ -141,4 +147,5 @@ binds {
     Mod+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
     Mod+Ctrl+R allow-when-locked=true { spawn "reboot"; }
     Mod+Backspace repeat=false { spawn "sudo" "chvt" "2"; }
+    Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
 }

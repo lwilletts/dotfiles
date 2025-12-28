@@ -44,9 +44,7 @@ c.aliases = {'h': 'help', 'q': 'close', 'x': 'quit --save'}
 # defaults
 config.bind('j', 'scroll-px 0 100')
 config.bind('k', 'scroll-px 0 -100')
-# config.bind('j', 'scroll down')
-# config.bind('k', 'scroll up')
-config.bind('b', 'cmd-set-text -s :tab-select ')
+config.bind('t', 'cmd-set-text -s :tab-select ')
 config.bind('return', 'selection-follow')
 config.bind('cx', 'download-cancel')
 config.bind('<Ctrl-s>', 'config-source ~/.config/qutebrowser/config.py')
@@ -74,9 +72,8 @@ config.bind('e', 'cmd-set-text -s :session-load ')
 config.bind('<Shift-e>', 'cmd-set-text -s :session-save -o ')
 
 # downloads
-config.bind('<Ctrl-d>', 'spawn qutedl {url}')
-config.bind('<Ctrl-f>', 'spawn yt-dlp -x {url}')
 config.bind('<Ctrl-o>', 'spawn mpv {url}')
+config.bind('<Ctrl-Shift-d>', 'spawn yt-dlp -x {url}')
 
 # yank
 config.bind("<y><o>", "yank inline [[{url}][{title}]]")
@@ -414,7 +411,7 @@ c.completion.web_history.max_items = -1
 # value. With QtWebEngine, the maximum supported value is 2147483647 (~2
 # GB).
 # Type: Int
-# c.content.cache.size = None
+c.content.cache.size = 2147483647
 
 # Allow websites to read canvas elements. Note this is needed for some
 # websites to work properly.

@@ -3,75 +3,115 @@
     "reload_style_on_change": true,
     "layer": "top",
     "position": "left",
-    "width": 30,
+    "width": 40,
     "spacing": 0,
     "margin-top": 0,
     "margin-right": 0,
     "margin-bottom": 0,
     "margin-left": 0,
 
-    "clock": {
-        "timezone": "Europe/London",
-        "interval": 60,
-        "format": "{:%H%M<span color='#808080'>\nhrs</span>}",
-        "tooltip-format": "\n<span size='8pt' font='lemon'>{calendar}</span>",
-        "calendar": {
-                    "mode"          : "month",
-                    "mode-mon-col"  : 4,
-                    "weeks-pos"     : "",
-                    "on-scroll"     : -1,
-                    "format": {
-                              "months":     "<span color='#EFEFEF'>{}</span>",
-                              "days":       "<span color='#EFEFEF'>{}</span>",
-                              "weeks":      "<span color='#808080'>W{}</span>",
-                              "weekdays":   "<span color='#808080'>{}</span>",
-                              "today":      "<span color='#b23450'>{}</span>"
-                              }
-                    },
-        "actions":  {
-                    "on-click": "mode",
-                    "on-scroll-up": "shift_up",
-                    "on-scroll-down": "shift_down"
-                    }
+    "custom/launcher": {
+        "format": "\n 🮰",
+        "on-click": "fuzzel",
+        "tooltip": false
     },
 
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "on-click-right": "close"
+    "custom/files": {
+        "format": "",
+        "on-click": "foot",
+        "tooltip": false
     },
-    
-    "niri/window": {
-        "icon": false,
-        "icon-size": 14,
-        "format": "",
-        "separate-outputs": false
+
+    "custom/gap": {
+        "format": " ",
+        "tooltip": false
     },
 
     "niri/workspaces": {
+        "format": "{name}",
         "current-only": false,
         "disable-click": false,
-        "all-outputs": false,
-        "format": "{index}"
+        "all-outputs": false
+    },
+
+    "wlr/taskbar": {
+        "format": "{name}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "maximize",
+        "icon-size": 14,
+        "tooltip": true,
+        "tooltip-format": "{title} | {app_id}",
+        "sort-by-app-id": false,
+        "active-first": false,
+        "rewrite": {
+            "qutebrowser": "",
+            "Google Chrome": "",
+            "Firefox": "",
+            "Foot": "",
+            "discord": "🖃",
+            "Element": "🖃",
+            "OBS Studio": "󰐑",
+            "mpv Media Player": "",
+            "Swayimg": "",
+            "Remmina Remote Desktop Client": "",
+            "Steam": "",
+            ".*(steam_app_[0-9]+).*": "",
+            "Into The Breach": ""
+        }
     },
 
     "systemd-failed-units": {
-        "hide-on-ok": true, 
-        "format": "system: {nr_failed_system} user: {nr_failed_user}",
+        "hide-on-ok": false,
+        "format": "s: {nr_failed_system}\nu: {nr_failed_user}",
         "format-ok": "",
         "system": true,
         "user": true
+    },
+
+    // network card
+    "temperature": {
+        "interval": 5,
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:02.1/0000:05:00.0/0000:06:02.0/0000:09:00.0/mdio_bus/r8169-0-900/r8169-0-900:00/hwmon/hwmon5/temp1_input",
+        "critical-threshold": 70,
+        "format-critical": "{temperatureC}C",
+        "format": "{temperatureC}C"
     },
 
     "tray": {
         "show-passive-items": true,
         "reverse-direction": true,
         "icon-size": 14,
-        "spacing": 2
+        "spacing": 6
+    },
+
+    "clock": {
+        "timezone": "Europe/London",
+        "interval": 60,
+        "format": "{:%H%M<span color='#808080'>\n hrs</span>}",
+        "tooltip-format": "\n<span size='8pt' font='lemon'>{calendar}</span>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 4,
+            "weeks-pos"     : "",
+            "on-scroll"     : -1,
+            "format": {
+              "months":     "<span color='#D9EAE2'>{}</span>",
+              "days":       "<span color='#D9EAE2'>{}</span>",
+              "weeks":      "<span color='#808080'>W{}</span>",
+              "weekdays":   "<span color='#808080'>{}</span>",
+              "today":      "<span color='#B23450'>{}</span>"
+            }
+        },
+        "actions": {
+            "on-click": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
 
     "modules-left": [
-        "clock",
+        "custom/launcher",
         "niri/workspaces"
     ],
 
@@ -81,6 +121,29 @@
 
     "modules-right": [
         "systemd-failed-units",
-        "tray"
+        "temperature",
+        "tray",
+        "clock"
     ]
 }
+
+// "format": "⏻", // power
+// "format": "◱", // overview bottom left or another waybar on the right side
+// "format": "" // writer / text editor icon
+//  excel / calc
+// 📅 📆  calenders
+// 📰 newsreader
+// 💾
+//   mics
+//  settings
+//  bluetooth
+//     
+//   🖂 🖃           󰨊   📰  󰐑 󰒋 🔐  💾
+// 󰃀 󰃁 󰃂 󰃃 󰃄 󰃅 󰃆
+//             𝌆 𝌇 𝌈 𝌉 𝌊 𝌋 𝌌 𝌍 𝌎 𝌏
+// 𝌐 𝌑 𝌒 𝌓 𝌔 𝌕 𝌖 𝌗 𝌘 𝌙 𝌚 𝌛 𝌜 𝌝 𝌞 𝌟
+// 𝌠 𝌡 𝌢 𝌣 𝌤 𝌥 𝌦 𝌧 𝌨 𝌩 𝌪 𝌫 𝌬 𝌭 𝌮 𝌯
+// 𝌰 𝌱 𝌲 𝌳 𝌴 𝌵 𝌶 𝌷 𝌸 𝌹 𝌺 𝌻 𝌼 𝌽 𝌾 𝌿
+// 𝍀 𝍁 𝍂 𝍃 𝍄 𝍅 𝍆 𝍇 𝍈 𝍉 𝍊 𝍋 𝍌 𝍍 𝍎 𝍏
+// 𝍐 𝍑 𝍒 𝍓 𝍔 𝍕 𝍖
+// ☐ 

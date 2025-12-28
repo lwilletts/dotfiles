@@ -1,0 +1,61 @@
+ Todo         ctermfg=0    ctermbg=3
+ Title        ctermfg=1    ctermbg=NONE
+ Error        ctermfg=0    ctermbg=1
+ Normal       ctermfg=7    ctermbg=NONE
+ NonText      ctermfg=7    ctermbg=NONE
+ LineNr       ctermfg=7    ctermbg=NONE
+ Folded       ctermfg=7    ctermbg=0
+ Visual       ctermfg=7    ctermbg=6
+ ErrorMsg     ctermfg=1    ctermbg=0
+ Directory    ctermfg=3    ctermbg=0
+ Underlined   ctermfg=7    ctermbg=NONE
+ WarningMsg   ctermfg=1    ctermbg=NONE
+ FoldColumn   ctermfg=4    ctermbg=NONE
+ SignColumn   ctemfg=0    ctermbg=NONE
+ Cursor       ctermfg=7    ctermbg=NONE
+ CursorLine   ctermfg=NONE ctermbg=NONE
+ Search       ctermfg=0    ctermbg=4
+ IncSearch    ctermfg=0    ctermbg=4
+ VertSplit    ctermfg=NONE ctermbg=0
+ ColorColumn  ctermfg=0    ctermbg=6
+ StatusLine   ctermfg=6    ctermbg=NONE
+ StatusLineNC ctermfg=0    ctermbg=NONE
+ Pmenu        ctermfg=7    ctermbg=0
+ PmenuSel     ctermfg=0    ctermbg=7
+ PmenuSbar    ctermfg=6    ctermbg=NONE
+ WildMenu     ctermbg=0    ctermbg=7
+ SpellBad     ctermfg=0    ctermbg=1
+    -- syntax
+
+ Type         ctermfg=7    ctermbg=NONE
+ String       ctermfg=1    ctermbg=NONE
+ Number       ctermfg=1    ctermbg=NONE
+-- NULL SIGTERM
+ Special      ctermfg=4    ctermbg=NONE
+ Comment      ctermfg=6    ctermbg=NONE
+-- value
+ PreProc      ctermfg=4    ctermbg=NONE
+ Boolean      ctermfg=3    ctermbg=NONE
+ Constant     ctermfg=2    ctermbg=NONE
+ Function     ctermfg=7    ctermbg=NONE
+ Statement    ctermfg=3    ctermbg=NONE
+-- tabs whitespace
+ SpecialKey   ctermfg=7    ctermbg=NONE
+ Identifier   ctermfg=7    ctermbg=NONE
+ MatchParen   ctermfg=1    ctermbg=NONE
+
+-- diffs
+ DiffAdd      ctermfg=2    ctermbg=NONE
+ DiffText     ctermfg=2    ctermbg=NONE
+ DiffChange   ctermfg=7    ctermbg=NONE
+ DiffDelete   ctermfg=1    ctermbg=NONE
+
+-- what the
+ TabLine      ctermfg=7    ctermbg=NONE
+ TabLineSel   ctermfg=7    ctermbg=NONE
+ TabLineFill  ctermfg=7    ctermbg=NONE
+ Question     ctermfg=NONE ctermbg=NONE
+
+--  SpellCap
+--  SpellLocal
+--  SpellRare

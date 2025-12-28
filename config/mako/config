@@ -1,29 +1,36 @@
 sort=-time
 layer=overlay
-anchor=bottom-right
+anchor=bottom-left
 
-output=DP-1
+output=DP-2
 
-width=400
-height=300
+width=300
+height=160
 padding=20
-margin=60
-
-font=Scientifica 8
-border-size=2
-border-radius=2
-border-color=#EFEFEF
-background-color=#101010
+margin=0,0,20,0
+outer-margin=0,32,32,32
 
 icons=1
-default-timeout=11000
+icon-location=left
+icon-border-radius=4
+
+default-timeout=8000
 ignore-timeout=1
+max-visible=10
+
+markup=1
+font=lemon 8
+border-size=2
+border-radius=2
+text-alignment=left
+border-color=#D9EAE2
+background-color=#0A0A0A
 
 [urgency=low]
-border-color=#EFEFEF
+border-color=#D9EAE2
 
 [urgency=normal]
-border-color=#EFEFEF
+border-color=#D9EAE2
 
 [urgency=high]
 border-color=#CA3448

@@ -1,9 +1,10 @@
-@define-color white rgba(239, 239, 239, 1);
-@define-color black rgba(10, 10, 10, 1);
-@define-color dark  rgba(28, 28, 28, 1);
-@define-color grey  rgba(80, 80, 80, 1);
-@define-color mid   rgba(100, 100, 100, 1);
-@define-color red   rgba(178, 52, 80, 1);
+@define-color bright rgba(239, 239, 239, 1);
+@define-color white  rgba(217, 234, 226, 1);
+@define-color black  rgba(10, 10, 10, 1);
+@define-color dark   rgba(52, 52, 52, 1);
+@define-color grey   rgba(80, 80, 80, 1);
+@define-color mid    rgba(128, 128, 128, 1);
+@define-color red    rgba(178, 52, 80, 1);
 
 * {
     border: none;
@@ -14,8 +15,8 @@
 }
 
 window#waybar {
-    background: @dark ;
-    border-right: 2px solid @mid;
+    background: @black;
+    border-right: 4px solid @dark;
     color: @white;
     border-radius: 0px 0px 0px 0px;
 }
@@ -24,16 +25,8 @@ window#waybar.empty #window {
     background-color: transparent;
 }
 
-#clock { 
-    padding: 8px 0px 0px 0px;
-}
-
-#tray { 
-    padding: 0px 0px 8px 0px;
-}
-
 tooltip {
-    background: @dark;
+    background: @black;
     border: 2px solid @white;
 }
 
@@ -41,54 +34,92 @@ tooltip label {
     color: @white;
 }
 
-#workspaces button {
-    color: @white;
-    border-right: 2px solid transparent;
-    padding: 10px 8px 10px 8px;
+#custom-launcher {
+    border-right: transparent;
+    padding: 12px 0px 12px 0px;
 }
 
-button.focused {
-    border-right: 2px solid @white;
-    border-color: @white;
-    color: @white;
-    transition-duration: 0.2s ease-in-out;
-}
-
-button.empty {
-    color: @grey;
-}
-
-button:hover {
-    color: @dark;
+#custom-launcher:hover {
+    color: @black;
     background: @white;
 }
 
-#mode {
-    background: @black;
+#workspaces button {
+    color: @white;
+    border-right: 4px solid transparent;
+    padding: 12px 0px 12px 0px;
+}
+
+#workspaces button.focused {
+    color: @white;
+    border-right: 4px solid @bright;
+    border-color: @white;
+}
+
+#workspaces button.empty {
+    color: @grey;
+}
+
+#workspaces button:hover {
+    color: @black;
+    background: @white;
+    transition-duration: 0.1s;
+}
+
+#taskbar button {
+    color: @white;
+    border-right: 4px solid transparent;
+    padding: 12px 0px 12px 0px;
+}
+
+#taskbar button.active {
+    border-right: 4px solid @bright;
+}
+
+#taskbar button:hover {
+    color: @black;
+    background: @white;
+    transition-duration: 0.1s;
+}
+
+#systemd-failed-units {
+    background: transparent;
+    padding: 8px 0px 8px 0px;
+}
+
+#systemd-failed-units.ok {
+    color: @white;
+}
+
+#systemd-failed-units.degraded {
+    color: @red;
+}
+
+#temperature {
+    color: @white;
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+#tray {
+    padding: 8px 0px 8px 0px;
 }
 
 #tray menu {
     color: @white;
-    background: @dark;
-    border: 2px solid @white;
+    background: @black;
 }
 
-#systemd-failed-units {
-    background: @dark;
-    border-right: 2px solid @white;
+#clock {
+    padding: 8px 2px 8px 0px;
 }
 
-#systemd-failed-units.ok {
-    background: @dark;
-    border-right: 2px solid @white;
+#clock {
+    padding: 8px 2px 8px 0px;
 }
 
-#systemd-failed-units.degraded {
-    color: @white;
-    border-right: 2px solid @red;
-    padding: 0px 0px 0px 0px;
-}
-    
 @keyframes blink {
     to {
         background-color: @white;
