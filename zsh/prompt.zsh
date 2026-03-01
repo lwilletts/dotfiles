@@ -38,10 +38,10 @@ zle-keymap-select() {
 hash busybox 2> /dev/null || {
     if hash dircolors 2> /dev/null; then
         eval "$(dircolors ~/.zsh/lscolours)"
-        alias ls="ls -F -N --color=auto --group-directories-first"
+        alias ls="ls -F --color=auto"
     else
-        alias ls="ls -F -N --group-directories-first"
+        alias ls="ls -F"
     fi
 } || {
-    alias ls="ls -F --group-directories-first"
+    alias ls="ls"
 }

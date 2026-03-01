@@ -9,6 +9,7 @@ $HOME/src/fwm
 /sbin
 /usr/sbin
 $HOME/.local/share/flatpak/exports/bin
+/opt/homebrew/bin
 $HOME/.local/bin"
 
 printf '%s\n' "$EXECPATHS" | while read -r EXECPATH; do

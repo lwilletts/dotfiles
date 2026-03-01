@@ -9,11 +9,11 @@ chpwd() {
         [ -z "$(ls -1)" ] && {
             printf '%s\n\n' "${f5}Empty directory!${R}"
         } || {
-            ls -F --color=auto --group-directories-first
+            ls -F --color=auto
             printf '\n'
         }
     } || {
-        ls -F --color=auto --group-directories-first | head -n 10
+        ls -F --color=auto | head -n 10
         printf '%s\n' "${f3}...${R}"
         printf '\n'
     }
