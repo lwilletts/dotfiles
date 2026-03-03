@@ -8,7 +8,7 @@ mod1 + q
 
 # window focus
 mod1 + Tab
-    chwb -s 0 $(pfw); \ 
+    chwb -s 0 $(pfw); \
     wid=$(lsw | head -n 1); \
     wtf $wid; chwso -r $(pfw); chwb -s 2 -c 0xEEEEEE $wid
 mod1 + {h,j,k,l}
@@ -16,7 +16,7 @@ mod1 + {h,j,k,l}
     if pfw &> /dev/null; then wid=$(lsw | xargs wattr "$dir"i | sort "$sort" | sed "0,/$(pfw)/d" | sed "1s/^[0-9]* //p;d"); fi; \
     if [ ! -z $wid ]; then \
         chwb -s 0 $(pfw); wtf $wid; chwso -r $wid; chwb -s 2 -c 0xEEEEEE $wid; \
-    fi 
+    fi
 
 # window manipulation
 mod1 + {a,m}
@@ -56,7 +56,9 @@ mod1 + {minus, equal, shift + minus, plus}
     wrs {-40 0,40 0,0 -40,0 40} $(pfw)
 
 # groups
-mod1 + {Escape,1,2,3,4,5,6,7,8}
+mod1 + Escape
+    sudo chvt 1
+mod1 + {Backspace,1,2,3,4,5,6,7,8}
     for wid in $(lsw -a); do \
         if [ $(atomx GROUP $wid) -eq {0,1,2,3,4,5,6,7,8} 2>/dev/null ]; then \
             mapw -t $wid; chwb -s 0 $wid; chwso -r $wid; \
@@ -82,8 +84,6 @@ mod1 + button5
 # sys
 mod1 + shift + r
     pkill -USR1 -x sxhkd
-mod1 + BackSpace
-    sudo chvt 1
 mod1 + ctrl + BackSpace
     pkill xinit
 

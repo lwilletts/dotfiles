@@ -9,7 +9,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: lemon;
+    font-family: scientifica;
     font-size: 11px;
     min-height: 0;
 }
@@ -82,20 +82,18 @@ tooltip label {
     transition-duration: 0.1s;
 }
 
-#systemd-failed-units {
-    background: transparent;
-    padding: 8px 0px 8px 0px;
+#tray {
+    padding: 6px 0px 8px 0px;
 }
 
-#systemd-failed-units.ok {
+#tray menu {
     color: @white;
-}
-
-#systemd-failed-units.degraded {
-    color: @red;
+    background: @black;
+    border: 2px solid @white;
 }
 
 #temperature {
+    padding: 4px 0px 4px 0px;
     color: @white;
 }
 
@@ -103,13 +101,12 @@ tooltip label {
     color: @red;
 }
 
-#tray {
-    padding: 8px 0px 8px 0px;
+#network {
+    color: @white;
 }
 
-#tray menu {
-    color: @white;
-    background: @black;
+#network.disconnected {
+    color: @red;
 }
 
 #clock {

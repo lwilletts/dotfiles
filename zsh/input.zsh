@@ -52,7 +52,7 @@ bindboth '^[[Z' reverse-menu-complete
 zstyle ':completion:*' menu select
 
 # Ctrl-Backspace
-bindkey '^H' backward-kill-word
+bindboth '^h' backward-kill-word
 
 cdParentKey() {
     pushd ..
@@ -60,7 +60,7 @@ cdParentKey() {
 }
 
 zle -N cdParentKey
-bindkey "^k" cdParentKey
+bindboth "^k" cdParentKey
 
 clearLS() {
     chpwd

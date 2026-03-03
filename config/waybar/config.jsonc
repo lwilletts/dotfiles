@@ -54,34 +54,45 @@
             "OBS Studio": "󰐑",
             "mpv Media Player": "",
             "Swayimg": "",
+            "GNU Image Manipulation Program": "",
+            "BambuStudio": "💻",
+            "Moonlight": "",
             "Remmina Remote Desktop Client": "",
             "Steam": "",
             ".*(steam_app_[0-9]+).*": "",
+            "overwatch.exe": "",
             "Into The Breach": ""
         }
     },
 
-    "systemd-failed-units": {
-        "hide-on-ok": false,
-        "format": "s: {nr_failed_system}\nu: {nr_failed_user}",
-        "format-ok": "",
-        "system": true,
-        "user": true
-    },
-
-    // network card
     "temperature": {
         "interval": 5,
-        "hwmon-path": "/sys/devices/pci0000:00/0000:00:02.1/0000:05:00.0/0000:06:02.0/0000:09:00.0/mdio_bus/r8169-0-900/r8169-0-900:00/hwmon/hwmon5/temp1_input",
-        "critical-threshold": 70,
-        "format-critical": "{temperatureC}C",
-        "format": "{temperatureC}C"
+        // cpu
+        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon3/temp3_input",
+        "critical-threshold": 80,
+        "format": "{temperatureC}C",
+        "format-critical": "{temperatureC}C"
+        // network card
+        // "hwmon-path": "/sys/devices/pci0000:00/0000:00:02.1/0000:05:00.0/0000:06:02.0/0000:09:00.0/mdio_bus/r8169-0-900/r8169-0-900:00/hwmon/hwmon5/temp1_input",
+        // "on-click": "sudo ethtool -s enp9s0 speed 1000"
+    },
+
+    "network": {
+        "inteval": 10,
+        "interface": "enp116s0u1c2",
+        "family": "ipv4",
+        "format": "",
+        "format-disconnected": "",
+        "tooltip": true,
+        "tooltip-format-ethernet": "{ifname}: {ipaddr} {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "foot -e nmtui"
     },
 
     "tray": {
         "show-passive-items": true,
         "reverse-direction": true,
-        "icon-size": 14,
+        "icon-size": 12,
         "spacing": 6
     },
 
@@ -120,8 +131,7 @@
     ],
 
     "modules-right": [
-        "systemd-failed-units",
-        "temperature",
+        "network",
         "tray",
         "clock"
     ]
@@ -136,9 +146,11 @@
 // 💾
 //   mics
 //  settings
-//  bluetooth
-//     
-//   🖂 🖃           󰨊   📰  󰐑 󰒋 🔐  💾
+//   bluetooth
+//      󰁹 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰂃 󰂄 󰂅 󰂆 󰂇 󰂈 󰂉 󰂊 󰂋 󰂌 󰂍 󰂎 󰂏 󰂐 󰂑
+// 󰂚 󰂛 󰂜 󰂝 󰂞 󰂟
+//  warning
+//   🖂 🖃          󰨊  📰  󰐑 󰒋 🔐  💾
 // 󰃀 󰃁 󰃂 󰃃 󰃄 󰃅 󰃆
 //             𝌆 𝌇 𝌈 𝌉 𝌊 𝌋 𝌌 𝌍 𝌎 𝌏
 // 𝌐 𝌑 𝌒 𝌓 𝌔 𝌕 𝌖 𝌗 𝌘 𝌙 𝌚 𝌛 𝌜 𝌝 𝌞 𝌟

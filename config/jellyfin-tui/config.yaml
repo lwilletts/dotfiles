@@ -1,6 +1,6 @@
 servers:
   - name: blaze.lan
-    url: 'http://blaze.lan:8096'
+    url: 'http://192.168.8.158:8096'
     username: 'fyr'
     password_file: /home/fyr/.jellyfin-tui-pw
     default: true

@@ -18,7 +18,4 @@ hotkey-overlay { skip-at-startup; }
 
 environment {
     DISPLAY ":0"
-    AMD_USERQ "1"
-    QT_QPA_PLATFORM "wayland"
-    QT_QPA_PLATFORMTHEME "qt6ct"
 }

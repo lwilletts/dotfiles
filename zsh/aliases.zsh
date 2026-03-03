@@ -15,6 +15,7 @@ alias cp="cp -ri"
 alias path="readlink -f"
 alias rsync="rsync --info=progress2"
 alias szsh="source ~/.zshrc"
+alias chunk="split -n 10 --numeric-suffixes=1 --suffix-length=2 --additional-suffix=.txt"
 
 # apps
 alias n="niri-session"
@@ -34,6 +35,9 @@ alias ffprobe="ffprobe -hide_banner"
 # net
 alias net="curl -4 icanhazip.com"
 alias wget="wget --no-hsts"
+alias wake="wakeonlan 74:97:79:D8:1B:F1"
+# alias wake="wakeonlan E8:9C:25:6C:40:73 --ip 192.168.8.198"
+
 
 # ansible
 alias pl="ansible-playbook"

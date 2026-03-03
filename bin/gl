@@ -16,23 +16,21 @@ EOF
 
 main() {
     case "$1" in
-        aim)      steam steam://rungameid/824270   & ;;
-        civ5)     steam steam://rungameid/8930     & ;;
-        ftl)      steam steam://rungameid/212680   & ;;
-        hades)    steam steam://rungameid/1145360  & ;;
-        horizon)  steam steam://rungameid/1151640  & ;;
-        ittb)     steam steam://rungameid/590380   & ;;
-        ma|midair)   steam steam://rungameid/1231210  & ;;
-        # ma|midair)   steam steam://rungameid/1469060  & ;;
-        tribes)   steam steam://rungameid/2687970  & ;;
-        rottr)    steam steam://rungameid/391220   & ;;
-        sottr)    steam steam://rungameid/750920   & ;;
-        shenzhen) steam steam://rungameid/504210   & ;;
-        stardew)  steam steam://rungameid/413150   & ;;
-        xcom)     steam steam://rungameid/268500   & ;;
-        *)
-            printf '%s\n' "game not found"
-            ;;
+        aim)       steam steam://rungameid/824270  & ;;
+        civ5)      steam steam://rungameid/8930    & ;;
+        ftl)       steam steam://rungameid/212680  & ;;
+        hades)     steam steam://rungameid/1145360 & ;;
+        horizon)   steam steam://rungameid/1151640 & ;;
+        ittb)      steam steam://rungameid/590380  & ;;
+        ma|midair) steam steam://rungameid/1231210 & ;;
+        matest)    steam steam://rungameid/1469060 & ;;
+        tribes)    steam steam://rungameid/2687970 & ;;
+        rottr)     steam steam://rungameid/391220  & ;;
+        sottr)     steam steam://rungameid/750920  & ;;
+        shenzhen)  steam steam://rungameid/504210  & ;;
+        stardew)   steam steam://rungameid/413150  & ;;
+        xcom)      steam steam://rungameid/268500  & ;;
+        *)         printf '%s\n' "game not found" ;;
     esac
 }
 

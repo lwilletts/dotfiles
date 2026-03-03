@@ -17,6 +17,7 @@ input {
         scroll-factor 2
     }
 
+    workspace-auto-back-and-forth
     focus-follows-mouse max-scroll-amount="90%"
     disable-power-key-handling
 }
@@ -64,8 +65,8 @@ binds {
 
     // floating & tabbed management
     Mod+W { toggle-column-tabbed-display; }
-    Mod+S { toggle-window-floating; }
-    Mod+E { switch-focus-between-floating-and-tiling; }
+    Mod+E { toggle-window-floating; }
+    Mod+S { switch-focus-between-floating-and-tiling; }
 
     // column management
     Mod+C { center-visible-columns; }
@@ -112,9 +113,8 @@ binds {
     Super+Tab { focus-workspace-previous; }
 
     // window sizing
-    Mod+R { switch-preset-window-height; }
-    Mod+Shift+R { switch-preset-window-width; }
-    Mod+A { reset-window-height; }
+    Mod+A { switch-preset-window-height; }
+    Mod+R { switch-preset-window-width; }
     Mod+M { maximize-window-to-edges; }
     Mod+F { fullscreen-window; }
     Mod+Shift+F { toggle-windowed-fullscreen; }
@@ -126,12 +126,18 @@ binds {
     Mod+Shift+Equal { set-window-height "+5%"; }
 
     // audio
-    Mod+Space  { spawn "playerctl" "play-pause"; }
-    Mod+Comma  { spawn "playerctl" "prev"; }
-    Mod+Period { spawn "playerctl" "next"; }
-    Mod+Slash  { spawn "playerctl" "stop"; }
-    Mod+9 { spawn "playerctl" "volume" "0.02-"; }
-    Mod+0 { spawn "playerctl" "volume" "0.02+"; }
+    Mod+Space  { spawn "playerctl" "-p" "jellyfin-tui" "play-pause"; }
+    Mod+Comma  { spawn "playerctl" "-p" "jellyfin-tui" "prev"; }
+    Mod+Period { spawn "playerctl" "-p" "jellyfin-tui" "next"; }
+    Mod+Slash  { spawn "playerctl" "-p" "jellyfin-tui" "stop"; }
+    Mod+9 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02-"; }
+    Mod+0 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02+"; }
+    Super+Space  { spawn "playerctl" "-p" "jellyfin-tui" "play-pause"; }
+    Super+Comma  { spawn "playerctl" "-p" "jellyfin-tui" "prev"; }
+    Super+Period { spawn "playerctl" "-p" "jellyfin-tui" "next"; }
+    Super+Slash  { spawn "playerctl" "-p" "jellyfin-tui" "stop"; }
+    Super+9 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02-"; }
+    Super+0 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02+"; }
     XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "2"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
@@ -146,6 +152,6 @@ binds {
     Mod+Ctrl+Backspace { quit skip-confirmation=true; }
     Mod+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
     Mod+Ctrl+R allow-when-locked=true { spawn "reboot"; }
-    Mod+Backspace repeat=false { spawn "sudo" "chvt" "2"; }
-    Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Escape repeat=false { spawn "sudo" "chvt" "2"; }
+    Mod+Backspace { toggle-keyboard-shortcuts-inhibit; }
 }

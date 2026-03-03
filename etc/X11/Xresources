@@ -3,9 +3,9 @@
 
 /* basics */
 *.modifier   : mod4
-*.font       : xft:Cozette-8
-*.boldFont   : xft:Cozette-8
-*.italicFont : xft:Cozette-8
+*.font       : xft:lemon-8
+*.boldFont   : xft:lemon-8
+*.italicFont : xft:lemon-8
 
 /* general settings */
 *.cursorBlink     : 0

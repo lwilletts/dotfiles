@@ -1,22 +1,22 @@
 // nothing to do with layout really
 // but having rounded corners work better here...
 window-rule {
-    geometry-corner-radius 0
+    geometry-corner-radius 4
     clip-to-geometry true
 }
 
 layout {
-    gaps 0
+    gaps 10
 
     struts {
-        left 0
-        right 0
-        top 0
-        bottom 0
+        left 6
+        right 6
+        top -2
+        bottom 2
     }
 
     // behaviour
-    default-column-width { proportion 0.33; }
+    default-column-width { proportion 0.33333; }
     center-focused-column "never"
     // always-center-single-column
 
@@ -35,24 +35,18 @@ layout {
     }
 
     focus-ring {
-        off
-        width 2
-    }
-
-    border {
-        on
         width 2
     }
 
     tab-indicator {
         hide-when-single-tab
         place-within-column
-        gap 0
+        gap 8
         width 8
-        gaps-between-tabs 0
-        length total-proportion=1.0
+        gaps-between-tabs 12
+        length total-proportion=0.25
         position "right"
-        corner-radius 0
+        corner-radius 2
     }
 
     insert-hint {
@@ -60,10 +54,14 @@ layout {
     }
 
     shadow {
-        off
+        on
         softness 12
         spread 3
         offset x=2 y=2
         draw-behind-window false
+    }
+
+    border {
+        width 2
     }
 }

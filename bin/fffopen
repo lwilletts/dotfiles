@@ -12,7 +12,7 @@ case "$mime_type" in
         "${EDITOR:-vi}" "$1"
         ;;
     image/*)
-        mpv --loop-file --really-quiet "$1"
+        swayimg "$1"
         ;;
     video/*|application/mxf*)
         mpv --loop-file --really-quiet "$1"

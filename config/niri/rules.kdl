@@ -30,13 +30,14 @@ window-rule {
 
 window-rule {
     match app-id=r#"steam_app_|gamescope"#
-    open-on-workspace "☱"
+    open-on-workspace "☲"
     open-fullscreen true
 }
 
 window-rule {
-    match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach"#
-    open-on-workspace "☱"
+    match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach|overwatch.exe"#
+    open-on-workspace "☲"
+    variable-refresh-rate false
     min-width 1800
 }
 
@@ -46,18 +47,23 @@ window-rule {
     open-focused false
 }
 
-// rdp
+// moonlight game streaming
 window-rule {
-    match app-id="org.remmina.Remmina" title="ember.lan"
+    match title="Moonlight"
     open-on-workspace "☲"
-    open-maximized-to-edges true
+    open-floating true
 }
 
 window-rule {
-    match app-id="org.remmina.Remmina"
+    match title="ember - Moonlight"
     open-on-workspace "☲"
+//     min-width 1856
+//     max-width 1856
+//     min-height 1392
+//     max-height 1392
+    open-maximized-to-edges true
+    open-floating false
     open-focused true
-    open-floating true
 }
 
 // content
@@ -80,6 +86,6 @@ window-rule {
 
 // floating windows
 window-rule {
-    match app-id=r#"mpv|FTL|resolve|wine"#
+    match app-id=r#"mpv|FTL|swayimg"#
     open-floating true
 }

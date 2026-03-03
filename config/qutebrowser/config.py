@@ -17,8 +17,8 @@ c.content.blocking.whitelist = ['googleadservices.com', 'adservice.google.com']
 config.bind('Ctrl-o', 'config-cycle content.blocking.enabled')
 
 # start
-c.url.start_pages = ['blaze.lan:3000']
-c.url.default_page = 'blaze.lan:3000'
+c.url.start_pages = ['192.168.8.63:3000']
+c.url.default_page = '192.168.8.63:3000'
 
 # sane defaults
 c.backend = 'webengine'
@@ -44,7 +44,6 @@ c.aliases = {'h': 'help', 'q': 'close', 'x': 'quit --save'}
 # defaults
 config.bind('j', 'scroll-px 0 100')
 config.bind('k', 'scroll-px 0 -100')
-config.bind('t', 'cmd-set-text -s :tab-select ')
 config.bind('return', 'selection-follow')
 config.bind('cx', 'download-cancel')
 config.bind('<Ctrl-s>', 'config-source ~/.config/qutebrowser/config.py')
@@ -55,11 +54,20 @@ c.input.mouse.rocker_gestures = False
 c.input.mouse.back_forward_buttons = False
 
 # tab management
+config.bind('t', 'cmd-set-text -s :tab-select ')
 config.bind('<Ctrl-j>', 'tab-move -')
 config.bind('<Ctrl-k>', 'tab-move +')
-config.bind('<Shift-k>', 'tab-next')
 config.bind('<Shift-j>', 'tab-prev')
+config.bind('<Shift-k>', 'tab-next')
 config.bind('<Shift-d>', 'tab-clone')
+
+# tab position
+c.tabs.position = 'top'
+c.tabs.width = 200
+c.tabs.max_width = 110
+c.tabs.min_width = 110
+c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
+c.tabs.title.alignment = 'left'
 
 # quickmarks
 config.bind('am', 'quickmark-load -t mail')
@@ -131,15 +139,6 @@ c.completion.use_best_match = False
 c.completion.cmd_history_max_items = -1
 c.completion.timestamp_format = '%d-%m-%Y-%H:%M:%S'
 c.completion.open_categories = ['bookmarks', 'quickmarks', 'history']
-
-# tabs
-# position
-c.tabs.position = 'top'
-c.tabs.width = 200
-c.tabs.max_width = 110
-c.tabs.min_width = 110
-c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
-c.tabs.title.alignment = 'left'
 
 # title
 c.window.title_format = '{current_title}'
@@ -242,8 +241,6 @@ c.fonts.tabs.unselected = '8pt cozette'
 # c.fonts.web.size.default
 # c.fonts.web.size.default_fixed
 
-# colors
-
 # dark mode
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.preferred_color_scheme = "auto"
@@ -285,7 +282,7 @@ c.colors.statusbar.url.error.fg = '#60C8B1'
 c.colors.hints.bg = '#D9EAE2'
 c.colors.hints.fg = '#121212'
 c.colors.hints.match.fg = '#D9EAE2'
-c.hints.border = '1px solid' + str('#D9EAE2')
+c.hints.border = '2px solid' + str('#D9EAE2')
 
 # background color of an error message
 c.colors.messages.error.bg = '#D9EAE2'
@@ -376,7 +373,7 @@ c.colors.statusbar.passthrough.fg = '#121212'
 c.colors.tabs.bar.bg = '#121212'
 c.colors.tabs.indicator.error = '#CA3448'
 
-    # normal
+# normal
 c.colors.tabs.odd.fg = '#D9EAE2'
 c.colors.tabs.odd.bg = '#121212'
 c.colors.tabs.even.fg = '#D9EAE2'
@@ -386,7 +383,7 @@ c.colors.tabs.selected.odd.fg = '#121212'
 c.colors.tabs.selected.even.bg = '#D9EAE2'
 c.colors.tabs.selected.even.fg = '#121212'
 
-    # pinned
+# pinned
 c.colors.tabs.pinned.odd.fg = '#D9EAE2'
 c.colors.tabs.pinned.odd.bg = '#121212'
 c.colors.tabs.pinned.even.fg = '#D9EAE2'
@@ -396,7 +393,7 @@ c.colors.tabs.pinned.selected.odd.fg = '#121212'
 c.colors.tabs.pinned.selected.even.bg = '#D9EAE2'
 c.colors.tabs.pinned.selected.even.fg = '#121212'
 
-    # right-click menu
+# right-click menu
 c.colors.contextmenu.menu.bg = '#121212'
 c.colors.contextmenu.menu.fg = '#D9EAE2'
 c.colors.contextmenu.selected.bg = '#D9EAE2'
@@ -407,17 +404,13 @@ c.colors.contextmenu.selected.fg = '#121212'
 
 c.completion.web_history.max_items = -1
 
-# Size (in bytes) of the HTTP network cache. Null to use the default
-# value. With QtWebEngine, the maximum supported value is 2147483647 (~2
-# GB).
-# Type: Int
+# Size (in bytes) of the HTTP network cache. maximum supported value is 2147483647
 c.content.cache.size = 2147483647
 
 # Allow websites to read canvas elements. Note this is needed for some
 # websites to work properly.
 # Type: Bool
 # c.content.canvas_reading = True
-
 c.content.desktop_capture = 'ask'
 
 # Try to pre-fetch DNS entries to speed up browsing.
@@ -489,7 +482,7 @@ c.content.dns_prefetch = True
 #   - true
 #   - false
 #   - ask
-c.content.mouse_lock = False
+c.content.mouse_lock = 'ask'
 
 # Automatically mute tabs.
 c.content.mute = False
@@ -707,7 +700,7 @@ c.qt.force_software_rendering = 'none'
 #   - single-process: Run all tabs in a single process. This should be used for debugging purposes only, and it disables `:open --private`.
 # c.qt.process_model = 'process-per-site-instance'
 
-    # scroll + search
+# scroll + search
 c.scrolling.bar = 'when-searching'
 c.scrolling.smooth = False
 c.search.ignore_case = 'smart'
@@ -746,15 +739,17 @@ c.search.incremental = True
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-# c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 
 # Bindings for normal mode
 # config.bind("'", 'enter-mode jump_mark')
-# config.bind('+', 'zoom-in')
-# config.bind('-', 'zoom-out')
-# config.bind('.', 'repeat-command')
-# config.bind('/', 'set-cmd-text /')
-# config.bind(':', 'set-cmd-text :')
+config.bind('=', 'zoom')
+config.bind('+', 'zoom-in')
+config.bind('-', 'zoom-out')
+config.bind('.', 'repeat-command')
+config.bind('/', 'cmd-set-text /')
+config.bind('<Ctrl-F>', 'cmd-set-text /')
+config.bind(':', 'cmd-set-text :')
 # config.bind(';I', 'hint images tab')
 # config.bind(';O', 'hint links fill :open -t -r {hint-url}')
 # config.bind(';R', 'hint --rapid links window')
@@ -783,7 +778,6 @@ c.search.incremental = True
 # config.bind('<Ctrl-B>', 'scroll-page 0 -1')
 # config.bind('<Ctrl-D>', 'scroll-page 0 0.5')
 # config.bind('<Ctrl-F5>', 'reload -f')
-# config.bind('<Ctrl-F>', 'scroll-page 0 1')
 # config.bind('<Ctrl-N>', 'open -w')
 # config.bind('<Ctrl-Q>', 'quit')
 # config.bind('<Ctrl-Return>', 'follow-selected -t')
@@ -806,10 +800,9 @@ c.search.incremental = True
 # config.bind('<Return>', 'follow-selected')
 # config.bind('<back>', 'back')
 # config.bind('<forward>', 'forward')
-# config.bind('=', 'zoom')
-# config.bind('?', 'set-cmd-text ?')
+# config.bind('?', 'cmd-set-text ?')
 # config.bind('@', 'run-macro')
-# config.bind('B', 'set-cmd-text -s :quickmark-load -t')
+# config.bind('B', 'cmd-set-text -s :quickmark-load -t')
 # config.bind('D', 'tab-close -o')
 # config.bind('F', 'hint all tab')
 # config.bind('G', 'scroll-to-perc')
@@ -819,7 +812,7 @@ c.search.incremental = True
 # config.bind('L', 'forward')
 # config.bind('M', 'bookmark-add')
 # config.bind('N', 'search-prev')
-# config.bind('O', 'set-cmd-text -s :open -t')
+# config.bind('O', 'cmd-set-text -s :open -t')
 # config.bind('PP', 'open -t -- {primary}')
 # config.bind('Pp', 'open -t -- {clipboard}')
 # config.bind('R', 'reload -f')
@@ -833,46 +826,45 @@ c.search.incremental = True
 # config.bind('[[', 'navigate prev')
 # config.bind(']]', 'navigate next')
 # config.bind('`', 'enter-mode set_mark')
-
-# config.bind('b', 'set-cmd-text -s :quickmark-load')
+# config.bind('b', 'cmd-set-text -s :quickmark-load')
 # config.bind('cd', 'download-clear')
 # config.bind('co', 'tab-only')
 # config.bind('d', 'tab-close')
 # config.bind('f', 'hint')
 # config.bind('g$', 'tab-focus -1')
 # config.bind('g0', 'tab-focus 1')
-# config.bind('gB', 'set-cmd-text -s :bookmark-load -t')
+# config.bind('gB', 'cmd-set-text -s :bookmark-load -t')
 # config.bind('gC', 'tab-clone')
 # config.bind('gD', 'tab-give')
-# config.bind('gO', 'set-cmd-text :open -t -r {url:pretty}')
+# config.bind('gO', 'cmd-set-text :open -t -r {url:pretty}')
 # config.bind('gU', 'navigate up -t')
 # config.bind('g^', 'tab-focus 1')
 # config.bind('ga', 'open -t')
-# config.bind('gb', 'set-cmd-text -s :bookmark-load')
+# config.bind('gb', 'cmd-set-text -s :bookmark-load')
 # config.bind('gd', 'download')
 # config.bind('gf', 'view-source')
 # config.bind('gg', 'scroll-to-perc 0')
 # config.bind('gi', 'hint inputs --first')
 # config.bind('gl', 'tab-move -')
 # config.bind('gm', 'tab-move')
-# config.bind('go', 'set-cmd-text :open {url:pretty}')
+# config.bind('go', 'cmd-set-text :open {url:pretty}')
 # config.bind('gr', 'tab-move +')
-# config.bind('gt', 'set-cmd-text -s :buffer')
+# config.bind('gt', 'cmd-set-text -s :buffer')
 # config.bind('gu', 'navigate up')
 # config.bind('h', 'scroll left')
 # config.bind('i', 'enter-mode insert')
 # config.bind('l', 'scroll right')
 # config.bind('m', 'quickmark-save')
 # config.bind('n', 'search-next')
-# config.bind('o', 'set-cmd-text -s :open')
+# config.bind('o', 'cmd-set-text -s :open')
 # config.bind('pP', 'open -- {primary}')
 # config.bind('pp', 'open -- {clipboard}')
 # config.bind('q', 'record-macro')
 # config.bind('r', 'reload')
 # config.bind('sf', 'save')
-# config.bind('sk', 'set-cmd-text -s :bind')
-# config.bind('sl', 'set-cmd-text -s :set -t')
-# config.bind('ss', 'set-cmd-text -s :set')
+# config.bind('sk', 'cmd-set-text -s :bind')
+# config.bind('sl', 'cmd-set-text -s :set -t')
+# config.bind('ss', 'cmd-set-text -s :set')
 # config.bind('tIH', 'config-cycle -p -u *://*.{url:host}/* content.images ;; reload')
 # config.bind('tIh', 'config-cycle -p -u *://{url:host}/* content.images ;; reload')
 # config.bind('tIu', 'config-cycle -p -u {url} content.images ;; reload')
@@ -895,18 +887,18 @@ c.search.incremental = True
 # config.bind('tsu', 'config-cycle -p -t -u {url} content.javascript.enabled ;; reload')
 # config.bind('u', 'undo')
 # config.bind('v', 'enter-mode caret')
-# config.bind('wB', 'set-cmd-text -s :bookmark-load -w')
-# config.bind('wO', 'set-cmd-text :open -w {url:pretty}')
+# config.bind('wB', 'cmd-set-text -s :bookmark-load -w')
+# config.bind('wO', 'cmd-set-text :open -w {url:pretty}')
 # config.bind('wP', 'open -w -- {primary}')
-# config.bind('wb', 'set-cmd-text -s :quickmark-load -w')
+# config.bind('wb', 'cmd-set-text -s :quickmark-load -w')
 # config.bind('wf', 'hint all window')
 # config.bind('wh', 'back -w')
 # config.bind('wi', 'inspector')
 # config.bind('wl', 'forward -w')
-# config.bind('wo', 'set-cmd-text -s :open -w')
+# config.bind('wo', 'cmd-set-text -s :open -w')
 # config.bind('wp', 'open -w -- {clipboard}')
-# config.bind('xO', 'set-cmd-text :open -b -r {url:pretty}')
-# config.bind('xo', 'set-cmd-text -s :open -b')
+# config.bind('xO', 'cmd-set-text :open -b -r {url:pretty}')
+# config.bind('xo', 'cmd-set-text -s :open -b')
 # config.bind('yD', 'yank domain -s')
 # config.bind('yM', 'yank markdown -s')
 # config.bind('yP', 'yank pretty-url -s')
@@ -915,8 +907,8 @@ c.search.incremental = True
 # config.bind('ym', 'yank markdown')
 # config.bind('yp', 'yank pretty-url')
 # config.bind('yt', 'yank title')
-config.bind('yY', 'yank')
-config.bind('yy', 'yank -s')
+config.bind('yy', 'yank')
+config.bind('yY', 'yank -s')
 # config.bind('{{', 'navigate prev -t')
 # config.bind('}}', 'navigate next -t')
 
