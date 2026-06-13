@@ -13,7 +13,6 @@ alias mv="mv -i"
 alias df="df -h"
 alias cp="cp -ri"
 alias path="readlink -f"
-alias rsync="rsync --info=progress2"
 alias szsh="source ~/.zshrc"
 alias chunk="split -n 10 --numeric-suffixes=1 --suffix-length=2 --additional-suffix=.txt"
 

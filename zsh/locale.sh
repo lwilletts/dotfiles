@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LANG="en_US.UTF-8"
+LANG="en_GB.UTF-8"
 export LANG
 
 [ -n "$LC_CTYPE" ]          && export LC_CTYPE

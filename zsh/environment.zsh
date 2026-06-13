@@ -3,13 +3,13 @@ PATH=""
 EXECPATHS="
 $HOME/.d/bin
 $HOME/src/fwm
+/opt/homebrew/bin
 /usr/local/bin
 /usr/bin
 /bin
 /sbin
 /usr/sbin
 $HOME/.local/share/flatpak/exports/bin
-/opt/homebrew/bin
 $HOME/.local/bin"
 
 printf '%s\n' "$EXECPATHS" | while read -r EXECPATH; do

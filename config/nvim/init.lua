@@ -86,7 +86,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- undo
-vim.opt.undodir = "$HOME/.cache/nvim/undodir"
+vim.opt.undodir = "/Users/laurece/.cache/nvim/undodir"
 vim.opt.undofile = true
 vim.opt.undoreload = 5000
 vim.opt.undolevels = 5000
