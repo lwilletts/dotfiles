@@ -13,3 +13,4 @@
 	pl = pull
 	pu = push
 	ci = commit
+    l = log --oneline

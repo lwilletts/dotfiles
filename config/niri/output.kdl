@@ -1,4 +1,4 @@
-output "DP-2" {
+output "DP-1" {
     focus-at-startup
     mode "2560x1440@239.970"
     scale 1

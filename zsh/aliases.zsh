@@ -37,7 +37,6 @@ alias wget="wget --no-hsts"
 alias wake="wakeonlan 74:97:79:D8:1B:F1"
 # alias wake="wakeonlan E8:9C:25:6C:40:73 --ip 192.168.8.198"
 
-
 # ansible
 alias pl="ansible-playbook"
 alias role="ansible-role"

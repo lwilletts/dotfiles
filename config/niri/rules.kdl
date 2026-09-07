@@ -23,7 +23,7 @@ window-rule {
 
 // game
 window-rule {
-    match app-id=r#"steam|Lutris"#
+    match app-id=r#"steam|Lutris|heroic"#
     open-on-workspace "☱"
     default-column-width { proportion 0.3; }
 }
@@ -35,8 +35,9 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|Breach|overwatch.exe"#
+    match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|midair2|Stardew|Breach|overwatch.exe"#
     open-on-workspace "☲"
+    open-maximized true
     variable-refresh-rate false
     min-width 1800
 }

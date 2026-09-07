@@ -4,18 +4,24 @@ mod1 + Return
 mod1 + d
     dmenu_run -fn "Cozette-8" -b -f -i -p "Run >" -nb "#1C1C1C" -nf "#EEEEEE" -sb "#EEEEEE" -sf "#1C1C1C"
 mod1 + q
-    killw -p $(pfw)
+    killw -p $(pfw); wid=$(lsw | tail -n 1); \
+    wtf $wid; chwso -r $(pfw); chwb -s 2 -c 0xEEEEEE $wid; \
+    wmp -a $(($(wattr x $wid) + $(wattr w $wid) / 2)) $(($(wattr y $wid) + $(wattr h $wid) / 2))
 
 # window focus
 mod1 + Tab
-    chwb -s 0 $(pfw); \
+    chwb -s 2 -c 0x1C1C1C $(pfw); \
     wid=$(lsw | head -n 1); \
-    wtf $wid; chwso -r $(pfw); chwb -s 2 -c 0xEEEEEE $wid
+    wtf $wid; chwso -r $(pfw); chwb -s 2 -c 0xEEEEEE $wid; \
+    wmp -a $(($(wattr x $wid) + $(wattr w $wid) / 2)) $(($(wattr y $wid) + $(wattr h $wid) / 2))
 mod1 + {h,j,k,l}
     { dir=x; sort=-nr;, dir=y; sort=-n;, dir=y; sort=-nr;, dir=x; sort=-n; } \
-    if pfw &> /dev/null; then wid=$(lsw | xargs wattr "$dir"i | sort "$sort" | sed "0,/$(pfw)/d" | sed "1s/^[0-9]* //p;d"); fi; \
+    if pfw &> /dev/null; then \
+        wid=$(lsw | xargs wattr "$dir"i | sort "$sort" | sed "0,/$(pfw)/d" | sed "1s/^[0-9]* //p;d"); \
+    fi; \
     if [ ! -z $wid ]; then \
-        chwb -s 0 $(pfw); wtf $wid; chwso -r $wid; chwb -s 2 -c 0xEEEEEE $wid; \
+        chwb -s 2 -c 0x1C1C1C $(pfw); wtf $wid; chwso -r $wid; chwb -s 2 -c 0xEEEEEE $wid; \
+        wmp -a $(($(wattr x $wid) + $(wattr w $wid) / 2)) $(($(wattr y $wid) + $(wattr h $wid) / 2)); \
     fi
 
 # window manipulation
@@ -46,22 +52,26 @@ mod1 + f
 # window move
 mod1 + shift + {h,j,k,l}
     wmv {-40 0,0 40,0 -40,40 0} $(pfw); \
-    wmp -a $(($(wattr x $(pfw)) + $(wattr w $(pfw)) / 2)) $(($(wattr y $(pfw)) + $(wattr h $(pfw)) / 2))
+    wmp -a $(($(wattr x $(pfw)) + $(wattr w $(pfw)) / 2)) $(($(wattr y $(pfw)) + $(wattr h $(pfw)) / 2)); \
+    atomx -d WM_POSITION $(pfw)
 mod1 + g
     x=$(($(wattr w $(lsw -r)) / 2)); y=$(($(wattr h $(lsw -r)) / 2)); \
-    wmv -a $x $y $(pfw); wmp -a $x $y
+    wmv -a $x $y $(pfw); wmp -a $x $y; \
+    atomx -d WM_POSITION $(pfw)
 
 # window resize
 mod1 + {minus, equal, shift + minus, plus}
-    wrs {-40 0,40 0,0 -40,0 40} $(pfw)
+    wrs {-40 0,40 0,0 -40,0 40} $(pfw); \
+    wmp -a $(($(wattr x $(pfw)) + $(wattr w $(pfw)) / 2)) $(($(wattr y $(pfw)) + $(wattr h $(pfw)) / 2)); \
+    atomx -d WM_POSITION $(pfw)
 
 # groups
 mod1 + Escape
     sudo chvt 1
-mod1 + {Backspace,1,2,3,4,5,6,7,8}
+mod1 + {BackSpace,1,2,3,4,5,6,7,8}
     for wid in $(lsw -a); do \
         if [ $(atomx GROUP $wid) -eq {0,1,2,3,4,5,6,7,8} 2>/dev/null ]; then \
-            mapw -t $wid; chwb -s 0 $wid; chwso -r $wid; \
+            mapw -t $wid; chwb -s 2 -c 0x1C1C1C $wid; chwso -r $wid; \
         fi; \
     done
 mod1 + shift + {1,2,3,4,5,6,7,8}
@@ -75,7 +85,7 @@ mod1 + {@button1,@button3}
 mod1 + button4
     for wid in $(lsw -u); do \
         if [ $(atomx GROUP $wid) -eq 0 2>/dev/null ]; then \
-            mapw -m $wid; chwb -s 0 $wid; chwso -r $wid; \
+            mapw -m $wid; chwb -s 2 -c 0x1C1C1C $wid; chwso -r $wid; \
         fi; \
     done
 mod1 + button5
@@ -86,6 +96,12 @@ mod1 + shift + r
     pkill -USR1 -x sxhkd
 mod1 + ctrl + BackSpace
     pkill xinit
+
+# music
+mod1 + {space,comma,period,slash,9,0}
+    playerctl -p jellyfin-tui {play-pause,prev,next,stop,volume 0.02-,volume 0.02+}
+{XF86AudioMute,XF86AudioRaiseVolume,XF86AudioLowerVolume}
+    pamixer {-t, -i 2, -d 2}
 
 # shot
 Print

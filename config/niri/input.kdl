@@ -48,8 +48,8 @@ binds {
     Super+WheelScrollDown       cooldown-ms=100 { consume-or-expel-window-right; }
     Super+Shift+WheelScrollUp   cooldown-ms=100 { swap-window-left; }
     Super+Shift+WheelScrollDown cooldown-ms=100 { swap-window-right; }
-    Mod+Shift+WheelScrollUp     cooldown-ms=100 { focus-column-or-monitor-left; }
-    Mod+Shift+WheelScrollDown   cooldown-ms=100 { focus-column-or-monitor-right; }
+    Mod+Shift+WheelScrollUp     cooldown-ms=100 { move-window-up-or-to-workspace-up; }
+    Mod+Shift+WheelScrollDown   cooldown-ms=100 { move-window-down-or-to-workspace-down; }
     Mod+Ctrl+WheelScrollUp      cooldown-ms=100 { set-column-width "+10%"; }
     Mod+Ctrl+WheelScrollDown    cooldown-ms=100 { set-column-width "-10%"; }
 
@@ -132,12 +132,6 @@ binds {
     Mod+Slash  { spawn "playerctl" "-p" "jellyfin-tui" "stop"; }
     Mod+9 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02-"; }
     Mod+0 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02+"; }
-    Super+Space  { spawn "playerctl" "-p" "jellyfin-tui" "play-pause"; }
-    Super+Comma  { spawn "playerctl" "-p" "jellyfin-tui" "prev"; }
-    Super+Period { spawn "playerctl" "-p" "jellyfin-tui" "next"; }
-    Super+Slash  { spawn "playerctl" "-p" "jellyfin-tui" "stop"; }
-    Super+9 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02-"; }
-    Super+0 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02+"; }
     XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "2"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }

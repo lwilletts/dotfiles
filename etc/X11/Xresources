@@ -3,9 +3,9 @@
 
 /* basics */
 *.modifier   : mod4
-*.font       : xft:lemon-8
-*.boldFont   : xft:lemon-8
-*.italicFont : xft:lemon-8
+*.font       : xft:Cozette-8
+*.boldFont   : xft:Cozette-8
+*.italicFont : xft:Cozette-8
 
 /* general settings */
 *.cursorBlink     : 0
@@ -17,7 +17,7 @@
 
 /* URxvt general settings */
 URxvt.letterSpace    : 0
-URxvt.internalBorder : 4
+URxvt.internalBorder : 10
 URxvt.externalBorder : 0
 URxvt.scrollBar      : 0
 

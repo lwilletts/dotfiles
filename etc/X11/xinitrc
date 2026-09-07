@@ -2,8 +2,8 @@
 
 DISPLAY=:1
 
-xrandr --output DP-2 --primary --mode 2560x1440 -r 239.97 \
-       --output DP-1 --off \
+xrandr --output DisplayPort-0 --primary --mode 2560x1440 -r 239.97 \
+       --output DisplayPort-1 --off \
        --output HDMI-0 --off \
        --output HDMI-1 --off &> /dev/null
 
@@ -25,31 +25,24 @@ wew | while read -r ev wid; do
         CREATE)
             case $(atomx WM_CLASS $wid) in
                 steam_app_*)
+                    wtf $wid
+                    chwso -r $wid
+                    wtp $(wattr xywh $(lsw -r)) $wid
+                    atomx GROUP=3 $wid
                     chwb -s 0 $wid
-                    atomx GROUP=2 $wid
                     ;;
                 xclock)
                     ignw -s $wid
                     chwb -s 2 -c 0xEEEEEE $wid
                     atomx GROUP=8 $wid
-                    wmv 22 22 $wid
-                    ;;
-                urxvt)
-                    wattr o $wid || {
-                        chwb -s 0 $(pfw)
-                        chwso -r $(pfw)
-                        wtf $wid
-                        wmv 22 60 $wid
-                        atomx GROUP=1 $wid
-                        chwb -s 2 -c 0xEEEEEE $wid
-                    }
+                    wmv 12 12 $wid
                     ;;
                 *)
                     wattr o $wid || {
-                        chwb -s 0 $(pfw)
-                        chwso -r $(pfw)
+                        chwb -s 2 -c 0x1C1C1C $wid
                         wtf $wid
-                        wmv -a 1280 720 $wid
+                        wmv -a $(wmp) $wid
+                        chwso -r $wid
                         chwb -s 2 -c 0xEEEEEE $wid
                     }
                     ;;
@@ -63,7 +56,6 @@ wew | while read -r ev wid; do
             }
             ;;
         DESTROY)
-            chwb -s 2 $(pfw)
             ;;
     esac
 done

@@ -69,6 +69,7 @@ vim.opt.autochdir = true
 vim.opt.autoindent = false
 vim.opt.clipboard = 'unnamed,unnamedplus'
 vim.opt.formatoptions:remove('cro')
+vim.opt.textwidth = 80
 
 -- filetype simple defaults for now
 vim.opt.tabstop = 4
@@ -80,7 +81,7 @@ vim.opt.mouse = 'nvi'
 vim.opt.mousefocus = true
 vim.opt.mousemodel = 'popup'
 
--- search 
+-- search
 vim.opt.incsearch = true
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
@@ -99,7 +100,7 @@ vim.opt.splitright = true
 autocmd('BufWritePost', {pattern = 'init.lua', command = 'source $MYVIMRC'})
 
 -- key remaps
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 vim.keymap.set('n', '<leader>E', '<cmd>edit $MYVIMRC<CR>')
 vim.keymap.set('n', '<leader>c', '<cmd>nohlsearch<CR>')

@@ -59,7 +59,10 @@
             "Moonlight": "",
             "Remmina Remote Desktop Client": "",
             "Steam": "",
+            "Heroic Games Launcher": "",
             ".*(steam_app_[0-9]+).*": "",
+            ".*(exe).*": "",
+            "Stardew Valley": "",
             "overwatch.exe": "",
             "Into The Breach": ""
         }

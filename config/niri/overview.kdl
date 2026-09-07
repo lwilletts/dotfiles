@@ -22,6 +22,17 @@ layer-rule {
 gestures {
     hot-corners {
         bottom-left
+        bottom-right
+    }
+
+    dnd-edge-view-scroll {
+        trigger-width 100
+        max-speed 500
+    }
+
+    dnd-edge-workspace-switch {
+        trigger-height 100
+        max-speed 500
     }
 }
 
