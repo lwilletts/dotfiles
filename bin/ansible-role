@@ -21,6 +21,7 @@ main() {
         "$PWD/$ROLE_NAME/meta" \
         "$PWD/$ROLE_NAME/tasks" \
         "$PWD/$ROLE_NAME/vars/main" \
+        "$PWD/$ROLE_NAME/defaults" \
         "$PWD/$ROLE_NAME/handlers" \
         "$PWD/$ROLE_NAME/files" \
         "$PWD/$ROLE_NAME/templates"
