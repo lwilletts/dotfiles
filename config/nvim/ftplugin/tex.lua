@@ -2,7 +2,7 @@ vim.opt_local.wrap = true
 vim.opt_local.linebreak = true
 vim.opt_local.spell = true
 vim.opt_local.textwidth = 80
-vim.opt_local.conceallevel = 1
+vim.opt_local.conceallevel = 0
 vim.opt_local.concealcursor = "nc"
 vim.opt_local.formatoptions:append("t") -- auto-wrap text
 vim.opt_local.formatoptions:append("n") -- numbered lists
