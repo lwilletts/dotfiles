@@ -1,29 +1,28 @@
 -- init.lua
 
--- shortcut autocmd
-local autocmd = vim.api.nvim_create_autocmd
+-- plugin management
+vim.pack.add({
+    "https://github.com/lervag/vimtex",
+    "https://github.com/nvim-mini/mini.surround",
+    "https://github.com/neovim/nvim-lspconfig",
+    "https://github.com/farmergreg/vim-lastplace",
+    "https://github.com/baskerville/vim-sxhkdrc",
+    "https://github.com/imsnif/kdl.vim",
+})
 
--- paq bootstrap
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({
-    'git', 'clone', '--depth', '1',
-    'https://github.com/savq/paq-nvim.git',
-    install_path
-  })
-end
-
--- plugin
-require "paq" {
-    "savq/paq-nvim",
-    "tpope/vim-surround",
-    "neovim/nvim-lspconfig",
-    "farmergreg/vim-lastplace",
-    "baskerville/vim-sxhkdrc",
-    "imsnif/kdl.vim",
-    -- "github/copilot.vim",
+-- vimtex plugin options
+vim.g.tex_flavour = "latex"
+vim.g.vimtex_view_method = "skim"
+vim.g.vimtex_view_skim_sync = 1
+vim.g.vimtex_view_skim_activate = 0
+vim.g.vimtex_compiler_latexmk = {
+  executable = 'latexmk',
+  options = {
+    '-pdf',
+    '-shell-escape',
+    '-interaction=nonstopmode',
+    '-file-line-error',
+  },
 }
 
 -- editorconfig
@@ -40,8 +39,9 @@ vim.opt.showmode = true
 vim.opt.laststatus = 0
 
 -- terminal colors
-vim.opt.background = 'dark'
-vim.opt.termguicolors = true
+vim.opt.background = 'light'
+vim.opt.termguicolors = false
+vim.cmd.colorscheme = 'morning'
 
 -- vim.g.terminal_color1 = '#1C1C1C'
 -- vim.g.terminal_color2 = '#CA3448'
@@ -63,6 +63,7 @@ vim.opt.guicursor = 'n:blinkon0'
 vim.opt.syntax = 'on'
 vim.opt.number = true
 vim.opt.wrap = false
+vim.opt.linebreak = false
 
 -- text behaviour
 vim.opt.autochdir = true
@@ -71,7 +72,7 @@ vim.opt.clipboard = 'unnamed,unnamedplus'
 vim.opt.formatoptions:remove('cro')
 vim.opt.textwidth = 80
 
--- filetype simple defaults for now
+-- filetype
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
@@ -87,7 +88,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- undo
-vim.opt.undodir = "/home/fyr/.cache/nvim/undodir"
+vim.opt.undodir = "/Users/laurence/.cache/nvim/undodir"
 vim.opt.undofile = true
 vim.opt.undoreload = 5000
 vim.opt.undolevels = 5000
@@ -97,6 +98,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- autocmds
+local autocmd = vim.api.nvim_create_autocmd
 autocmd('BufWritePost', {pattern = 'init.lua', command = 'source $MYVIMRC'})
 
 -- key remaps
