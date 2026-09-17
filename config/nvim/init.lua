@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 require("nvim-treesitter").setup({
-  install_dir = vim.fn.stdpath("data") .. "/site",
+  install_dir = vim.fn.stdpath("data") .. "/site"
 })
 
 require("nvim-treesitter").install({
@@ -73,7 +73,7 @@ require("mason").setup()
 vim.lsp.config.pyright = {
   cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
-  root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+  root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" }
 }
 
 vim.lsp.config.lua_ls = {
@@ -84,7 +84,7 @@ vim.lsp.config.lua_ls = {
     Lua = {
       runtime = { version = "LuaJIT" },
       diagnostics = { globals = { "vim" } },
-      workspace = { checkThirdParty = false },
+      workspace = { checkThirdParty = false }
     }
   }
 }
