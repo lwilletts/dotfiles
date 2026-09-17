@@ -10,7 +10,8 @@ $HOME/src/fwm
 /sbin
 /usr/sbin
 $HOME/.local/share/flatpak/exports/bin
-$HOME/.local/bin"
+$HOME/.local/bin
+/Library/TeX/texbin"
 
 printf '%s\n' "$EXECPATHS" | while read -r EXECPATH; do
     if [ -d "$EXECPATH" ]; then 
