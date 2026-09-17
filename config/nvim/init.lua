@@ -3,11 +3,13 @@
 -- plugin management
 vim.pack.add({
     "https://github.com/lervag/vimtex",
-    "https://github.com/nvim-mini/mini.surround",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/mason-org/mason.nvim",
     "https://github.com/neovim/nvim-lspconfig",
+    "https://github.com/kylechui/nvim-surround",
     "https://github.com/farmergreg/vim-lastplace",
     "https://github.com/baskerville/vim-sxhkdrc",
-    "https://github.com/imsnif/kdl.vim",
+    "https://github.com/imsnif/kdl.vim"
 })
 
 -- vimtex plugin options
@@ -22,13 +24,129 @@ vim.g.vimtex_compiler_latexmk = {
     '-shell-escape',
     '-interaction=nonstopmode',
     '-file-line-error',
-  },
+  }
 }
+
+-- vimtex cleanup
+vim.api.nvim_create_autocmd('BufLeave', {
+    pattern = "*.tex",
+    callback = function()
+        if vim.b.vimtex then
+            vim.cmd("VimtexClean")
+        end
+    end
+})
+
+-- treesitter plugin
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == "nvim-treesitter" and kind == "update" then
+      if not ev.data.active then
+        vim.cmd.packadd("nvim-treesitter")
+      end
+      vim.cmd("TSUpdate")
+    end
+  end
+})
+
+require("nvim-treesitter").setup({
+  install_dir = vim.fn.stdpath("data") .. "/site",
+})
+
+require("nvim-treesitter").install({
+  "lua", "vim", "vimdoc", "latex", "yaml",
+  "python", "javascript", "typescript", "bash", "markdown",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "lua", "python", "yaml", "javascript", "typescript", "bash", "markdown" },
+  callback = function()
+    pcall(vim.treesitter.start)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end
+})
+
+-- LSP configuration
+require("mason").setup()
+
+vim.lsp.config.pyright = {
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+}
+
+vim.lsp.config.lua_ls = {
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  root_markers = { ".luarc.json", ".luarc.jsonc", ".git" },
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = { checkThirdParty = false },
+    }
+  }
+}
+
+vim.lsp.config.yamlls = {
+  cmd = { "yaml-language-server", "--stdio" },
+  filetypes = { "yaml", "yaml.docker-compose" },
+  root_markers = { ".git" }
+}
+
+vim.lsp.config.texlab = {
+  cmd = { "texlab" },
+  filetypes = { "tex", "plaintex", "bib" },
+  root_markers = { ".latexmkrc", ".git" }
+}
+
+vim.lsp.enable({ "pyright", "lua_ls", "yamlls", "texlab" })
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.completion.enable(true, args.data.client_id, args.buf, { autotrigger = true })
+  end
+})
+
+-- lsp completion settings
+vim.o.pumheight = 10
+vim.o.signcolumn = "yes"
+
+--- completion binds
+vim.keymap.set("i", "<Tab>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-n>"
+  end
+  return "<Tab>"
+end, { expr = true })
+
+vim.keymap.set("i", "<S-Tab>", function()
+  if vim.fn.pumvisible() == 1 then
+    return "<C-p>"
+  end
+  return "<S-Tab>"
+end, { expr = true })
+
+-- vim lastplace options
+vim.g.lastplace_lastposition = 1
+vim.g.lastplace_open_folds = 0
+vim.g.lastplace_ignore = "gitcommit,gitrebase,xxd"
+vim.g.lastplace_ignore_buftype = "nofile,quickfix,help"
+
+-- completion
+vim.opt.completeopt = { "menuone", "noinsert" }
 
 -- editorconfig
 vim.g.editorconfig = true
 
--- title
+-- window title
 vim.opt.title = true
 vim.opt.titlestring = 'nvim: %t'
 
@@ -65,6 +183,12 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.linebreak = false
 
+-- text tabs character
+vim.opt.list = true
+vim.opt.listchars = {
+    tab = "> "
+}
+
 -- text behaviour
 vim.opt.autochdir = true
 vim.opt.autoindent = false
@@ -97,19 +221,8 @@ vim.opt.undolevels = 5000
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- autocmds
-local autocmd = vim.api.nvim_create_autocmd
-
-autocmd('BufWritePost', {pattern = 'init.lua', command = 'source $MYVIMRC'})
-
-autocmd('BufLeave', {
-    pattern = "*.tex",
-    callback = function()
-        if vim.b.vimtex then
-            vim.cmd("VimtexClean")
-        end
-    end,
-})
+-- source init.lua
+vim.api.nvim_create_autocmd('BufWritePost', {pattern = 'init.lua', command = 'source $MYVIMRC'})
 
 -- key remaps
 vim.g.mapleader = " "
