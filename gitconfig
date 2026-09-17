@@ -20,6 +20,7 @@
     c = commit
     s = status -sb
     sw = switch
+    s = status -sb
     l = log --oneline
     r = restore
     ri = rebase -i
