@@ -18,6 +18,7 @@
     a = add
     c = commit
     s = status -sb
+    s = status -sb
     l = log --oneline
     ri = rebase -i
     rc = rebase --continue
