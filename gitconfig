@@ -1,16 +1,67 @@
 [user]
-	email = laurencewilletts@protonmail.com
-	name = Laurence Willetts
+    email = laurencewilletts@protonmail.com
+    name = Laurence Willetts
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
 [core]
-	editor = nvim
+    editor = nvim
+    pager = less
+    autocrlf = input
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
 [color]
-	ui = true
+    ui = true
+
 [alias]
-	a = add
-	c = clone
-	pl = pull
-	pu = push
-	ci = commit
+    a = add
+    c = commit
+    s = status -sb
     l = log --oneline
+    ri = rebase -i
+    rc = rebase --continue
+    rs = rebase --skip
+    graph = log --graph --oneline --decorate --all
+    fix = commit --fixup
+    amend = commit --amend --no-edit
+    squash = commit --fixup
+
+[log]
+    abbrevCommit = true
+    decorate = auto
+
+[blame]
+    showEmail = true
+
+[diff]
+    tool = nvimdiff
+    algorithm = histogram
+    colorMoved = default
+
+[push]
+    default = current
+
+[pull]
+    rebase = true
+
+[merge]
+    ff = only
+    conflictstyle = diff3
+    stat = true
+
+[rebase]
+    autoStash = false
+    autoSquash = false
+
+[branch]
+    autoSetupRebase = always
+
+[fetch]
+    prune = true
+
+[status]
+    showUntrackedFiles = all
+
+[help]
+    autocorrect = 20
