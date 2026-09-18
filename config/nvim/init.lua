@@ -10,7 +10,7 @@ vim.pack.add({
     "https://github.com/farmergreg/vim-lastplace",
     "https://github.com/baskerville/vim-sxhkdrc",
     "https://github.com/imsnif/kdl.vim",
-    "https://MartinCornelius/reword.nvim"
+    "https://github.com/MartinCornelius/reword.nvim"
 })
 
 -- vimtex plugin options
