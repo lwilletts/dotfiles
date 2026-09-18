@@ -9,7 +9,8 @@ vim.pack.add({
     "https://github.com/kylechui/nvim-surround",
     "https://github.com/farmergreg/vim-lastplace",
     "https://github.com/baskerville/vim-sxhkdrc",
-    "https://github.com/imsnif/kdl.vim"
+    "https://github.com/imsnif/kdl.vim",
+    "https://MartinCornelius/reword.nvim"
 })
 
 -- vimtex plugin options
@@ -119,7 +120,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.o.pumheight = 10
 vim.o.signcolumn = "yes"
 
---- completion binds
+-- vim lastplace options
+vim.g.lastplace_lastposition = 1
+vim.g.lastplace_open_folds = 0
+vim.g.lastplace_ignore = "gitcommit,gitrebase,xxd"
+vim.g.lastplace_ignore_buftype = "nofile,quickfix,help"
+
+-- reword.nvim
+require("reword").setup({ persist = true })
+
+-- completion
+vim.opt.completeopt = { "menuone", "noinsert" }
+
 vim.keymap.set("i", "<Tab>", function()
   if vim.fn.pumvisible() == 1 then
     return "<C-n>"
@@ -133,15 +145,6 @@ vim.keymap.set("i", "<S-Tab>", function()
   end
   return "<S-Tab>"
 end, { expr = true })
-
--- vim lastplace options
-vim.g.lastplace_lastposition = 1
-vim.g.lastplace_open_folds = 0
-vim.g.lastplace_ignore = "gitcommit,gitrebase,xxd"
-vim.g.lastplace_ignore_buftype = "nofile,quickfix,help"
-
--- completion
-vim.opt.completeopt = { "menuone", "noinsert" }
 
 -- editorconfig
 vim.g.editorconfig = true
