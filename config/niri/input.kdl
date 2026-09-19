@@ -137,9 +137,9 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
 
     // shot
-    Super+Shift+s { screenshot; }
-    Print { screenshot-screen; }
-    Shift+Print { screenshot-window; }
+    Super+Shift+s { screenshot show-pointer=false; }
+    Print { screenshot-screen show-pointer=false; }
+    Shift+Print { screenshot-window show-pointer=false; }
 
     // system
     Mod+Shift+B { power-off-monitors; }
