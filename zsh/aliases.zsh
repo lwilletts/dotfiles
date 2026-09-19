@@ -55,6 +55,7 @@ alias p="zathura"
 alias q="qutebrowser"
 alias strip="jhead -de"
 alias findexec="fd . --exact-depth 1 -t x"
+hash fdfind 2> /dev/null && alias fd="fdfind"
 
 # dtach
 alias irc="dtach -A /tmp/irc weechat"
