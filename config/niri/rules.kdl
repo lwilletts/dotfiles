@@ -8,7 +8,7 @@ workspace "☷" { open-on-output "eDP-1"; }
 // general
 window-rule {
     match app-id="foot"
-    default-column-width { proportion 0.25; }
+    default-column-width { proportion 0.35; }
 }
 
 // dash
