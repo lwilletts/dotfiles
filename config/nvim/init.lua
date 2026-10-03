@@ -46,6 +46,10 @@ vim.opt.signcolumn = "yes"
 vim.opt.complete = ".,w,b,u,t,i"
 vim.opt.completeopt = { "menuone", "noinsert" }
 
+-- menu completion
+vim.opt.wildmenu = true
+vim.opt.wildmode = "longest:full,full"
+
 -- mouse
 vim.opt.mouse = 'nvi'
 vim.opt.mousefocus = true
