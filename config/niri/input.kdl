@@ -26,7 +26,7 @@ input {
         accel-speed 0.05
         accel-profile "adaptive"
         // next-release: pinch-sensitivity 1.0
-        scroll-factor vertical=1.0 horizontal=1.0 
+        scroll-factor vertical=1.0 horizontal=1.0
         middle-emulation
         click-method "button-areas"
         disabled-on-external-mouse
