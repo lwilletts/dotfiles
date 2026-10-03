@@ -17,8 +17,8 @@ c.content.blocking.whitelist = ['googleadservices.com', 'adservice.google.com']
 config.bind('Ctrl-o', 'config-cycle content.blocking.enabled')
 
 # start
-c.url.start_pages = ['192.168.8.63:3000']
-c.url.default_page = '192.168.8.63:3000'
+c.url.start_pages = ['blaze.local:3000']
+c.url.default_page = 'blaze.local:3000'
 
 # sane defaults
 c.backend = 'webengine'
@@ -55,15 +55,15 @@ c.input.mouse.back_forward_buttons = False
 
 # tab management
 config.bind('t', 'cmd-set-text -s :tab-select ')
-config.bind('<Ctrl-j>', 'tab-move -')
-config.bind('<Ctrl-k>', 'tab-move +')
-config.bind('<Shift-j>', 'tab-prev')
-config.bind('<Shift-k>', 'tab-next')
+config.bind('<Ctrl-j>', 'tab-move +')
+config.bind('<Ctrl-k>', 'tab-move -')
+config.bind('<Shift-j>', 'tab-next')
+config.bind('<Shift-k>', 'tab-prev')
 config.bind('<Shift-d>', 'tab-clone')
 
 # tab position
-c.tabs.position = 'top'
-c.tabs.width = 200
+c.tabs.position = 'left'
+c.tabs.width = 180
 c.tabs.max_width = 110
 c.tabs.min_width = 110
 c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
