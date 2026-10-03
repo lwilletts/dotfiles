@@ -1,5 +1,4 @@
 // assignment
-<<<<<<< HEAD
 workspace "☰" { open-on-output "eDP-1"; }
 workspace "☱" { open-on-output "eDP-1"; }
 workspace "☳" { open-on-output "eDP-1"; }
