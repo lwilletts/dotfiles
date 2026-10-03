@@ -16,9 +16,11 @@
 
 [alias]
     a = add
+    d = diff
     c = commit
     s = status -sb
     l = log --oneline
+    r = restore
     ri = rebase -i
     rc = rebase --continue
     rs = rebase --skip
@@ -59,9 +61,6 @@
 
 [fetch]
     prune = true
-
-[status]
-    showUntrackedFiles = all
 
 [help]
     autocorrect = 20
