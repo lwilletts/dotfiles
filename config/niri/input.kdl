@@ -142,6 +142,9 @@ binds {
     Print { screenshot-screen show-pointer=false; }
     Shift+Print { screenshot-window show-pointer=false; }
 
+    // lock
+    Super+Shift+L { spawn "swaylock" "-u" "-K" "-i" "~/usr/backs/fishing_dark.jpg" "-s" "center"; }
+
     // system
     Mod+Shift+B { power-off-monitors; }
     Mod+Ctrl+Backspace { quit skip-confirmation=true; }
