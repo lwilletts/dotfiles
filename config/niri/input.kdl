@@ -29,7 +29,7 @@ input {
         scroll-factor vertical=1.0 horizontal=1.0
         middle-emulation
         click-method "button-areas"
-        disabled-on-external-mouse
+        // disabled-on-external-mouse
     }
 
     trackpoint {
@@ -51,6 +51,10 @@ cursor {
     hide-after-inactive-ms 5000
 }
 
+switch-events {
+    lid-close { spawn "swaylock" "-u" "-K" "-i" "~/usr/backs/black_waves.jpg" "-s" "center"; }
+}
+
 binds {
     // sys
     Mod+Return cooldown-ms=125 { spawn "footclient"; }
@@ -60,7 +64,6 @@ binds {
 
     // overview
     Mod+O { toggle-overview; }
-    Mod+MouseMiddle { toggle-overview; }
 
     // mouse
     Mod+WheelScrollUp           cooldown-ms=100 { focus-workspace-up; }
