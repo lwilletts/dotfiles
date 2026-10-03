@@ -4,5 +4,5 @@ Requires=graphical-session.target niri.service
 After=graphical-session.target niri.service
 
 [Service]
-ExecStart=/usr/bin/swaybg -m fill -i "%h/usr/backs/fishing_dark.jpg"
+ExecStart=/usr/bin/swaybg -m fill -i "%h/usr/backs/black_waves.jpg"
 Restart=on-failure
