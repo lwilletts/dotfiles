@@ -48,7 +48,6 @@
     rebase = true
 
 [merge]
-    ff = only
     conflictstyle = diff3
     stat = true
 
