@@ -17,6 +17,27 @@ input {
         scroll-factor 2
     }
 
+    touchpad {
+        tap
+        natural-scroll
+        dwt
+        dwtp
+        drag true
+        accel-speed 0.05
+        accel-profile "adaptive"
+        // next-release: pinch-sensitivity 1.0
+        scroll-factor vertical=1.0 horizontal=1.0 
+        middle-emulation
+        click-method "button-areas"
+        disabled-on-external-mouse
+    }
+
+    trackpoint {
+        // off
+        accel-speed 0.05
+        accel-profile "adaptive"
+    }
+
     workspace-auto-back-and-forth
     focus-follows-mouse max-scroll-amount="90%"
     disable-power-key-handling
