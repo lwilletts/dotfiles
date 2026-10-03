@@ -71,12 +71,10 @@ binds {
     // column management
     Mod+C { center-visible-columns; }
     Mod+V { center-column; }
-    Mod+U { focus-column-first; }
-    Mod+I { focus-column-last; }
+    Mod+U { swap-window-left; }
+    Mod+I { swap-window-right; }
     Mod+Shift+U { move-column-to-first; }
     Mod+Shift+I { move-column-to-last; }
-    Mod+Ctrl+H { swap-window-left; }
-    Mod+Ctrl+L { swap-window-right; }
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
@@ -125,6 +123,9 @@ binds {
     Mod+Shift+Minus { set-window-height "-5%"; }
     Mod+Shift+Equal { set-window-height "+5%"; }
 
+    // wayland utils
+    Mod+B { spawn "pkill" "--signal=SIGUSR1" "waybar"; }
+
     // audio
     Mod+Space  { spawn "playerctl" "-p" "jellyfin-tui" "play-pause"; }
     Mod+Comma  { spawn "playerctl" "-p" "jellyfin-tui" "prev"; }
@@ -140,6 +141,9 @@ binds {
     Super+Shift+s { screenshot show-pointer=false; }
     Print { screenshot-screen show-pointer=false; }
     Shift+Print { screenshot-window show-pointer=false; }
+
+    // lock
+    Super+Shift+L { spawn "swaylock" "-u" "-K" "-i" "~/usr/backs/fishing_dark.jpg" "-s" "center"; }
 
     // system
     Mod+Shift+B { power-off-monitors; }

@@ -19,6 +19,7 @@
     d = diff
     c = commit
     s = status -sb
+    sw = switch
     l = log --oneline
     r = restore
     ri = rebase -i
