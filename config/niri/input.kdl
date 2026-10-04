@@ -143,7 +143,7 @@ binds {
     Shift+Print { screenshot-window show-pointer=false; }
 
     // lock
-    Super+Shift+L { spawn "swaylock" "-u" "-K" "-i" "~/usr/backs/fishing_dark.jpg" "-s" "fit"; }
+    Super+Shift+L { spawn "swaylock"; }
 
     // system
     Mod+Shift+B { power-off-monitors; }

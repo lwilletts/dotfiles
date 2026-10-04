@@ -1,0 +1,15 @@
+[Unit]
+Description=Stasis Wayland Idle Manager
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionPathExists=%t
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/stasis
+ExecReload=/usr/bin/stasis reload
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

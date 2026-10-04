@@ -1,0 +1,55 @@
+@author "fyr"
+@description "Scorch Configuration"
+
+default:
+  debounce_seconds 4
+  enable_loginctl_integration false
+  enable_dbus_inhibit true
+  pre_suspend_command None
+  monitor_media true
+  ignore_remote_media true
+  media_blacklist ["Game_Source" "Voice_Source"]
+
+  notify_on_unpause false
+  notify_before_action false
+  notify_seconds_before 10
+  notification_icon "stasis"
+
+  inhibit_apps [
+    r".*\.exe"
+    r"steam_app_.*"
+  ]
+
+  suspend_inhibit_media [
+    "jellyfin-tui"
+  ]
+
+  suspend_inhibit_apps [
+    "ffmpeg"
+    "gcc"
+    "clang"
+    "rustc"
+  ]
+
+  startup:
+    timeout 0
+    command ""
+  end
+
+  dpms:
+    timeout 300
+    command "niri msg action power-off-monitors"
+    resume_command ""
+  end
+
+  lock_screen:
+    timeout 360
+    command "swaylock"
+    resume_command ""
+  end
+
+  suspend:
+    timeout 1800
+    command "swaylock && systemctl suspend"
+  end
+end

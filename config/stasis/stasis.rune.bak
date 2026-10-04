@@ -1,0 +1,45 @@
+@author "fyr"
+@description "Desktop Configuration"
+
+default:
+  enable_loginctl_integration false
+  enable_dbus_inhibit true
+  pre_suspend_command None
+  monitor_media false
+  ignore_remote_media true
+  media_blacklist ["Game output" "Voice output" "Game_Source" "Voice_Source"]
+
+  debounce_seconds 4
+
+  notify_on_unpause false
+  notify_before_action true
+  notification_icon "stasis"
+
+  inhibit_apps [
+    "mpv"
+    "ffmpeg"
+    r"steam_app_.*"
+  ]
+
+  startup:
+    timeout 0
+    command ""
+  end
+
+  lock_screen:
+    timeout 300
+    command "waylock -l"
+    resume_command "notify-send 'Welcome back $env.USER!'"
+  end
+
+  dpms:
+    timeout 300
+    command "waylock -d"
+    resume_command ""
+  end
+
+  suspend:
+    timeout 1200
+    command "systemctl suspend"
+  end
+end

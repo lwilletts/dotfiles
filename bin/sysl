@@ -34,7 +34,7 @@ headless() {
     ln $OPTIONS "$DOTFILEDIR/zsh/zshrc" "$HOME/.zshrc"
     ln $OPTIONS "$DOTFILEDIR/zsh/zprofile" "$HOME/.zprofile"
 
-} 
+}
 
 simpleX11() {
     [ ! -d "$HOME/.config" ] && mkdir -p "$HOME/.config"
@@ -42,18 +42,14 @@ simpleX11() {
     ln $OPTIONS "$DOTFILEDIR/etc/X11/xinitrc" "$HOME/.xinitrc"
     ln $OPTIONS "$DOTFILEDIR/etc/X11/Xresources" "$HOME/.Xresources"
     ln $OPTIONS "$DOTFILEDIR/config/sxhkd" "$HOME/.config"
-    
+
     # sudo cp -f "$DOTFILEDIR/etc/X11/xorg.conf.d" "/etc/X11/"
 }
-  
+
 wayland() {
     [ ! -d "$HOME/.config" ] && mkdir -p "$HOME/.config"
     [ ! -d "$HOME/.config/qutebrowser" ] && mkdir -p "$HOME/.config/qutebrowser"
     [ ! -d "$HOME/.config/systemd/user" ] && mkdir -p "$HOME/.config/systemd/user"
-
-    if [ -d "$HOME/.config/niri" ]; then
-        rm -rf "$HOME/.config/niri"
-    fi
 
     ln $OPTIONS "$DOTFILEDIR/config/niri" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/mako" "$HOME/.config"
@@ -61,6 +57,8 @@ wayland() {
     ln $OPTIONS "$DOTFILEDIR/config/fuzzel" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/waybar" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/zathura" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/stasis" "$HOME/.config"
+    ln $OPTIONS "$DOTFILEDIR/config/swaylock" "$HOME/.config"
 
     ln $OPTIONS "$DOTFILEDIR/config/mpv" "$HOME/.config"
     ln $OPTIONS "$DOTFILEDIR/config/pipewire" "$HOME/.config"
@@ -80,10 +78,10 @@ for arg in "$@"; do
         h|headless) headless  ;;
         x|x11)	    simpleX11 ;;
         w|wayland)  wayland   ;;
-        all|deploy) 
+        all|deploy)
         headless
         simpleX11
-        wayland 
+        wayland
         ;;
     esac
 done
