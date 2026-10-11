@@ -1,5 +1,5 @@
-scaling=fit
-image=/home/fyr/usr/backs/fishing_dark.jpg
+scaling=fill
+image=/home/fyr/usr/backs/black_waves.jpg
 disable-caps-lock-text
 indicator-radius=30
 indicator-thickness=4
