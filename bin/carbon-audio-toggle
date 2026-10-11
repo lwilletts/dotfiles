@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# carbon-audio-toggle
+# specific function toggles on ThinkPad Carbon Gen 14
+
+usage() {
+    base=$(basename "$0")
+
+    cat >&2 << EOF
+Usage:
+    $base
+        -a | --audio : Toggle Audio Mute
+        -m | --mute  : Toggle Microphone Mute
+EOF
+
+    [ $# -eq 0 ] || exit "$1"
+}
+
+toggle_mute() {
+    pamixer -t
+
+    case "$(brightnessctl -d platform::mute get)" in
+        0) brightnessctl -q -d platform::mute set 1 ;;
+        1) brightnessctl -q -d platform::mute set 0 ;;
+    esac
+}
+
+toggle_mic_mute() {
+    pamixer -t --source alsa_input.pci-0000_00_1f.3-platform-sof_sdw.HiFi__Mic__source
+
+    case "$(brightnessctl -d platform::micmute get)" in
+        0) brightnessctl -q -d platform::micmute set 1 ;;
+        1) brightnessctl -q -d platform::micmute set 0 ;;
+    esac
+}
+
+main() {
+    case "$@" in
+        -a|--audio)
+            toggle_mute
+            ;;
+        -m|--mic)
+            toggle_mic_mute
+            ;;
+        *)
+            usage
+            ;;
+    esac
+}
+
+main "$@"
