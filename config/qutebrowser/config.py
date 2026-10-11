@@ -42,27 +42,32 @@ c.session.lazy_restore = False
 c.aliases = {'h': 'help', 'q': 'close', 'x': 'quit --save'}
 
 # defaults
+config.bind('h', 'scroll left')
 config.bind('j', 'scroll-px 0 100')
 config.bind('k', 'scroll-px 0 -100')
+config.bind('l', 'scroll right')
 config.bind('return', 'selection-follow')
 config.bind('cx', 'download-cancel')
 config.bind('<Ctrl-s>', 'config-source ~/.config/qutebrowser/config.py')
 config.bind('<Ctrl-E>', 'config-edit', mode='normal')
 
-# mouse
+# mouse / trackpad
 c.input.mouse.rocker_gestures = False
 c.input.mouse.back_forward_buttons = False
+config.bind('<Alt+Left>', 'back')
+config.bind('<Alt+Right>', 'forward')
+
 
 # tab management
 config.bind('t', 'cmd-set-text -s :tab-select ')
-config.bind('<Ctrl-j>', 'tab-move +')
-config.bind('<Ctrl-k>', 'tab-move -')
-config.bind('<Shift-j>', 'tab-next')
-config.bind('<Shift-k>', 'tab-prev')
+config.bind('<Ctrl-j>', 'tab-move -')
+config.bind('<Ctrl-k>', 'tab-move +')
+config.bind('<Shift-j>', 'tab-prev')
+config.bind('<Shift-k>', 'tab-next')
 config.bind('<Shift-d>', 'tab-clone')
 
 # tab position
-c.tabs.position = 'left'
+c.tabs.position = 'top'
 c.tabs.width = 180
 c.tabs.max_width = 110
 c.tabs.min_width = 110
@@ -653,11 +658,15 @@ c.prompt.radius = 10
 # https://peter.sh/experiments/chromium-command-line-switches/ for a
 # list) will work.
 # Type: List of String
-c.qt.args = ["ignore-gpu-blocklist", "enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "num-raster-threads=4"]
+c.qt.args = ["ignore-gpu-blocklist",
+             "enable-native-gpu-memory-buffers",
+             "enable-gpu-rasterization",
+             "num-raster-threads=4"
+]
 
-# Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
-# environment variable and is useful to force using the XCB plugin when
-# running QtWebEngine on Wayland.
+# Force a Qt platform to use. This sets the `QT_QPA_PLATFORM` environment
+# variable and is useful to force using the XCB plugin when running QtWebEngine
+# on Wayland.
 # Type: String
 # c.qt.force_platform = None
 
