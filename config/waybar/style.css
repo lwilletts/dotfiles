@@ -5,6 +5,7 @@
 @define-color grey   rgba(80, 80, 80, 1);
 @define-color mid    rgba(128, 128, 128, 1);
 @define-color red    rgba(178, 52, 80, 1);
+@define-color green  rgba(96, 200, 177, 1);
 
 * {
     border: none;
@@ -92,21 +93,30 @@ tooltip label {
     border: 2px solid @white;
 }
 
-#temperature {
-    padding: 4px 0px 4px 0px;
-    color: @white;
-}
-
-#temperature.critical {
-    color: @red;
-}
-
 #network {
     color: @white;
+    padding: 6px 0px 8px 0px;
 }
 
-#network.disconnected {
+#network.disabled, #network.disconnected {
     color: @red;
+}
+
+#battery.discharging {
+    color: @white;
+}
+
+#battery.charging, #battery.plugged {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @red;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation: blink 1s steps(2) infinite;
 }
 
 #clock {
@@ -119,6 +129,7 @@ tooltip label {
 
 @keyframes blink {
     to {
+        opacity: 0.4;
         background-color: @white;
         color: @black;
     }
