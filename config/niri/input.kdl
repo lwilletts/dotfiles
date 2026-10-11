@@ -34,7 +34,7 @@ input {
 
     trackpoint {
         // off
-        accel-speed 0.05
+        accel-speed 0.001
         accel-profile "adaptive"
     }
 
@@ -52,7 +52,7 @@ cursor {
 }
 
 switch-events {
-    lid-close { spawn "swaylock" "-u" "-K" "-i" "~/usr/backs/black_waves.jpg" "-s" "center"; }
+    lid-close { spawn "swaylock"; }
 }
 
 binds {
@@ -158,9 +158,18 @@ binds {
     Mod+Slash  { spawn "playerctl" "-p" "jellyfin-tui" "stop"; }
     Mod+9 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02-"; }
     Mod+0 { spawn "playerctl" "-p" "jellyfin-tui" "volume" "0.02+"; }
-    XF86AudioMute        allow-when-locked=true { spawn "pamixer" "-t"; }
+    XF86AudioMute        allow-when-locked=true { spawn "carbon-audio-toggle" "--audio"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pamixer" "-i" "2"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
+
+    // ThinkPad Shortcuts
+    XF86AudioMicMute allow-when-locked=true { spawn "carbon-audio-toggle" "--mic"; }
+    XF86MonBrightnessUp { spawn "brightnessctl" "-q" "set" "+5%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "-q" "set" "5%-"; }
+    XF86Display { spawn "echo"; }
+    XF86Launch7 { spawn "echo"; }
+    F23 { spawn "echo"; }
+    XF86Favorites { spawn "echo"; }
 
     // shot
     Super+Shift+S { screenshot show-pointer=false; }
