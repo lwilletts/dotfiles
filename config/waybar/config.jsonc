@@ -159,6 +159,7 @@
 
     "modules-right": [
         "network",
+        "battery",
         "tray",
         "clock"
     ]
