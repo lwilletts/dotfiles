@@ -121,7 +121,7 @@ c.hints.auto_follow_timeout = 0
 # c.url.yank_ignored_parameters = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
 
 # zoom
-c.zoom.default = '100%'
+c.zoom.default = '75%'
 c.zoom.levels = ['50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%']
 c.zoom.mouse_divider = 512
 
