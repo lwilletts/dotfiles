@@ -1,5 +1,5 @@
 [Unit]
-Description=Stasis Wayland Idle Manager
+Description=Wayland Idle Manager
 PartOf=graphical-session.target
 After=graphical-session.target
 ConditionPathExists=%t

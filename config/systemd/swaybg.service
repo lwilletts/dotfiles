@@ -1,8 +1,12 @@
 [Unit]
+Description=Set Wallpaper
 PartOf=graphical-session.target
-Requires=graphical-session.target niri.service
-After=graphical-session.target niri.service
+BindsTo=niri.service
+After=niri.service
 
 [Service]
 ExecStart=/usr/bin/swaybg -m fill -i "%h/usr/backs/fishing_dark.jpg"
 Restart=on-failure
+
+[Install]
+WantedBy=niri.service
