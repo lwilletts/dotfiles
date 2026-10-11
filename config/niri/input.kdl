@@ -113,7 +113,8 @@ binds {
     // window sizing
     Mod+A { switch-preset-window-height; }
     Mod+R { switch-preset-window-width; }
-    Mod+M { maximize-window-to-edges; }
+    Mod+M { maximize-column; }
+    Mod+Shift+M { maximize-window-to-edges; }
     Mod+F { fullscreen-window; }
     Mod+Shift+F { toggle-windowed-fullscreen; }
 
@@ -138,7 +139,7 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "pamixer" "-d" "2"; }
 
     // shot
-    Super+Shift+s { screenshot show-pointer=false; }
+    Super+Shift+S { screenshot show-pointer=false; }
     Print { screenshot-screen show-pointer=false; }
     Shift+Print { screenshot-window show-pointer=false; }
 

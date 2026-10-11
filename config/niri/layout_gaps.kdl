@@ -16,7 +16,7 @@ layout {
     }
 
     // behaviour
-    default-column-width { proportion 0.33333; }
+    default-column-width { proportion 0.33; }
     center-focused-column "never"
     // always-center-single-column
 
