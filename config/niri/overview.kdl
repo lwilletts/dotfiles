@@ -36,21 +36,24 @@ gestures {
 }
 
 recent-windows {
-    debounce-ms 1000
+    // off
+    debounce-ms 500
     open-delay-ms 0
 
     highlight {
+        active-color "#EFEFEFFF"
+        urgent-color "#CA3448FF"
         padding 10
         corner-radius 4
     }
 
     previews {
-        max-height 1080
-        max-scale 0.75
+        max-height 360
+        max-scale 0.4
     }
 
-    // binds {
-    //     Super+Tab         { next-window     scope="output"; }
-    //     Super+Shift+Tab   { previous-window scope="output"; }
-    // }
+    binds {
+        Super+Tab       { next-window     scope="output"; }
+        Super+Shift+Tab { previous-window scope="output"; }
+    }
 }

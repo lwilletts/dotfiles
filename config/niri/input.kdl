@@ -108,7 +108,6 @@ binds {
 
     // quick window switch
     Mod+Tab { focus-window-previous; }
-    Super+Tab { focus-workspace-previous; }
 
     // window sizing
     Mod+A { switch-preset-window-height; }
