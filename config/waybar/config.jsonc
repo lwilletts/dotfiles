@@ -51,11 +51,15 @@
             "Foot": "",
             "discord": "🖃",
             "Element": "🖃",
+            "Proton Pass": "",
+            "Virtual Machine Manager": "󰒋",
             "OBS Studio": "󰐑",
             "mpv Media Player": "",
             "Swayimg": "",
             "GNU Image Manipulation Program": "",
+            "WinBox": "",
             "BambuStudio": "💻",
+            "OrcaSlicer": "💻",
             "Moonlight": "",
             "Remmina Remote Desktop Client": "",
             "Steam": "",
@@ -88,8 +92,8 @@
         "bat": "BAT0",
         "full-at": 100,
         "states": {
-            "warning": 30,
-            "critical": 15
+            "warning": 25,
+            "critical": 10
         },
         "format": "{icon}",
         "format-icons": [ "", "", "", "", "" ],
@@ -163,7 +167,7 @@
 //      󰁹 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰂃 󰂄 󰂅 󰂆 󰂇 󰂈 󰂉 󰂊 󰂋 󰂌 󰂍 󰂎 󰂏 󰂐 󰂑
 // 󰂚 󰂛 󰂜 󰂝 󰂞 󰂟
 //  warning
-//   🖂 🖃          󰨊  📰  󰐑 󰒋 🔐  💾
+//   🖂  🖃           󰨊  📰  󰐑 󰒋 🔐  💾
 // 󰃀 󰃁 󰃂 󰃃 󰃄 󰃅 󰃆
 // 𝌆 𝌇 𝌈 𝌉 𝌊 𝌋 𝌌 𝌍 𝌎 𝌏
 // 𝌐 𝌑 𝌒 𝌓 𝌔 𝌕 𝌖 𝌗 𝌘 𝌙 𝌚 𝌛 𝌜 𝌝 𝌞 𝌟
