@@ -21,8 +21,7 @@ layer-rule {
 
 gestures {
     hot-corners {
-        bottom-left
-        bottom-right
+        top-right
     }
 
     dnd-edge-view-scroll {

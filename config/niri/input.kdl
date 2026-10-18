@@ -113,8 +113,8 @@ binds {
     // window sizing
     Mod+A { switch-preset-window-height; }
     Mod+R { switch-preset-window-width; }
-    Mod+M { maximize-column; }
-    Mod+Shift+M { maximize-window-to-edges; }
+    Mod+M { maximize-window-to-edges; }
+    Mod+Shift+M { maximize-column; }
     Mod+F { fullscreen-window; }
     Mod+Shift+F { toggle-windowed-fullscreen; }
 
@@ -126,6 +126,8 @@ binds {
 
     // wayland utils
     Mod+B { spawn "pkill" "--signal=SIGUSR1" "waybar"; }
+    Super+C { spawn "hyprpicker" "--autocopy" "--scale=6" "--format=hex"; }
+    Super+Shift+C { spawn "hyprpicker" "--autocopy" "--scale=6" "--format=rgb"; }
 
     // audio
     Mod+Space  { spawn "playerctl" "-p" "jellyfin-tui" "play-pause"; }
@@ -149,8 +151,8 @@ binds {
     // system
     Mod+Shift+B { power-off-monitors; }
     Mod+Ctrl+Backspace { quit skip-confirmation=true; }
-    Mod+Ctrl+Q allow-when-locked=true { spawn "poweroff"; }
-    Mod+Ctrl+R allow-when-locked=true { spawn "reboot"; }
+    Mod+Ctrl+Q allow-when-locked=true { spawn "systemctl" "poweroff"; }
+    Mod+Ctrl+R allow-when-locked=true { spawn "systemctl" "reboot"; }
     Mod+Escape repeat=false { spawn "sudo" "chvt" "2"; }
     Mod+Backspace { toggle-keyboard-shortcuts-inhibit; }
 }
