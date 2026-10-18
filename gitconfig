@@ -17,11 +17,12 @@
 [alias]
     a = add
     d = diff
+    dc = diff --cached
     c = commit
     s = status -sb
     sw = switch
     l = log --oneline
-    r = restore
+    r = restore --staged
     ri = rebase -i
     rc = rebase --continue
     rs = rebase --skip
