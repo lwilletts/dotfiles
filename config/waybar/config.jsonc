@@ -97,9 +97,11 @@
     },
 
     "battery": {
-        "interval": 60,
+        "interval": 30,
         "bat": "BAT0",
         "full-at": 100,
+        "smooth-power": true,
+        "smooth-power-time-constant": 180,
         "states": {
             "warning": 25,
             "critical": 10
@@ -109,6 +111,9 @@
         "format-time": "{H}hrs {M}mins",
         "tooltip": true,
         "tooltip-format": "{timeTo}\n\npower:\t  {power}W draw\nhealth:\t  {health}%\ncapacity: {capacity}%",
+        "tooltip-format-full": "Full\n\npower:\t  {power}W draw\nhealth:\t  {health}%\ncapacity: {capacity}%",
+        "tooltip-format-plugged": "{timeTo}\n\npower:\t  {power}W draw\nhealth:\t  {health}%\ncapacity: {capacity}%",
+        "tooltip-format-charging": "{timeTo}\n\npower:\t  {power}W draw\nhealth:\t  {health}%\ncapacity: {capacity}%",
 
         "events": {
             "on-discharging-critical": "notify-send -u critical 'Low Battery!'"
@@ -126,7 +131,7 @@
         "timezone": "Europe/London",
         "interval": 60,
         "format": "{:%H%M<span color='#808080'> hrs</span>}",
-        "tooltip-format": "\n<span size='8pt' font='lemon'>{calendar}</span>",
+        "tooltip-format": "\n<span size='8pt' font='scientifica'>{calendar}</span>",
         "calendar": {
             "mode"          : "year",
             "mode-mon-col"  : 4,
