@@ -169,7 +169,6 @@ binds {
     XF86MonBrightnessDown { spawn "brightnessctl" "-q" "set" "5%-"; }
     XF86Display { spawn "echo"; }
     XF86Launch7 { spawn "echo"; }
-    F23 { spawn "echo"; }
     XF86Favorites { spawn "echo"; }
 
     // shot
