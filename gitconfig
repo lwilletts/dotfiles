@@ -65,3 +65,5 @@
 
 [help]
     autocorrect = 20
+[commit]
+	verbose = true
