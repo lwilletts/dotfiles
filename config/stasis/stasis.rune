@@ -3,9 +3,9 @@
 
 default:
   debounce_seconds 4
-  enable_loginctl_integration false
+  enable_loginctl_integration true
   enable_dbus_inhibit true
-  pre_suspend_command None
+  pre_suspend_command "pgrep -x swaylock || swaylock -f"
   monitor_media true
   ignore_remote_media true
   media_blacklist ["Game_Source" "Voice_Source"]
@@ -50,6 +50,6 @@ default:
 
   suspend:
     timeout 1800
-    command "swaylock && systemctl suspend"
+    command "systemctl suspend"
   end
 end
