@@ -30,7 +30,7 @@
     fix = commit --fixup
     amend = commit --amend --no-edit
     squash = commit --fixup
-    sync = "!git fetch origin main:main && git rebase main"
+    sync = "!git fetch origin main && git rebase origin/main"
     wtinit = "!git-wt-init"
 
 [log]
