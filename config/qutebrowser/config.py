@@ -55,15 +55,15 @@ c.input.mouse.back_forward_buttons = False
 
 # tab management
 config.bind('t', 'cmd-set-text -s :tab-select ')
-config.bind('<Ctrl-j>', 'tab-move +')
-config.bind('<Ctrl-k>', 'tab-move -')
-config.bind('<Shift-j>', 'tab-next')
-config.bind('<Shift-k>', 'tab-prev')
+config.bind('<Ctrl-j>', 'tab-move -')
+config.bind('<Ctrl-k>', 'tab-move +')
+config.bind('<Shift-j>', 'tab-prev')
+config.bind('<Shift-k>', 'tab-next')
 config.bind('<Shift-d>', 'tab-clone')
 
 # tab position
-c.tabs.position = 'left'
-c.tabs.width = 180
+c.tabs.position = 'top'
+c.tabs.width = 200
 c.tabs.max_width = 110
 c.tabs.min_width = 110
 c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
