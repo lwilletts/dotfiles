@@ -42,16 +42,21 @@ c.session.lazy_restore = False
 c.aliases = {'h': 'help', 'q': 'close', 'x': 'quit --save'}
 
 # defaults
+config.bind('h', 'scroll left')
 config.bind('j', 'scroll-px 0 100')
 config.bind('k', 'scroll-px 0 -100')
+config.bind('l', 'scroll right')
 config.bind('return', 'selection-follow')
 config.bind('cx', 'download-cancel')
 config.bind('<Ctrl-s>', 'config-source ~/.config/qutebrowser/config.py')
 config.bind('<Ctrl-E>', 'config-edit', mode='normal')
 
-# mouse
+# mouse / trackpad
 c.input.mouse.rocker_gestures = False
 c.input.mouse.back_forward_buttons = False
+config.bind('<Alt+Left>', 'back')
+config.bind('<Alt+Right>', 'forward')
+
 
 # tab management
 config.bind('t', 'cmd-set-text -s :tab-select ')
@@ -63,7 +68,6 @@ config.bind('<Shift-d>', 'tab-clone')
 
 # tab position
 c.tabs.position = 'top'
-c.tabs.width = 200
 c.tabs.max_width = 110
 c.tabs.min_width = 110
 c.tabs.padding = {'top': 10, 'bottom': 10, 'left': 10, 'right': 10}
@@ -185,7 +189,7 @@ c.prompt.filebrowser = True
 c.downloads.open_dispatcher = None
 
 # privacy & content
-# c.content.headers.user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+c.content.headers.user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
 c.content.headers.do_not_track = True
 # c.content.host_blocking.enabled = True
 
@@ -653,11 +657,15 @@ c.prompt.radius = 10
 # https://peter.sh/experiments/chromium-command-line-switches/ for a
 # list) will work.
 # Type: List of String
-c.qt.args = ["ignore-gpu-blocklist", "enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "num-raster-threads=4"]
+c.qt.args = ["ignore-gpu-blocklist",
+             "enable-native-gpu-memory-buffers",
+             "enable-gpu-rasterization",
+             "num-raster-threads=4"
+]
 
-# Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
-# environment variable and is useful to force using the XCB plugin when
-# running QtWebEngine on Wayland.
+# Force a Qt platform to use. This sets the `QT_QPA_PLATFORM` environment
+# variable and is useful to force using the XCB plugin when running QtWebEngine
+# on Wayland.
 # Type: String
 # c.qt.force_platform = None
 

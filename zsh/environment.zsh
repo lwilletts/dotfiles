@@ -41,6 +41,7 @@ alias vim="$VISUAL"
 export PAGER="less"
 export MANPAGER='nvim --cmd ":lua vim.g.noplugins=1" +Man!'
 export MANWIDTH=999
+export DEPLOY="$HOME/deploy/ansible-lan"
 export GAME="$HOME/.steam/steam/steamapps/common"
 export COMPAT="$HOME/.steam/steam/steamapps/compatdata"
 

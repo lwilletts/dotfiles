@@ -47,20 +47,26 @@
         "rewrite": {
             "qutebrowser": "",
             "Google Chrome": "",
-            "Firefox": "",
+            "Mozilla Firefox": "",
             "Foot": "",
             "discord": "🖃",
             "Element": "🖃",
+            "Proton Pass": "",
+            "Virtual Machine Manager": "󰒋",
             "OBS Studio": "󰐑",
             "mpv Media Player": "",
             "Swayimg": "",
             "GNU Image Manipulation Program": "",
+            "WinBox": "",
             "BambuStudio": "💻",
+            "OrcaSlicer": "💻",
             "Moonlight": "",
+            "Looking Glass Client": "",
             "Remmina Remote Desktop Client": "",
             "Steam": "",
             "Heroic Games Launcher": "",
             ".*(steam_app_[0-9]+).*": "",
+            ".*(Star Trek).*": "",
             ".*(exe).*": "",
             "Stardew Valley": "",
             "overwatch.exe": "",
@@ -68,28 +74,38 @@
         }
     },
 
-    "temperature": {
-        "interval": 5,
-        // cpu
-        "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon3/temp3_input",
-        "critical-threshold": 80,
-        "format": "{temperatureC}C",
-        "format-critical": "{temperatureC}C"
-        // network card
-        // "hwmon-path": "/sys/devices/pci0000:00/0000:00:02.1/0000:05:00.0/0000:06:02.0/0000:09:00.0/mdio_bus/r8169-0-900/r8169-0-900:00/hwmon/hwmon5/temp1_input",
-        // "on-click": "sudo ethtool -s enp9s0 speed 1000"
-    },
-
     "network": {
         "inteval": 10,
-        "interface": "enp116s0u1c2",
         "family": "ipv4",
         "format": "",
+        "format-wifi": "",
+        "format-disabled": "",
         "format-disconnected": "",
         "tooltip": true,
-        "tooltip-format-ethernet": "{ifname}: {ipaddr} {gwaddr}",
+        "tooltip-format": "{ifname}:\n\nip addr:\t{ipaddr}\ngateway:\t{gwaddr}",
+        "tooltip-format-wifi": "{ifname}:\n\ngateway: {gwaddr}\nip addr: {ipaddr}\nsignal:\t {signalStrength}%",
+        "tooltip-format-disabled": "Disabled",
         "tooltip-format-disconnected": "Disconnected",
         "on-click": "foot -e nmtui"
+    },
+
+    "battery": {
+        "interval": 60,
+        "bat": "BAT0",
+        "full-at": 100,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "{icon}",
+        "format-icons": [ "", "", "", "", "" ],
+        "format-time": "{H}hrs {M}mins",
+        "tooltip": true,
+        "tooltip-format": "{timeTo}\n\npower:\t  {power}W draw\nhealth:\t  {health}%\ncapacity: {capacity}%",
+
+        "events": {
+            "on-discharging-critical": "notify-send -u critical 'Low Battery!'"
+        }
     },
 
     "tray": {
@@ -110,11 +126,11 @@
             "weeks-pos"     : "",
             "on-scroll"     : -1,
             "format": {
-              "months":     "<span color='#D9EAE2'>{}</span>",
-              "days":       "<span color='#D9EAE2'>{}</span>",
-              "weeks":      "<span color='#808080'>W{}</span>",
-              "weekdays":   "<span color='#808080'>{}</span>",
-              "today":      "<span color='#B23450'>{}</span>"
+                "months":     "<span color='#D9EAE2'>{}</span>",
+                "days":       "<span color='#D9EAE2'>{}</span>",
+                "weeks":      "<span color='#808080'>W{}</span>",
+                "weekdays":   "<span color='#808080'>{}</span>",
+                "today":      "<span color='#B23450'>{}</span>"
             }
         },
         "actions": {
@@ -153,9 +169,9 @@
 //      󰁹 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰂃 󰂄 󰂅 󰂆 󰂇 󰂈 󰂉 󰂊 󰂋 󰂌 󰂍 󰂎 󰂏 󰂐 󰂑
 // 󰂚 󰂛 󰂜 󰂝 󰂞 󰂟
 //  warning
-//   🖂 🖃          󰨊  📰  󰐑 󰒋 🔐  💾
+//   🖂  🖃           󰨊  📰  󰐑 󰒋 🔐  💾
 // 󰃀 󰃁 󰃂 󰃃 󰃄 󰃅 󰃆
-//             𝌆 𝌇 𝌈 𝌉 𝌊 𝌋 𝌌 𝌍 𝌎 𝌏
+// 𝌆 𝌇 𝌈 𝌉 𝌊 𝌋 𝌌 𝌍 𝌎 𝌏
 // 𝌐 𝌑 𝌒 𝌓 𝌔 𝌕 𝌖 𝌗 𝌘 𝌙 𝌚 𝌛 𝌜 𝌝 𝌞 𝌟
 // 𝌠 𝌡 𝌢 𝌣 𝌤 𝌥 𝌦 𝌧 𝌨 𝌩 𝌪 𝌫 𝌬 𝌭 𝌮 𝌯
 // 𝌰 𝌱 𝌲 𝌳 𝌴 𝌵 𝌶 𝌷 𝌸 𝌹 𝌺 𝌻 𝌼 𝌽 𝌾 𝌿

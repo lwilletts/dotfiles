@@ -27,7 +27,7 @@ vim.keymap.set("i", "<Tab>", function()
         return "<Tab>"
     end
 
-    return "<C-x><C-n>"
+    return "<C-x><C-n><C-n>"
 end, { expr = true, noremap = true })
 
 vim.keymap.set("i", "<S-Tab>", function()

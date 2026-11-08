@@ -1,12 +1,9 @@
 // assignment
-workspace "☰" { open-on-output "DP-2"; }
-workspace "☱" { open-on-output "DP-2"; }
-workspace "☲" { open-on-output "DP-2"; }
-workspace "☳" { open-on-output "DP-2"; }
-workspace "☴" { open-on-output "DP-2"; }
-workspace "☵" { open-on-output "DP-2"; }
-workspace "☶" { open-on-output "DP-2"; }
-workspace "☷" { open-on-output "DP-2"; }
+workspace "☰" { open-on-output "eDP-1"; }
+workspace "☱" { open-on-output "eDP-1"; }
+workspace "☳" { open-on-output "eDP-1"; }
+workspace "☶" { open-on-output "eDP-1"; }
+workspace "☷" { open-on-output "eDP-1"; }
 
 // general
 window-rule {
@@ -17,54 +14,42 @@ window-rule {
 // dash
 window-rule {
     match app-id=r#"qutebrowser|google-chrome"#
+    open-on-workspace "☰"
     default-column-width { proportion 0.5; }
+    open-focused false
+}
+
+window-rule {
+    match app-id=r#"firefox"#
+    open-on-workspace "☱"
+    default-column-width { proportion 0.5; }
+    open-focused false
+}
+
+window-rule {
+    match app-id=r#"discord|Element|WebCord"#
     open-focused false
 }
 
 // game
 window-rule {
     match app-id=r#"steam|Lutris|heroic"#
-    open-on-workspace "☱"
+    open-on-workspace "☳"
     default-column-width { proportion 0.3; }
 }
 
 window-rule {
     match app-id=r#"steam_app_|gamescope"#
-    open-on-workspace "☲"
+    open-on-workspace "☳"
     open-fullscreen true
 }
 
 window-rule {
     match app-id=r#"steam_app_1469060|steam_app_1231210|steam_app_824270|midair2|Stardew|Breach|overwatch.exe"#
-    open-on-workspace "☲"
+    open-on-workspace "☳"
     open-maximized true
     variable-refresh-rate false
     min-width 1800
-}
-
-window-rule {
-    match app-id=r#"discord|Element|WebCord"#
-    open-on-workspace "☱"
-    open-focused false
-}
-
-// moonlight game streaming
-window-rule {
-    match title="Moonlight"
-    open-on-workspace "☲"
-    open-floating true
-}
-
-window-rule {
-    match title="ember - Moonlight"
-    open-on-workspace "☲"
-//     min-width 1856
-//     max-width 1856
-//     min-height 1392
-//     max-height 1392
-    open-maximized-to-edges true
-    open-floating false
-    open-focused true
 }
 
 // content
@@ -78,12 +63,10 @@ window-rule {
 
 window-rule {
     match app-id="com.obsproject"
-    open-on-workspace "☳"
+    open-on-workspace "☶"
     open-focused true
     open-floating true
 }
-
-//
 
 // floating windows
 window-rule {

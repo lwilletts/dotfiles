@@ -44,7 +44,7 @@ vim.opt.expandtab = true
 vim.opt.pumheight = 20
 vim.opt.signcolumn = "yes"
 vim.opt.complete = ".,w,b,u,t,i"
-vim.opt.completeopt = { "menuone", "noinsert" }
+vim.opt.completeopt = { "menuone", "noselect" }
 
 -- menu completion
 vim.opt.wildmenu = true
