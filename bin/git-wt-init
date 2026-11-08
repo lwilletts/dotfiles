@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# git-wt-init
+# convert the current repository into a bare repo plus worktrees:
+#   repo/.bare            the git dir
+#   repo/.git             file pointing at .bare
+#   repo/<branch>/        the current checkout, untracked and ignored files kept
+
+set -eu
+
+[ -d .git ] || { echo "git-wt-init: run from the root of a normal repo" >&2; exit 1; }
+[ -z "$(git status --porcelain)" ] || { echo "git-wt-init: commit or stash changes first" >&2; exit 1; }
+branch=$(git branch --show-current)
+[ -n "$branch" ] || { echo "git-wt-init: detached HEAD, check out a branch first" >&2; exit 1; }
+
+mkdir .wt-tmp
+for f in * .[!.]* ; do
+    [ -e "$f" ] || continue
+    case "$f" in .wt-tmp|.git) continue ;; esac
+    mv "$f" .wt-tmp/
+done
+
+mv .git .bare
+git --git-dir=.bare config core.bare true
+echo "gitdir: ./.bare" > .git
+
+git worktree add --no-checkout "$branch" "$branch"
+for f in .wt-tmp/* .wt-tmp/.[!.]* ; do
+    [ -e "$f" ] || continue
+    mv "$f" "$branch"/
+done
+rmdir .wt-tmp
+git -C "$branch" reset -q
+
+echo "worktree: $PWD/$branch"

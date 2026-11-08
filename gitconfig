@@ -30,6 +30,8 @@
     fix = commit --fixup
     amend = commit --amend --no-edit
     squash = commit --fixup
+    sync = "!git fetch origin main:main && git rebase main"
+    wtinit = "!git-wt-init"
 
 [log]
     abbrevCommit = true
