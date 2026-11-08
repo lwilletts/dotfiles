@@ -32,6 +32,7 @@
     squash = commit --fixup
     syncmain = "!git fetch --all && git rebase origin/main"
     wtinit = "!git-wt-init"
+    pushall = "push --all --force-with-lease origin"
 
 [log]
     abbrevCommit = true
