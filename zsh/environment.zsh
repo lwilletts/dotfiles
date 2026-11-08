@@ -1,7 +1,7 @@
 PATH=""
 
 EXECPATHS="
-$HOME/.d/bin
+$HOME/.bin
 $HOME/src/fwm
 /opt/homebrew/bin
 /usr/local/bin
@@ -14,7 +14,7 @@ $HOME/.local/bin
 /Library/TeX/texbin"
 
 printf '%s\n' "$EXECPATHS" | while read -r EXECPATH; do
-    if [ -d "$EXECPATH" ]; then 
+    if [ -d "$EXECPATH" ]; then
         PATH="$PATH:$EXECPATH"
     fi
 done
