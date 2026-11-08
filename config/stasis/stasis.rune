@@ -6,6 +6,8 @@ default:
   enable_loginctl_integration true
   enable_dbus_inhibit true
   pre_suspend_command "pgrep -x swaylock || swaylock -f"
+  lid_close_action "lid-lock"
+  lid_open_action "niri msg action power-on-monitors"
   monitor_media true
   ignore_remote_media true
   media_blacklist ["Game_Source" "Voice_Source"]

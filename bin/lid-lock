@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# lid-lock
+# lock on lid close when logind leaves the system awake (external power,
+# undocked, lid action ignored); otherwise logind suspends and
+# swaylock-before-sleep.service locks first
+
+prop() {
+    busctl get-property org.freedesktop.login1 /org/freedesktop/login1 \
+        org.freedesktop.login1.Manager "$1"
+}
+
+[ "$(prop OnExternalPower)" = "b true" ] || exit 0
+[ "$(prop HandleLidSwitchExternalPower)" = 's "ignore"' ] || exit 0
+[ "$(prop Docked)" = "b false" ] || exit 0
+
+pgrep -x swaylock >/dev/null || swaylock -f
+niri msg action power-off-monitors
