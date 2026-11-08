@@ -75,7 +75,8 @@
     },
 
     "network": {
-        "inteval": 10,
+        "interval": 10,
+        "interface": "enp*",
         "family": "ipv4",
         "format": "",
         "format-wifi": "",
