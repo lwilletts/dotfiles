@@ -2,8 +2,9 @@
 {
     "reload_style_on_change": true,
     "layer": "top",
-    "position": "left",
-    "width": 40,
+    "position": "bottom",
+    "height": 36,
+    "width": 2048, // 80% of 2560
     "spacing": 0,
     "margin-top": 0,
     "margin-right": 0,
@@ -11,9 +12,14 @@
     "margin-left": 0,
 
     "custom/launcher": {
-        "format": "\n 🮰",
-        "on-click": "fuzzel",
+        "format": " 🮰",
+        "on-click": "pkill -x fuzzel || fuzzel",
         "tooltip": false
+    },
+
+    "group/launcher": {
+        "orientation": "horizontal",
+        "modules": [ "custom/launcher" ]
     },
 
     "custom/files": {
@@ -43,7 +49,7 @@
         "tooltip": true,
         "tooltip-format": "{title} | {app_id}",
         "sort-by-app-id": false,
-        "active-first": false,
+        "active-first": true,
         "rewrite": {
             "qutebrowser": "",
             "Google Chrome": "",
@@ -119,7 +125,7 @@
     "clock": {
         "timezone": "Europe/London",
         "interval": 60,
-        "format": "{:%H%M<span color='#808080'>\n hrs</span>}",
+        "format": "{:%H%M<span color='#808080'> hrs</span>}",
         "tooltip-format": "\n<span size='8pt' font='lemon'>{calendar}</span>",
         "calendar": {
             "mode"          : "year",
@@ -142,7 +148,8 @@
     },
 
     "modules-left": [
-        "custom/launcher",
+        "group/launcher",
+        "custom/gap",
         "niri/workspaces"
     ],
 

@@ -1,0 +1,114 @@
+#!/bin/sh
+# run center-visible-columns automatically
+# triggers: new window, window closed, focus change.
+
+seen_window_ids=" "
+
+# prints "true" if window $1 sits in a column with columns on both sides of it
+window_is_between_columns() {
+    niri msg --json windows | jq -r --argjson window_id "$1" '
+        (.[] | select(.id == $window_id)) as $window
+        | [.[] | select(.workspace_id == $window.workspace_id
+                        and .layout.pos_in_scrolling_layout != null)
+               | .layout.pos_in_scrolling_layout[0]] as $column_indexes
+        | $window.layout.pos_in_scrolling_layout[0] as $window_column
+        | ($window_column != null
+           and $window_column > ($column_indexes | min)
+           and $window_column < ($column_indexes | max))'
+}
+
+# prints how many columns are on the focused workspace
+focused_workspace_column_count() {
+    niri msg --json windows | jq -r --argjson workspace_id \
+        "$(niri msg --json workspaces | jq '[.[] | select(.is_focused)][0].id')" \
+        '[.[] | select(.workspace_id == $workspace_id
+                       and .layout.pos_in_scrolling_layout != null)
+              | .layout.pos_in_scrolling_layout[0]] | unique | length'
+}
+
+# prints "true" if the columns on the focused workspace are wider than the screen
+focused_workspace_overflows_screen() {
+    screen_width=$(niri msg --json focused-output | jq '.logical.width')
+
+    niri msg --json windows | jq -r --argjson screen_width "$screen_width" \
+        --argjson workspace_id \
+        "$(niri msg --json workspaces | jq '[.[] | select(.is_focused)][0].id')" '
+        [.[] | select(.workspace_id == $workspace_id
+                      and .layout.pos_in_scrolling_layout != null)]
+        | group_by(.layout.pos_in_scrolling_layout[0])
+        | map(map(.layout.tile_size[0]) | max)
+        | add // 0
+        | . > $screen_width'
+}
+
+# waits until window layouts stop changing, so the action runs on the final layout
+wait_for_layout_to_settle() {
+    previous_layout=
+    for _attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+        current_layout=$(niri msg --json windows | jq -c '[.[] | {id, layout}]')
+        [ "$current_layout" = "$previous_layout" ] && return
+        previous_layout=$current_layout
+        sleep 0.1
+    done
+}
+
+niri msg --json event-stream | while read -r event_line; do
+    event_name=$(printf '%s' "$event_line" | jq -r 'keys[0]')
+    trigger_center=0
+    center_action=center-visible-columns
+    new_window_id=
+
+    case "$event_name" in
+        WindowsChanged)
+            seen_window_ids=" $(printf '%s' "$event_line" | jq -r '[.WindowsChanged.windows[].id] | join(" ")') "
+            trigger_center=1
+            ;;
+        WindowClosed|WindowFocusChanged)
+            column_count=$(focused_workspace_column_count)
+            if [ "$column_count" -gt 1 ]; then
+                trigger_center=1
+            elif [ "$column_count" = 1 ]; then
+                # last remaining column: center just that column
+                trigger_center=1
+                center_action=center-column
+            fi
+            ;;
+        WindowOpenedOrChanged)
+            window_id=$(printf '%s' "$event_line" | jq -r '.WindowOpenedOrChanged.window.id')
+
+            case "$seen_window_ids" in
+                *" $window_id "*)
+                    ;;
+                *)
+                    seen_window_ids="$seen_window_ids$window_id "
+                    trigger_center=1
+                    new_window_id=$window_id
+                    ;;
+            esac
+            ;;
+    esac
+
+    if [ "$trigger_center" = 1 ]; then
+        if [ -n "$new_window_id" ]; then
+            # wait until the new window reports its column position
+            for _attempt in 1 2 3 4 5 6 7 8 9 10; do
+                niri msg --json windows | jq -e --argjson window_id "$new_window_id" \
+                    '.[] | select(.id == $window_id) | .layout.pos_in_scrolling_layout != null' \
+                    >/dev/null 2>&1 && break
+                sleep 0.1
+            done
+
+            if [ "$(window_is_between_columns "$new_window_id")" = true ]; then
+                center_action=center-column
+            fi
+        fi
+
+        wait_for_layout_to_settle
+
+        if [ "$(focused_workspace_overflows_screen)" = true ]; then
+            center_action=center-visible-columns
+        fi
+
+        niri msg action "$center_action"
+    fi
+done

@@ -34,7 +34,7 @@ binds {
     // sys
     Mod+Return cooldown-ms=125 { spawn "footclient"; }
     Mod+Shift+Return cooldown-ms=125 { spawn "footcolumn"; }
-    Mod+D repeat=false { spawn "fuzzel"; }
+    Mod+D repeat=false { spawn "sh" "-c" "pkill -x fuzzel || fuzzel"; }
     Mod+Q { close-window; }
 
     // overview

@@ -1,10 +1,10 @@
 sort=-time
 layer=overlay
-anchor=bottom-left
+anchor=bottom-center
 
 output=DP-2
 
-width=300
+width=400
 height=160
 padding=20
 margin=0,0,20,0
@@ -16,7 +16,7 @@ icon-border-radius=4
 
 default-timeout=8000
 ignore-timeout=1
-max-visible=10
+max-visible=3
 
 markup=1
 font=lemon 8

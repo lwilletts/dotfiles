@@ -19,8 +19,10 @@
 
 window#waybar {
     background: @black;
-    border-right: 4px solid @dark;
+    border-top: 4px solid @dark;
     color: @white;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-radius: 0px 0px 0px 0px;
 }
 
@@ -38,25 +40,27 @@ tooltip label {
 }
 
 #custom-launcher {
-    border-right: transparent;
-    padding: 12px 0px 12px 0px;
+    color: @white;
+    background: transparent;
+    border-top: 4px solid transparent;
+    padding: 0px 10px 0px 10px;
 }
 
-#custom-launcher:hover {
+#custom-launcher:hover, #launcher:hover, #launcher:hover #custom-launcher {
     color: @black;
     background: @white;
+    transition-duration: 0.1s;
 }
 
 #workspaces button {
     color: @white;
-    border-right: 4px solid transparent;
-    padding: 12px 0px 12px 0px;
+    border-top: 4px solid transparent;
+    padding: 0px 10px 0px 15px;
 }
 
 #workspaces button.focused {
     color: @white;
-    border-right: 4px solid @bright;
-    border-color: @white;
+    border-top: 4px solid @white;
 }
 
 #workspaces button.empty {
@@ -71,12 +75,12 @@ tooltip label {
 
 #taskbar button {
     color: @white;
-    border-right: 4px solid transparent;
-    padding: 12px 0px 12px 0px;
+    border-top: 4px solid transparent;
+    padding: 0px 10px 0px 10px;
 }
 
 #taskbar button.active {
-    border-right: 4px solid @bright;
+    border-top: 4px solid @bright;
 }
 
 #taskbar button:hover {
@@ -86,7 +90,7 @@ tooltip label {
 }
 
 #tray {
-    padding: 6px 0px 8px 0px;
+    padding: 4px 5px 0px 3px;
 }
 
 #tray menu {
@@ -97,7 +101,7 @@ tooltip label {
 
 #network {
     color: @white;
-    padding: 6px 0px 8px 0px;
+    padding: 4px 6px 0px 6px;
 }
 
 #network.disabled, #network.disconnected {
@@ -121,11 +125,7 @@ tooltip label {
 }
 
 #clock {
-    padding: 8px 2px 8px 0px;
-}
-
-#clock {
-    padding: 8px 2px 8px 0px;
+    padding: 4px 8px 0px 8px;
 }
 
 @keyframes blink {
