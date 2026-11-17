@@ -108,6 +108,10 @@ tooltip label {
     color: @red;
 }
 
+#battery {
+    padding: 4px 5px 0px 3px;
+}
+
 #battery.discharging {
     color: @grey;
 }
